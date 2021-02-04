@@ -7,13 +7,21 @@
 	<!-- Include Bootstrap Script and css-->
 	<link rel="stylesheet" href="../CSS/style.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 	<!-- Include Fontawesome -->
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.0/css/all.css">
 	
 	<title>Beauty SPA</title>
+	
+	<!-- Loading navbar -->
+	<script>
+	$(document).ready(function(){
+	    $("#nav-placeholder").load("nav.html");
+	});
+	</script>
+
 </head>
 
 
@@ -21,36 +29,9 @@
 <body>
 
 	<!--  NAV -->
-	<nav class="navbar navbar-expand-sm navbar-light bg-dark" id="navbar"> 
-  	<a class="navbar-brand text-white" href="index.html ">Beauty SPA</a>
-  		<!-- Collapse Button -->
-  		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-   		<span class="navbar-toggler-icon"></span>
-  		</button>
- 		<!--  Nav Item List -->
-  		<div class="collapse navbar-collapse" id="navbarSupportedContent" >
-   			<ul class="navbar-nav mr-auto">
-      			<li class="nav-item active" id="selectedItem">
-        		<a class="nav-link text-white" href="index.html">Home<span class="sr-only">(current)</span></a>	<!-- Pagina selezionata -->
-      			</li>
-      			<li class="nav-item">
-        		<a class="nav-link text-white" href="Gallery.html">Galleria</a>
-      			</li>
-      			<li class="nav-item">
-       			<a class="nav-link text-white" href="Booking.html">Prenota</a>
-      			</li>
-      			<li class="nav-item">
-        		<a class="nav-link text-white" href="Info.html">Info e Contatti</a>
-      			</li>
-    		</ul>
-    <!-- /Nav Item List -->
-  		</div>
-	</nav>
+	<div id="nav-placeholder"> Caricamento menu.. </div>
 	<!-- /NAV -->
 	
-
-</head>
-<body>
 
 <div class="bgimg-1">
   <div class="caption">
