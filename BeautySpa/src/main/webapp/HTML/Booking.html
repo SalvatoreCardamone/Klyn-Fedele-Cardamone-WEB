@@ -18,9 +18,12 @@
 	<!-- Loading navbar -->
 	<script>
 	$(document).ready(function(){
-	    $("#nav-placeholder").load("nav.html");
+		$("#nav-placeholder").load("nav.html", function() {
+			$("#prenota").attr("id","selectedItem");
+	    }); 
 	});
 	</script>
+
 	
 </head>
 
