@@ -6,22 +6,20 @@ public class Utente {
 
 	private String email;
 	private String password;
-	private ArrayList<Recensione> recensioni;
 	private String nome;
 	private String cognome;
 	private boolean convalidato;
 	
 	public Utente()
 	{
-		recensioni= new ArrayList<Recensione>();
+				
 	}
 	
 	
-	public Utente(String email, String password, ArrayList<Recensione> recensione, String nome, String cognome, boolean convalidato)
+	public Utente(String email, String password, String nome, String cognome, boolean convalidato)
 	{
 		this.email=email;
 		this.password=password;
-		this.recensioni=recensione;
 		this.nome=nome;
 		this.cognome=cognome;
 		this.convalidato=convalidato;
@@ -67,15 +65,7 @@ public class Utente {
 		this.convalidato = convalidato;
 	}
 	
-	public void stampaRecensioni()
-	{
-		System.out.println("Lista Recensioni: ");
-		for(int i=0; i<recensioni.size(); i++)
-		{
-			System.out.println(i+":"+recensioni.get(i).toString()+"\n");
-		}
-		System.out.println(";");
-	}
+	
 	
 	public String toString()
 	{
@@ -86,8 +76,6 @@ public class Utente {
 			stampa+="Convalidato!";
 		else
 			stampa+="Non Convalidato!";
-		
-		stampaRecensioni();
 		
 		return stampa;
 	}
