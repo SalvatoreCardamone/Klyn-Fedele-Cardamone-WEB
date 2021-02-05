@@ -1,13 +1,4 @@
-	
-	
 <!-- Shared navbar between html pages -->
-	
-	<!-- Jquery -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	<!-- Include Bootstrap Script and css-->
-	<link rel="stylesheet" href="../CSS/style.css">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
 <!--  NAV -->
 	<nav class="navbar navbar-expand-sm navbar-light bg-dark" id="navbar"> 
@@ -34,6 +25,24 @@
     		</ul>
     <!-- /Nav Item List -->
   		</div>
+  		
+  		<button type="button" class="btn btn-outline-success my-2 my-sm-0" data-toggle="modal" data-target="#loginModal" id="loginButton">
+		 Accedi
+		</button>  
 	</nav>
 	<!-- /NAV -->
 	
+	<div id="popup-placeholder">
+	
+	</div>
+	
+<script id="navbar">
+$(document).ready(function() {    
+	$('#popup-placeholder').load("Login.html");
+	
+	$( "#loginButton" ).click(function() {
+			$('#loginModal').modal('show');
+		});
+	
+	});
+</script>
