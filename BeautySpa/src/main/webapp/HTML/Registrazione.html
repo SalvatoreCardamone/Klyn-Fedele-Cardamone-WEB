@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Registrazione Utente</title>
+</head>
+<body>
+
+Registrazione Utete
+
+<form class="container" method="POST" action="/web.controller/registraUtente">
+	<div  class="form-group">
+	<label for="matricola" class="mr-sm-2">Inserici Email</label>
+	<input class="form-control" type="text" id="Email" name="email"/>
+	</div>
+	
+	<div  class="form-group">
+	<label for="nome" class="mr-sm-2">Inserici password</label>
+	<input class="form-control" type="text" id="Password" name="password"/>
+	</div>
+	
+	<div  class="form-group">
+	<label for="cognome" class="mr-sm-2">Inserici Nome</label>
+	<input class="form-control" type="text" id="Nome" name="nome"/>
+	</div>
+	
+	<div  class="form-group">
+	<label for="logo" class="mr-sm-2">Inserici cognome</label>
+	<input class="form-control" type="text" id="Cognome" name="cognome"/>
+	</div>
+	
+	<div  class="form-group">
+	<!--  button class="btn btn-warning">Verifica dati inseriti</button-->
+	<input class="btn btn-success" value="Registra Utente" type="submit"></input>
+	</div>
+	
+</form>
+
+</body>
+</html>

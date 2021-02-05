@@ -13,10 +13,7 @@ public class BeautySpaApplication {
 
 	public static void main(String[] args) 
 	{
-		
-		SpringApplication.run(BeautySpaApplication.class, args);
-		
-		
+		SpringApplication.run(BeautySpaApplication.class, args);	
 	}
 
 }
