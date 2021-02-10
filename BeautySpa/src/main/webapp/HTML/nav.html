@@ -29,20 +29,23 @@
   		<button type="button" class="btn btn-outline-success my-2 my-sm-0" data-toggle="modal" data-target="#loginModal" id="loginButton">
 		 Accedi
 		</button>  
+		
 	</nav>
 	<!-- /NAV -->
 	
-	<div id="popup-placeholder">
+	<div id="login-popup-placeholder"> </div>
+	<div id="register-popup-placeholder"> </div>
 	
-	</div>
 	
 <script id="navbar">
 $(document).ready(function() {    
-	$('#popup-placeholder').load("Login.html");
+	$('#login-popup-placeholder').load("Login.html");
+	$('#register-popup-placeholder').load("Registrazione.html");
 	
 	$( "#loginButton" ).click(function() {
 			$('#loginModal').modal('show');
 		});
 	
 	});
+	
 </script>
