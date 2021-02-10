@@ -15,25 +15,24 @@
         <div class="d-flex flex-column text-center">
         <form  class="container" method="POST" action="/HTML/index.html">
             <div class="form-group">
-              <label for="matricola" class="mr-sm-2">Inserici Email</label>
-				<input class="form-control" type="text" id="Email" name="email"/>
+				<input type="email" class="form-control" type="text" id="Email" name="email" placeholder="Inserisci Email." required/>
 			</div>
 	
 			<div  class="form-group">
-				<label for="nome" class="mr-sm-2">Inserici password</label>
-				<input class="form-control" type="text" id="Password" name="password"/>
+				<input type="password" class="form-control" type="text" id="Password" placeholder="Inserisci Password" name="password" required/>
 			</div>
 	
 			<div  class="form-group">
-				<label for="cognome" class="mr-sm-2">Inserici Nome</label>
-				<input class="form-control" type="text" id="Nome" name="nome"/>
+				<input class="form-control" type="text" id="Nome" name="nome" placeholder="Inserisci Nome." required/>
 			</div>
 	
 			<div  class="form-group">
-				<label for="logo" class="mr-sm-2">Inserici cognome</label>
-				<input class="form-control" type="text" id="Cognome" name="cognome"/>
+				<input class="form-control" type="text" id="Cognome" name="cognome" placeholder="Inserisci Cognome" required/>
 			</div>
-	
+			<div  class="form-group">
+				<input class="form-control" type="tel" id="Telefono" name="telefono" placeholder="Inserisci Numero di Telefono."  required />
+			</div>
+			
 			<div  class="form-group">
 			<!--  button class="btn btn-warning">Verifica dati inseriti</button-->
 			<input class="btn btn-success" value="Registra Utente" type="submit"></input>
