@@ -5,8 +5,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-public class Home {
-	
-
-
+public class Home 
+{
+	@GetMapping("/")
+	public String home()
+	{
+		return "/HTML/index.html";
+	}
 }
