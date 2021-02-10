@@ -19,7 +19,8 @@ function registraUtente()
 	$.ajax(
 	{
 		//eticketta ,variabbile
-		url: "registraUtenteObj",
+		
+		url: "/registraUtente",
 		method: "POST",
 		//data: studente,
 		//contentType:"json",
