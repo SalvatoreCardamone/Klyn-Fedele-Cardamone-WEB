@@ -41,6 +41,16 @@
           </form>
           
 
+		<div class="text-center text-muted delimiter">oppure usa un social network!</div>
+   		   <div class="d-flex justify-content-center social-buttons">
+   		   	 <div class="g-signin2" data-onsuccess="onSignIn"></></div>
+            <button type="button" class="btn btn-secondary btn-round" data-toggle="tooltip" data-placement="top" title="Facebook">
+              <i class="fab fa-facebook"></i>
+            </button>
+            <button type="button" class="btn btn-secondary btn-round" data-toggle="tooltip" data-placement="top" title="Linkedin">
+              <i class="fab fa-linkedin"></i>
+            </button>   
+          </div>   
         <div class="modal-footer d-flex justify-content-center">
         <div class="signup-section">Hai gia un account? <br/> <button type="button" class="btn btn-link" data-toggle="modal" data-target="#loginModal" data-dismiss="modal" id="loginButton">Accedi</button> </div>
      	</div>
@@ -56,3 +66,13 @@ $('#registerModal').on('shown.bs.modal', function () {
 	$("body").addClass("modal-open");
 	});
 </script>
+<script>
+function onSignIn(googleUser) {
+  var profile = googleUser.getBasicProfile();
+  console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+  console.log('Name: ' + profile.getName());
+  console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+}
+</script>
+
+ <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
