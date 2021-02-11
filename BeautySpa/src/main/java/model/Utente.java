@@ -8,21 +8,22 @@ public class Utente {
 	private String password;
 	private String nome;
 	private String cognome;
+	private String numero;
 	private boolean convalidato;
 	
 	public Utente()
 	{
-				
+		
 	}
 	
-	
-	public Utente(String email, String password, String nome, String cognome, boolean convalidato)
+	public Utente(String email, String password, String nome, String cognome, boolean convalidato, String numero)
 	{
 		this.email=email;
 		this.password=password;
 		this.nome=nome;
 		this.cognome=cognome;
 		this.convalidato=convalidato;
+		this.numero=numero;
 	}
 
 	public String getEmail() {
@@ -65,13 +66,22 @@ public class Utente {
 		this.convalidato = convalidato;
 	}
 	
+	public String getNumero() {
+		return numero;
+	}
+
+
+	public void setNumero(String numero) {
+		this.numero = numero;
+	}
+	
 	
 	
 	public String toString()
 	{
 		String stampa="";
 		
-		stampa="Email: "+email+"\nPassword: "+password+"\nNome: "+nome+"\nCognome: "+cognome;
+		stampa="Email: "+email+"\nPassword: "+password+"\nNome: "+nome+"\nCognome: "+cognome+"\n Numero: "+numero;
 		if(convalidato)
 			stampa+="Convalidato!";
 		else

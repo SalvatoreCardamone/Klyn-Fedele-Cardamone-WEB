@@ -26,7 +26,7 @@ public class UtenteDAOJDBC implements UtenteDAO
 		try
 		{
 		conn= dbSource.getConnection();
-		String quetyUpdate= "INSERT INTO utente values(?,?,?,?,?)";
+		String quetyUpdate= "INSERT INTO utente values(?,?,?,?,?,?)";
 		PreparedStatement st= conn.prepareStatement(quetyUpdate);
 		
 		st.setString(1, utente.getEmail());
@@ -34,6 +34,7 @@ public class UtenteDAOJDBC implements UtenteDAO
 		st.setString(3, utente.getNome());
 		st.setString(4, utente.getCognome());
 		st.setBoolean(5, utente.isConvalidato());
+		st.setString(6, utente.getNumero());
 		
 		st.executeUpdate();
 		System.out.println("Utente e stato aggiunto con sucesso");

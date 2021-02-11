@@ -10,8 +10,9 @@ function registraUtente()
 	//var matricola=$("#matricola").val();//uguale con quello di sopra(JQuery)
 	var nome= document.querySelector("#Nome").value;
 	var cogn= document.querySelector("#Cognome").value;
+	var telf= document.querySelector("#Telefono").value;
 	
-	var utente= new Utente(email, password, nome, cogn, false);
+	var utente= new Utente(email, password, nome, cogn, false, telefono);
 	
 	
 	//{matr:matr, cognome:cogn, nome:nome, date:date, scuolaId:scuola}
@@ -20,7 +21,7 @@ function registraUtente()
 	{
 		//eticketta ,variabbile
 		
-		url: "/registraUtente",
+		url: "/registrazione",
 		method: "POST",
 		//data: studente,
 		//contentType:"json",
@@ -28,6 +29,12 @@ function registraUtente()
 		contentType: "application/json",
 		success: function(responce)
 		{
+		
+		if(responce==="SUCCESS")
+			{
+			alert("Request succeded")
+			}
+		
 		console.log(JSON.stringify(responce));
 		/*
 			if(responce==="SUCCESS")
