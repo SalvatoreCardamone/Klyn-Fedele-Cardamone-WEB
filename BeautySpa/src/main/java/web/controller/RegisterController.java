@@ -16,21 +16,35 @@ import persistence.DBManager;
 public class RegisterController {
 
 	@PostMapping("/registrazione")
-	public String registraUtente(@RequestParam String email,@RequestParam String password,
+	public Utente registraUtente(@RequestParam String email,@RequestParam String password,
 			@RequestParam String nome,@RequestParam String cognome, @RequestParam String telefono)
 	{
 		Utente utente= new Utente(email,password, nome,cognome,false,telefono);
 		DBManager.getInstance().utenteDAO().save(utente);
 		System.out.println("Ok registo nuovo utente!");
 		
-		return "/HTML/RegistrazioneComplettata.html";
+		return utente;
 	}
 	
 	@GetMapping("/registrazione")
 	public String fineRegistrazione()
 	{
 		System.out.println("Fine dela registrazione");
-		return "/HTML/RegistrazioneCompletata.html";
+		//return "/HTML/RegistrazioneCompletata.html";
+		return "fReg.html";
 	}
+	
+	/*
+	@PostMapping("onSignIn")
+	public Utente registraUtente(@RequestParam String email,@RequestParam String password,
+			@RequestParam String nome,@RequestParam String cognome, @RequestParam String telefono)
+	{
+		Utente utente= new Utente(email,password, nome,cognome,false,telefono);
+		DBManager.getInstance().utenteDAO().save(utente);
+		System.out.println("Ok registo nuovo utente!");
+		
+		return utente;
+	}
+	*/
 	
 }

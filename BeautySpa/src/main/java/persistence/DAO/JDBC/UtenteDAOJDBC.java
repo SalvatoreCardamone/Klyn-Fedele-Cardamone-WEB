@@ -2,6 +2,7 @@ package persistence.DAO.JDBC;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -67,6 +68,41 @@ public class UtenteDAOJDBC implements UtenteDAO
 	public void delete(Utente studente) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public Utente login(String email, String password) {
+		Utente utente= new Utente();
+		Connection conn;
+		try
+		{
+			conn= dbSource.getConnection();
+		    String query = "select * from utente where utente.email=? and utente.password=?";
+		    PreparedStatement st= conn.prepareStatement(query);
+			
+			st.setString(1, email);
+			st.setString(2, password);
+		    ResultSet rs = st.executeQuery();
+		      while (rs.next()) 
+		      {
+		    	
+		        String nome = rs.getString("Nome");
+		        String cognome = rs.getString("Cognome");
+		        utente.setNome(nome);
+		        utente.setCognome(cognome);
+		        //System.out.println(nome+": "+cognome);
+		       
+		      }
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			//System.out.println("Non riesco a fare la query di login!");
+		}
+		//Rimane di passare i parametri al HTML per cambiarli
+		//Utente utente;
+		//return null;
+		return utente;
 	}
 
 }

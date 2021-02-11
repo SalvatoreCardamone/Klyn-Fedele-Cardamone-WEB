@@ -7,6 +7,7 @@ import model.Utente;
 public interface UtenteDAO 
 {
 	public void save(Utente utente); // Create
+	public Utente login(String email, String password);
 	public Utente findByPrimaryKey(String email); // Retrieve
 	public List<Utente> findAll();
 	public void update(Utente studente); //Update
