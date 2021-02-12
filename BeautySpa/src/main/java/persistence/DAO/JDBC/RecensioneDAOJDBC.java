@@ -48,7 +48,7 @@ public class RecensioneDAOJDBC implements RecensioneDAO
 	}
 
 	@Override
-	public ArrayList<Recensione> findAll(String emailUtente) {
+	public ArrayList<Recensione> mieRecensioni(String emailUtente) {
 		Connection conn;
 		ArrayList<Recensione> lista= new ArrayList<Recensione>();
 		try
@@ -77,6 +77,29 @@ public class RecensioneDAOJDBC implements RecensioneDAO
 			e.printStackTrace();
 		}
 		return lista;
+	}
+
+
+	@Override
+	public void delete(Integer idRecensione, String scrittoDa) {
+		Connection conn;
+		try
+		{
+			conn=dbSource.getConnection();
+			String query= "DELETE FROM recensione WHERE idRecensione=? and scrittoDa=?";
+			PreparedStatement st= conn.prepareStatement(query);
+			
+			st.setInt(1, idRecensione);
+			st.setString(2,scrittoDa);
+			
+			st.executeUpdate();
+			System.out.println("Recensione eliminata");
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		
 	}
 
 }

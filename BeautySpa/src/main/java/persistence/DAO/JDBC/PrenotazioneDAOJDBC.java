@@ -9,9 +9,7 @@ import persistence.DAO.PrenotazioneDAO;
 
 public class PrenotazioneDAOJDBC implements PrenotazioneDAO
 {
-	
 	DBSource dbSource;
-	
 	public PrenotazioneDAOJDBC(DBSource dbSourse)
 	{
 		this.dbSource=dbSource;
@@ -40,14 +38,22 @@ public class PrenotazioneDAOJDBC implements PrenotazioneDAO
 
 	@Override
 	public void delete(Integer idPrenotazione) {
-		// TODO Auto-generated method stub
+		Connection conn;
+		try
+		{
+			conn= dbSource.getConnection();
+			String query="DELETE FROM prenotazione WHERE idPrenotazione=?";
+			PreparedStatement st= conn.prepareStatement(query);
+			
+			st.setInt(1, idPrenotazione);
+			st.executeUpdate();
+			
+			System.out.println("Prenotazione eliminata");
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
 		
 	}
-
-	@Override
-	public void updatePrenotazione(Prenotazione prenotazione) {
-		// TODO Auto-generated method stub
-		
-	}
-
 }

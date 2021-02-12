@@ -8,5 +8,6 @@ import model.Utente;
 public interface RecensioneDAO 
 {
 	public void save(Recensione recensione);
-	public ArrayList<Recensione> findAll(String emailUtente);
+	public ArrayList<Recensione> mieRecensioni(String emailUtente);
+	public void delete(Integer idRecensione, String scrittoDa);
 }

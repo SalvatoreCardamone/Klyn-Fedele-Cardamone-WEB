@@ -18,7 +18,7 @@ public class TrattamentoDAOJDBC implements TrattamentoDAO{
 		this.dbSource=dbSource;
 	}
 
-	
+	/*
 	@Override
 	public void newTrattamento(Trattamento trattamento) {
 		Connection conn;
@@ -39,6 +39,7 @@ public class TrattamentoDAOJDBC implements TrattamentoDAO{
 			System.out.println("Non riesco a fare la query di save nel trattamento");
 		}
 	}
+	*/
 	
 
 	
@@ -46,7 +47,7 @@ public class TrattamentoDAOJDBC implements TrattamentoDAO{
 	@Override
 	public ArrayList<Trattamento> listaTrattamenti() {
 		Connection conn;
-		ArrayList<Trattamento> lista;
+		ArrayList<Trattamento> lista= new ArrayList<Trattamento>();
 		try {
 		    conn= dbSource.getConnection();
 		    String query = "select * from trattamento";
@@ -55,6 +56,8 @@ public class TrattamentoDAOJDBC implements TrattamentoDAO{
 		      while (rs.next()) {
 		        String nomeTrattamento = rs.getString("NomeTrattamento");
 		        Integer durata = rs.getInt("Durata");
+		        Trattamento passa= new Trattamento(nomeTrattamento,durata);
+		        lista.add(passa);
 		        System.out.println(nomeTrattamento+": "+durata);
 		      }
 		    } 
@@ -62,25 +65,33 @@ public class TrattamentoDAOJDBC implements TrattamentoDAO{
 		{
 			System.out.println("Non riesco a ristituire trattamenti");
 		}
-		return null;
+		return lista;
 	}
 
 	@Override
 	public Trattamento trovaNomeTrattamento(String nomeTrattamento) {
-		// TODO Auto-generated method stub
-		return null;
+		Connection conn;
+		Trattamento trattamento= new Trattamento();
+		try
+		{
+			conn= dbSource.getConnection();
+			String query= "SELECT * FROM trattamento WHERE nomeTrattamento=?";
+			PreparedStatement st= conn.prepareStatement(query);
+			
+			st.setString(1, nomeTrattamento);
+			ResultSet rs= st.executeQuery();
+			while(rs.next())
+			{
+				String nome=rs.getString("nomeTrattamento");
+				Integer durata=rs.getInt("durata");
+				trattamento.setNomeTrattamento(nome);
+				trattamento.setDurata(durata);
+			}
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		return trattamento;
 	}
-
-	@Override
-	public void aggiornaTrattamento(Trattamento trattamento) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void eliminaTrattamento(Trattamento trattamento) {
-		// TODO Auto-generated method stub
-		
-	}
-
 }
