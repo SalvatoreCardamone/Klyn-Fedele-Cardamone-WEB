@@ -3,6 +3,7 @@ package web.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import model.Utente;
 import persistence.DBManager;
@@ -16,19 +17,20 @@ public class LoginController
 		String []lista=nome.split(" ");
 		Utente utente= new Utente(email, id, lista[0],lista[1],true,"");
 		System.out.println("Nome: "+utente.getNome()+" Cognome: "+utente.getCognome());
-		//DBManager.getInstance().utenteDAO().save(utente);
+		DBManager.getInstance().utenteDAO().save(utente);
 		return "";
 	}
 	
 	@PostMapping("/login")
+	@ResponseBody
 	public String loginUtente(@RequestParam String email,@RequestParam String password)
 	{
-		Utente ut=new Utente();
-		ut= DBManager.getInstance().utenteDAO().trovaUtente(email, password);
-		if(ut.getEmail().equals(""))
-			return "NO";
+		Utente ut;
+		ut = DBManager.getInstance().utenteDAO().trovaUtente(email, password);
+		if(ut.getEmail() == null)
+			return "UTENTE NON TROVATO";
 		else
-			return "";
+			return "BENVENUTO " + ut.getEmail();
 		//Utente utente= new Utente(email, id, lista[0],lista[1],true,"");
 		//System.out.println("Nome: "+utente.getNome()+" Cognome: "+utente.getCognome());
 		//DBManager.getInstance().utenteDAO().save(utente);
