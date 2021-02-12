@@ -48,9 +48,41 @@ public class UtenteDAOJDBC implements UtenteDAO
 	}
 
 	@Override
-	public Utente findByPrimaryKey(String email) {
-		// TODO Auto-generated method stub
-		return null;
+	public Utente trovaUtente(String email, String password) {
+		Connection conn;
+		Utente ut= new Utente();
+		try
+		{
+			conn=dbSource.getConnection();
+			String query="SELECT * FROM utente WHERE email=? and password=?";
+			PreparedStatement st= conn.prepareStatement(query);
+			
+			st.setString(1, email);
+			st.setString(2, password);
+			
+			ResultSet rs= st.executeQuery();
+			while(rs.next())
+			{
+				String Email=rs.getString("email");
+				String Password=rs.getString("password");
+				String Nome=rs.getString("nome");
+				String Cognome=rs.getString("cognome");
+				String Numero=rs.getString("numero");
+				boolean Convalidato=rs.getBoolean("convalidato");
+				
+				ut.setEmail(Email);
+				ut.setPassword(Password);
+				ut.setNome(Nome);
+				ut.setCognome(Cognome);
+				ut.setConvalidato(Convalidato);
+				ut.setNumero(Numero);
+			}
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		return ut;
 	}
 
 	@Override
