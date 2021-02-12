@@ -1,10 +1,12 @@
 package model;
 
+import java.sql.Date;
+
 public class Prenotazione 
 {
 	private Integer idPrenotazione;
 	private String utente;
-	private String data;
+	private Date date;
 	private Trattamento trattamento;
 	
 	public Prenotazione()
@@ -12,11 +14,11 @@ public class Prenotazione
 		
 	}
 	
-	public Prenotazione(Integer idPrenotazione, String utente, String data, Trattamento trattamento)
+	public Prenotazione(Integer idPrenotazione, String utente, Date date, Trattamento trattamento)
 	{
 		this.idPrenotazione=idPrenotazione;
 		this.utente=utente;
-		this.data=data;
+		this.date=date;
 		this.trattamento=trattamento;
 	}
 
@@ -36,12 +38,12 @@ public class Prenotazione
 		this.utente = utente;
 	}
 
-	public String getData() {
-		return data;
+	public Date getDate() {
+		return date;
 	}
 
-	public void setData(String data) {
-		this.data = data;
+	public void setDate(Date data) {
+		this.date = data;
 	}
 
 	public Trattamento getTrattamento() {
@@ -52,11 +54,18 @@ public class Prenotazione
 		this.trattamento = trattamento;
 	}
 	
+	public String getNomeTrattamento()
+	{
+		String nome="";
+		nome=trattamento.getNomeTrattamento();
+		return nome;
+	}
+	
 	public String toString()
 	{
 		String stampa="";
 		
-		stampa="idPrenotazione: "+idPrenotazione+"\nUtente: "+utente+"\nData: "+data+"\nTrattamento: "+trattamento.toString();
+		stampa="idPrenotazione: "+idPrenotazione+"\nUtente: "+utente+"\nDate: "+date+"\nTrattamento: "+trattamento.toString();
 		
 		return stampa;
 	}

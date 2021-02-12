@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -27,8 +28,8 @@ public class UtenteDAOJDBC implements UtenteDAO
 		try
 		{
 		conn= dbSource.getConnection();
-		String quetyUpdate= "INSERT INTO utente values(?,?,?,?,?,?)";
-		PreparedStatement st= conn.prepareStatement(quetyUpdate);
+		String quety= "INSERT INTO utente values(?,?,?,?,?,?)";
+		PreparedStatement st= conn.prepareStatement(quety);
 		
 		st.setString(1, utente.getEmail());
 		st.setString(2, utente.getPassword());
@@ -53,9 +54,34 @@ public class UtenteDAOJDBC implements UtenteDAO
 	}
 
 	@Override
-	public List<Utente> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<Utente> findAll() {
+		ArrayList<Utente> lista= new ArrayList<Utente>();
+		Connection conn;
+		try
+		{
+			conn=dbSource.getConnection();
+			String query="select * fron utente";
+			PreparedStatement st= conn.prepareStatement(query);
+			ResultSet rs= st.executeQuery();
+			while(rs.next())
+			{
+				String email= rs.getString("email");
+				String password= rs.getString("password");
+				String nome= rs.getString("nome");
+				String cognome= rs.getString("cognome");
+				boolean convalidato= rs.getBoolean("convalidato");
+				String telefono= rs.getString("numero");
+				Utente ut= new Utente(email,password,nome,cognome,convalidato,telefono);
+				lista.add(ut);
+			}
+			
+			
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		return lista;
 	}
 
 	@Override
@@ -79,7 +105,6 @@ public class UtenteDAOJDBC implements UtenteDAO
 			conn= dbSource.getConnection();
 		    String query = "select * from utente where utente.email=? and utente.password=?";
 		    PreparedStatement st= conn.prepareStatement(query);
-			
 			st.setString(1, email);
 			st.setString(2, password);
 		    ResultSet rs = st.executeQuery();
@@ -90,8 +115,6 @@ public class UtenteDAOJDBC implements UtenteDAO
 		        String cognome = rs.getString("Cognome");
 		        utente.setNome(nome);
 		        utente.setCognome(cognome);
-		        //System.out.println(nome+": "+cognome);
-		       
 		      }
 		}
 		catch(Exception e)

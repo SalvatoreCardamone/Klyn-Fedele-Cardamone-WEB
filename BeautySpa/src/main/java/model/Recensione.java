@@ -1,9 +1,11 @@
 package model;
 
+import java.sql.Date;
+
 public class Recensione {
 	private Integer idRecensione;
 	private String descrizione;
-	private String data;
+	private Date date;
 	private String scrittoDa;//Utente
 	private Integer voto;
 	
@@ -12,11 +14,11 @@ public class Recensione {
 		
 	}
 	
-	public Recensione(Integer idRecensione, String descrizione, String data, String scrittoDa, Integer voto)
+	public Recensione(Integer idRecensione, String descrizione, Date data, String scrittoDa, Integer voto)
 	{
 		this.idRecensione=idRecensione;
 		this.descrizione=descrizione;
-		this.data=data;
+		this.date=data;
 		this.scrittoDa=scrittoDa;
 		this.voto=voto;
 	}
@@ -37,12 +39,12 @@ public class Recensione {
 		this.descrizione = descrizione;
 	}
 
-	public String getData() {
-		return data;
+	public Date getData() {
+		return date;
 	}
 
-	public void setData(String data) {
-		this.data = data;
+	public void setData(Date data) {
+		this.date = data;
 	}
 
 	public String getScrittoDa() {
@@ -65,7 +67,7 @@ public class Recensione {
 	{
 		String stampa="";
 		
-		stampa="idRecensione: "+idRecensione+"\ndescrizione: "+descrizione+"\nData: "+data+"\nScrittoDa: "+scrittoDa+"\nVoto: "+voto.toString();
+		stampa="idRecensione: "+idRecensione+"\ndescrizione: "+descrizione+"\nData: "+date+"\nScrittoDa: "+scrittoDa+"\nVoto: "+voto.toString();
 
 		return stampa;
 	}
