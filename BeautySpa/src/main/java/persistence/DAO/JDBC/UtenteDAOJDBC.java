@@ -48,7 +48,7 @@ public class UtenteDAOJDBC implements UtenteDAO
 	}
 
 	@Override
-	public Utente trovaUtente(String email, String password) {
+	public Utente trovaUtente(String email) {
 		Connection conn;
 		Utente ut= new Utente();
 		try
@@ -58,7 +58,7 @@ public class UtenteDAOJDBC implements UtenteDAO
 			PreparedStatement st= conn.prepareStatement(query);
 			
 			st.setString(1, email);
-			st.setString(2, password);
+			//st.setString(2, password);
 			
 			ResultSet rs= st.executeQuery();
 			while(rs.next())
@@ -117,16 +117,37 @@ public class UtenteDAOJDBC implements UtenteDAO
 	}
 
 	@Override
-	public void update(Utente studente) {
-		// TODO Auto-generated method stub
-		
+	public void update(Utente utente) 
+	{
+		Connection conn;
+		try
+		{
+			conn= dbSource.getConnection();
+			Utente ut= trovaUtente(utente.getEmail());
+			if(ut.getEmail() == null)
+			{
+				//utente non trovato
+			}
+			else
+			{
+				String query="UPDATE utente SET password=? and convalidato=? and numero=? WHERE email=?";
+				PreparedStatement st= conn.prepareStatement(query);
+				
+				st.setString(1, utente.getPassword());
+				st.setBoolean(2, utente.isConvalidato());
+				st.setString(3,utente.getNumero());
+				st.setString(4, utente.getEmail());
+				
+				st.executeUpdate();
+				System.out.println("Cambiamenti aggiornati!");
+			}
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
 	}
 
-	@Override
-	public void delete(Utente studente) {
-		// TODO Auto-generated method stub
-		
-	}
 
 	@Override
 	public Utente login(String email, String password) {
