@@ -16,14 +16,14 @@ import persistence.DBManager;
 public class RegisterController {
 
 	@PostMapping("/registrazione")
-	public Utente registraUtente(@RequestParam String email,@RequestParam String password,
+	public String registraUtente(@RequestParam String email,@RequestParam String password,
 			@RequestParam String nome,@RequestParam String cognome, @RequestParam String telefono)
 	{
 		Utente utente= new Utente(email,password, nome,cognome,false,telefono);
 		DBManager.getInstance().utenteDAO().save(utente);
 		System.out.println("Ok registo nuovo utente!");
 		
-		return utente;
+		return "Prova01";
 	}
 	
 	@GetMapping("/registrazione")

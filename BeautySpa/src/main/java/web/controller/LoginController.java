@@ -1,5 +1,7 @@
 package web.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -23,14 +25,18 @@ public class LoginController
 	
 	@PostMapping("/login")
 	@ResponseBody
-	public String loginUtente(@RequestParam String email,@RequestParam String password)
+	public String loginUtente(@RequestParam String email,@RequestParam String password, HttpSession session)
 	{
+		
 		Utente ut;
 		ut = DBManager.getInstance().utenteDAO().trovaUtente(email, password);
 		if(ut.getEmail() == null)
 			return "UTENTE NON TROVATO";
 		else
-			return "BENVENUTO " + ut.getEmail();
+		{
+			session.setAttribute("Utente :", ut.getNome());
+			return "/login";
+		}
 		//Utente utente= new Utente(email, id, lista[0],lista[1],true,"");
 		//System.out.println("Nome: "+utente.getNome()+" Cognome: "+utente.getCognome());
 		//DBManager.getInstance().utenteDAO().save(utente);
