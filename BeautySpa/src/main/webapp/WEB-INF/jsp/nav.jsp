@@ -2,22 +2,6 @@
     pageEncoding="ISO-8859-1"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
     
-    
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
-
-	<!-- Loading resources -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	<script>
-	$(function(){ $("head").load("../HTML/imports.html") });
-	</script>
-	
-	
-</head>
-<body>
 
 <!--  NAV -->
 	<nav class="navbar navbar-expand-sm navbar-light bg-dark" id="navbar"> 
@@ -30,22 +14,23 @@
   		<div class="collapse navbar-collapse" id="navbarSupportedContent" >
    			<ul class="navbar-nav mr-auto">
       			<li class="nav-item" id="home">
-        		<a class="nav-link text-white" href="Home.html">Home</a>
+        		<a class="nav-link text-white" href="/">Home</a>
       			</li>
       			<li class="nav-item" id="galleria">
-        		<a class="nav-link text-white" href="Gallery.html">Galleria</a>
+        		<a class="nav-link text-white" href="/Gallery">Galleria</a>
       			</li>
       			<li class="nav-item" id="prenota">
-       			<a class="nav-link text-white" href="Booking.html">Prenota</a>
+       			<a class="nav-link text-white" href="/Booking">Prenota</a>
       			</li>
       			<li class="nav-item" id="info">
-        		<a class="nav-link text-white" href="Info.html">Info e Contatti</a>
+        		<a class="nav-link text-white" href="/Info">Info e Contatti</a>
       			</li>
     		</ul>
     <!-- /Nav Item List -->
   		</div>
   		
 
+		<!-- Show login button if not logged -->
 		<c:choose>
 		  <c:when test="${utente == null}">
 		  <button type="button" class="btn btn-outline-success my-2 my-sm-0" data-toggle="modal" data-target="#loginModal" id="loginButton">
@@ -59,27 +44,18 @@
 		  </button>  
 		  </c:when>
 		  <c:otherwise>
-		    <!-- corrisponde al default -->
+		    <!-- Default -->
 		  </c:otherwise>
 		</c:choose>
-
-		
-		
+	
 	</nav>
 	<!-- /NAV -->
+	
+	<!-- Modal for login -->
 	<jsp:include page="login.jsp"/>
-
+	<!-- /Modal for login -->
 	
-	<div id="register-popup-placeholder"> </div>
+	<!-- Modal for register -->
+	<jsp:include page="register.jsp"/>
+	<!-- /Modal for register -->
 
-</body>
-
-<script>
-$(document).ready(function() {    
-	$('#register-popup-placeholder').load("../HTML/Registrazione.html");
-	
-	});
-	
-</script>
-
-</html>

@@ -1,14 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-    
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
-</head>
-<body>
 
 <!--  login popup -->
 <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -48,17 +40,8 @@
 
   </div>
 
-
-</body>
-
 <script>
 $('#loginModal').on('shown.bs.modal', function () {
 	$("body").addClass("modal-open");
 	});
 </script>
-
-<script>
-
-</script>
-
-</html>
