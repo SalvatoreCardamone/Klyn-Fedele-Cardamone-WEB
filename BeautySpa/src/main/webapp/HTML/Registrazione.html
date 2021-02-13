@@ -68,22 +68,6 @@ function onSignIn(googleUser) {
   console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
   
   //Per richiamare la servlet, BISOGNA PASSARE I 3 PARAMETRI
-  $.ajax
-  ({​​
-  url: "/iscriviProfessore", //<<-- login google
-  method: "POST",
-  data: JSON.stringify(profile), // <<-- aggiustare
-  contentType: "application/json",
-  success: function(responseProf)
-  {​​
-
-
-  }​​,
-  fail: function( jqXHR, textStatus )
-  {​​
-  alert( "Request failed: " + textStatus);
-  }​​
-  }​​);
 }
 </script>
 
