@@ -10,6 +10,6 @@ public class Home
 	@GetMapping("/")
 	public String home()
 	{
-		return "/HTML/index.html";
+		return "nav";
 	}
 }
