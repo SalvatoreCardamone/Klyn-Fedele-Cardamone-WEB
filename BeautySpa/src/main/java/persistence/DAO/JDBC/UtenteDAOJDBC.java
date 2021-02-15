@@ -163,11 +163,12 @@ public class UtenteDAOJDBC implements UtenteDAO
 		    ResultSet rs = st.executeQuery();
 		      while (rs.next()) 
 		      {
-		    	
-		        String nome = rs.getString("Nome");
-		        String cognome = rs.getString("Cognome");
-		        utente.setNome(nome);
-		        utente.setCognome(cognome);
+		    	String Email= rs.getString("email");
+		        String Nome = rs.getString("nome");
+		        String Cognome = rs.getString("cognome");
+		        utente.setEmail(Email);
+		        utente.setNome(Nome);
+		        utente.setCognome(Cognome);
 		      }
 		}
 		catch(Exception e)
