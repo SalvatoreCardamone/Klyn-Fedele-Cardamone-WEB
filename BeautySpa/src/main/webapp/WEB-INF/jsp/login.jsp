@@ -26,9 +26,6 @@
             <button class="btn btn-success btn-block" type="submit">Login</button>
           </form>
           
-          <c:if test ="${ utente!=null}"> 
-          <div class="text-center text-muted delimiter">  Benvenuto ${utente} </div>
-		  </c:if>
           </div>   
         <div class="modal-footer d-flex justify-content-center">
         <div class="signup-section">Non hai un account? <br/> <button type="button" class="btn btn-link" data-toggle="modal" data-target="#registerModal" data-dismiss="modal" id="registerButton">Registrati Ora</button></div>

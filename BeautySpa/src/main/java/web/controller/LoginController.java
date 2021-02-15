@@ -19,15 +19,22 @@ public class LoginController
 	public String loginUtente(@RequestParam String email,@RequestParam String password, HttpSession session)
 	{
 		
-		Utente ut = DBManager.getInstance().UtenteDAO().trovaUtente(email);
+		Utente ut = DBManager.getInstance().UtenteDAO().login(email, password);
 		if(ut.getEmail() != null)
-			session.setAttribute("utente", ut.getNome() + ut.getCognome());
+			session.setAttribute("utente", ut.getNome() + " " + ut.getCognome());
+		else
+			session.setAttribute("erroreLogin", true);
+			
+		return "Home"; 
 		
+	}
+	
+	@PostMapping("/logout")
+	public String logoutUtente(HttpSession session)
+	{
+		session.setAttribute("utente", null);
 		return "Home";
 		
-		//Utente utente= new Utente(email, id, lista[0],lista[1],true,"");
-		//System.out.println("Nome: "+utente.getNome()+" Cognome: "+utente.getCognome());
-		//DBManager.getInstance().utenteDAO().save(utente);
 	}
 	
 }

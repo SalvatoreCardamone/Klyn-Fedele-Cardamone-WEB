@@ -31,13 +31,14 @@
   		
 
 		<!-- Show login button if not logged -->
-		<c:choose>
-		  <c:when test="${utente == null}">
+
+		  <c:if test="${utente == null}">
 		  <button type="button" class="btn btn-outline-success my-2 my-sm-0" data-toggle="modal" data-target="#loginModal" id="loginButton">
 		  Accedi
 		  </button>
-		  </c:when>
-		  <c:when test="${utente != null}">
+		  </c:if>
+		  
+		  <c:if test="${utente != null}">
 		  <div class="dropdown">
 		  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"> Benvenuto ${utente}!
 		  <span class="caret"></span></button>
@@ -46,19 +47,25 @@
 		    <li> <a class="dropdown-item" href="#">Prenotazioni</a> </li>
 		    <li> <div class="dropdown-divider"></div>  </li>
 		    <li>
-		    <button type="button" class="btn btn-outline-danger my-2 my-sm-0 mx-auto d-block">
+		    <form method="POST" action="/logout">
+		    <button type="submit" class="btn btn-outline-danger my-2 my-sm-0 mx-auto d-block">
 			   Logout
 			 </button>
+			</form>
 			</li>
 		  </ul>
 		</div>
-		    
-		  </c:when>
-		  <c:otherwise>
-		    <!-- Default -->
-		  </c:otherwise>
-		</c:choose>
+		  </c:if>
+		  
+		  <c:if test="${erroreLogin eq true}">
+		  <c:set var="erroreLogin" value="${false}" scope="session" />
+		  <script>
+		  alert("Attenzione: Email inserita e/o password errati!");
+		  </script>
+		  </c:if>
+		 
 	
+		  
 	</nav>
 	<!-- /NAV -->
 	
@@ -69,4 +76,3 @@
 	<!-- Modal for register -->
 	<jsp:include page="register.jsp"/>
 	<!-- /Modal for register -->
-
