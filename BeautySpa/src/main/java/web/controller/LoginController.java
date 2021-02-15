@@ -19,12 +19,11 @@ public class LoginController
 	public String loginUtente(@RequestParam String email,@RequestParam String password, HttpSession session)
 	{
 		
-		//Utente ut;
-		//ut = DBManager.getInstance().utenteDAO().trovaUtente(email, password);
-		//if(ut.getEmail() != null)
-			session.setAttribute("utente", "banana");
+		Utente ut = DBManager.getInstance().UtenteDAO().trovaUtente(email);
+		if(ut.getEmail() != null)
+			session.setAttribute("utente", ut.getNome() + ut.getCognome());
 		
-		return "nav";
+		return "Home";
 		
 		//Utente utente= new Utente(email, id, lista[0],lista[1],true,"");
 		//System.out.println("Nome: "+utente.getNome()+" Cognome: "+utente.getCognome());

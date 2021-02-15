@@ -38,10 +38,21 @@
 		  </button>
 		  </c:when>
 		  <c:when test="${utente != null}">
-		  <p> Benvenuto ${utente}    </p>
-		  <button type="button" class="btn btn-outline-danger my-2 my-sm-0" data-toggle="modal" data-target="#loginModal" id="loginButton">
-		   Logout
-		  </button>  
+		  <div class="dropdown">
+		  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"> Benvenuto ${utente}!
+		  <span class="caret"></span></button>
+		  <ul class="dropdown-menu">
+		    <li> <a class="dropdown-item" href="#">Profilo</a> </li>
+		    <li> <a class="dropdown-item" href="#">Prenotazioni</a> </li>
+		    <li> <div class="dropdown-divider"></div>  </li>
+		    <li>
+		    <button type="button" class="btn btn-outline-danger my-2 my-sm-0 mx-auto d-block">
+			   Logout
+			 </button>
+			</li>
+		  </ul>
+		</div>
+		    
 		  </c:when>
 		  <c:otherwise>
 		    <!-- Default -->
