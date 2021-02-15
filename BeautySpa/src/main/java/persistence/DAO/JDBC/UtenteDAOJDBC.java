@@ -54,7 +54,7 @@ public class UtenteDAOJDBC implements UtenteDAO
 		try
 		{
 			conn=dbSource.getConnection();
-			String query="SELECT * FROM utente WHERE email=? and password=?";
+			String query="SELECT * FROM utente WHERE email=?";
 			PreparedStatement st= conn.prepareStatement(query);
 			
 			st.setString(1, email);
@@ -92,7 +92,7 @@ public class UtenteDAOJDBC implements UtenteDAO
 		try
 		{
 			conn=dbSource.getConnection();
-			String query="select * fron utente";
+			String query="SELECT * FROM utente";
 			PreparedStatement st= conn.prepareStatement(query);
 			ResultSet rs= st.executeQuery();
 			while(rs.next())
@@ -130,7 +130,7 @@ public class UtenteDAOJDBC implements UtenteDAO
 			}
 			else
 			{
-				String query="UPDATE utente SET password=? and convalidato=? and numero=? WHERE email=?";
+				String query="UPDATE utente SET password=? , convalidato=? , numero=? WHERE email=?";
 				PreparedStatement st= conn.prepareStatement(query);
 				
 				st.setString(1, utente.getPassword());

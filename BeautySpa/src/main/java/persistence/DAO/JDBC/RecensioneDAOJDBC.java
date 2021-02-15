@@ -5,7 +5,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
-
+import java.util.Calendar;
 
 import model.Recensione;
 import persistence.DBSource;
@@ -29,14 +29,16 @@ public class RecensioneDAOJDBC implements RecensioneDAO
 		try
 		{
 			conn= dbSource.getConnection();
-			String query="INSERT INTO recensione values(?,?,?,?,?)";
+			String query="INSERT INTO recensione(descrizione , date , scritto , voto) values(?,?,?,?)";
 			PreparedStatement st= conn.prepareStatement(query);
 			
-			st.setInt(1, recensione.getIdRecensione());
-			st.setString(2,recensione.getDescrizione());
-			st.setDate(3, recensione.getData());
-			st.setString(4, recensione.getScrittoDa());
-			st.setInt(5, recensione.getVoto());
+			//st.setInt(1, recensione.getIdRecensione());
+			st.setString(1,recensione.getDescrizione());
+			Calendar calendar = Calendar.getInstance();
+			Date date = new Date(calendar.getTime().getTime());
+			st.setObject(2, date);
+			st.setString(3, recensione.getScrittoDa());
+			st.setInt(4, recensione.getVoto());
 			
 			st.executeUpdate();
 			System.out.println("Recensione e stata aggiunta");
@@ -54,7 +56,7 @@ public class RecensioneDAOJDBC implements RecensioneDAO
 		try
 		{
 			conn= dbSource.getConnection();
-			String query="SELECT * FROM recensione WHERE recensione.scrittoDa=?";
+			String query="SELECT * FROM recensione WHERE scritto=?";
 			PreparedStatement st= conn.prepareStatement(query);
 			
 			
@@ -62,10 +64,10 @@ public class RecensioneDAOJDBC implements RecensioneDAO
 			ResultSet rs= st.executeQuery();
 			while(rs.next())
 			{
-				Integer idRecensione=rs.getInt("idRecensione");
+				Integer idRecensione=rs.getInt("id");
 				String descrizione=rs.getString("descrizione");
-				Date date=rs.getDate("data");
-				String scrittoDa=rs.getString("scrittoDa");
+				Date date=rs.getDate("date");
+				String scrittoDa=rs.getString("scritto");
 				Integer voto= rs.getInt("voto");
 				
 				Recensione passa= new Recensione(idRecensione, descrizione,date, scrittoDa, voto);
@@ -86,7 +88,7 @@ public class RecensioneDAOJDBC implements RecensioneDAO
 		try
 		{
 			conn=dbSource.getConnection();
-			String query= "DELETE FROM recensione WHERE idRecensione=? and scrittoDa=?";
+			String query= "DELETE FROM recensione WHERE id=? and scritto=?";
 			PreparedStatement st= conn.prepareStatement(query);
 			
 			st.setInt(1, idRecensione);

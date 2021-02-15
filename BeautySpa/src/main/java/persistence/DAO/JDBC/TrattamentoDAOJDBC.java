@@ -50,20 +50,20 @@ public class TrattamentoDAOJDBC implements TrattamentoDAO{
 		ArrayList<Trattamento> lista= new ArrayList<Trattamento>();
 		try {
 		    conn= dbSource.getConnection();
-		    String query = "select * from trattamento";
+		    String query = "SELECT * FROM trattamento";
 		    PreparedStatement st= conn.prepareStatement(query);
-		    ResultSet rs = st.executeQuery(query);
+		    ResultSet rs = st.executeQuery();
 		      while (rs.next()) {
-		        String nomeTrattamento = rs.getString("NomeTrattamento");
-		        Integer durata = rs.getInt("Durata");
+		        String nomeTrattamento = rs.getString("nome");
+		        Integer durata = rs.getInt("durata");
 		        Trattamento passa= new Trattamento(nomeTrattamento,durata);
 		        lista.add(passa);
-		        System.out.println(nomeTrattamento+": "+durata);
+		        //System.out.println(nomeTrattamento+": "+durata);
 		      }
 		    } 
 		catch (Exception e) 
 		{
-			System.out.println("Non riesco a ristituire trattamenti");
+			e.printStackTrace();
 		}
 		return lista;
 	}
@@ -75,14 +75,14 @@ public class TrattamentoDAOJDBC implements TrattamentoDAO{
 		try
 		{
 			conn= dbSource.getConnection();
-			String query= "SELECT * FROM trattamento WHERE nomeTrattamento=?";
+			String query= "SELECT * FROM trattamento WHERE nome=?";
 			PreparedStatement st= conn.prepareStatement(query);
 			
 			st.setString(1, nomeTrattamento);
 			ResultSet rs= st.executeQuery();
 			while(rs.next())
 			{
-				String nome=rs.getString("nomeTrattamento");
+				String nome=rs.getString("nome");
 				Integer durata=rs.getInt("durata");
 				trattamento.setNomeTrattamento(nome);
 				trattamento.setDurata(durata);

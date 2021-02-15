@@ -20,7 +20,7 @@ public class RegisterController {
 			@RequestParam String nome,@RequestParam String cognome, @RequestParam String telefono)
 	{
 		Utente utente= new Utente(email,password, nome,cognome,false,telefono);
-		DBManager.getInstance().utenteDAO().save(utente);
+		DBManager.getInstance().UtenteDAO().save(utente);
 		System.out.println("Ok registo nuovo utente!");
 		
 		return "Prova01";

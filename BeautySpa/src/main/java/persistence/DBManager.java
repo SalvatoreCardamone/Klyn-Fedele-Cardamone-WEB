@@ -1,6 +1,12 @@
 package persistence;
 
 import persistence.DAO.UtenteDAO;
+import persistence.DAO.RecensioneDAO;
+import persistence.DAO.TrattamentoDAO;
+import persistence.DAO.PrenotazioneDAO;
+import persistence.DAO.JDBC.PrenotazioneDAOJDBC;
+import persistence.DAO.JDBC.RecensioneDAOJDBC;
+import persistence.DAO.JDBC.TrattamentoDAOJDBC;
 import persistence.DAO.JDBC.UtenteDAOJDBC;
 
 public class DBManager 
@@ -44,19 +50,22 @@ public class DBManager
 		System.out.println("conesso");
 	}
 	
-	public UtenteDAO utenteDAO()
+	public UtenteDAO UtenteDAO()
 	{
 		return new UtenteDAOJDBC(dataSource);
 	}
-	/*
-	public CorsoDiLaureaDAO corsoDiLaureaDAO()
+	
+	public PrenotazioneDAO PrenotazioneDAO()
 	{
-		return new CorsoDiLaureaDAOJDBC(dataSource);
+		return new PrenotazioneDAOJDBC(dataSource);
 	}
 	
-	public ScuolaDAO scuolaDAO()
+	public TrattamentoDAO TrattamentoDAO()
 	{
-		return new ScuolaDAOJDBS(dataSource);
+		return new TrattamentoDAOJDBC(dataSource);
 	}
-	*/
+	public RecensioneDAO RecensioneDAO()
+	{
+		return new RecensioneDAOJDBC(dataSource);
+	}
 }

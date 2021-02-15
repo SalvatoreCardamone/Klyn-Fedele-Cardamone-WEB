@@ -1,7 +1,22 @@
 package web;
 
+import java.sql.Date;
+import java.sql.Time;
+import java.time.Clock;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.Calendar;
+
+
+
+import model.Prenotazione;
+import model.Recensione;
+import model.Trattamento;
 import model.Utente;
 import persistence.DBManager;
+import persistence.DAO.PrenotazioneDAO;
+import persistence.DAO.TrattamentoDAO;
 import persistence.DAO.UtenteDAO;
 
 public class TestDB {
@@ -10,11 +25,111 @@ public class TestDB {
 	{
 		DBManager.getInstance().verificaConnesione();
 		
-		UtenteDAO ut= DBManager.getInstance().utenteDAO();
-		//Inserimento Utente
-		Utente utente= new Utente();
-		ut.save(utente);
+		//Trattamenti
+		//provaListaTratamenti();
+		//provaTrovaTrattamenti("Massagi");
 		
+		//Utenti
+		//provaSaveUtente();
+		//provaLoginUtente("email","password");
+		//provaTrovaUtente("email");
+		//provaVediTuttiUtenti();
+		//provaUpdateUtente();
+		
+		//Recensioni
+		provaSaveRecensione();
+		//provaMieRecensioni("email");
+		//provaEliminaRecensione(2, "email");
+		
+		//Prenotazione
+		// provaSavePrenotazione();
+		//provaEliminaPrenotazione(11);
+		System.out.println("OK");
 	}
 	
+	public static void provaListaTratamenti()
+	{
+		ArrayList<Trattamento>lista;
+		lista=DBManager.getInstance().TrattamentoDAO().listaTrattamenti();
+		for(int i=0; i<lista.size(); i++)
+		{
+			System.out.println("Trattamento"+i+":"+lista.get(i));
+		}
+	}
+	public static void provaTrovaTrattamenti(String nome)
+	{
+		Trattamento trattamento= DBManager.getInstance().TrattamentoDAO().trovaNomeTrattamento(nome);
+		System.out.println(trattamento);
+	}
+	
+	public static void provaSaveUtente()
+	{
+		Utente utente= new Utente("email","password","nome","cognome",true,"12345");
+		DBManager.getInstance().UtenteDAO().save(utente);
+		System.out.println("Utente salvato");
+	}
+	public static void provaLoginUtente(String email, String password)
+	{
+		Utente utente=DBManager.getInstance().UtenteDAO().login(email, password);
+		System.out.println(utente);
+	}
+	public static void provaTrovaUtente(String email)
+	{
+		Utente utente= DBManager.getInstance().UtenteDAO().trovaUtente(email);
+		System.out.println(utente);
+	}
+	public static void provaVediTuttiUtenti()
+	{
+		ArrayList<Utente>lista= new ArrayList<Utente>();
+		lista=DBManager.getInstance().UtenteDAO().findAll();
+		for(int i=0; i<lista.size(); i++)
+		{
+			System.out.println(lista.get(i));
+		}
+	}
+	public static void provaUpdateUtente()
+	{
+		Utente utente= new Utente("email","pass","nome","cognome",false,"1111");
+		DBManager.getInstance().UtenteDAO().update(utente);
+		utente=DBManager.getInstance().UtenteDAO().trovaUtente(utente.getEmail());
+		System.out.println("Utente aggiornato\n"+utente);
+	}
+	
+	
+	public static void provaSaveRecensione()
+	{
+		long millis=System.currentTimeMillis();  
+        Date date=new Date(millis);  
+		Recensione recensione= new Recensione(0,"Buono",date,"email",5);
+		DBManager.getInstance().RecensioneDAO().save(recensione);
+		System.out.println("Recensione salvata");
+	}
+	public static void provaMieRecensioni(String email)
+	{
+		ArrayList<Recensione>lista= new ArrayList<Recensione>();
+		lista=DBManager.getInstance().RecensioneDAO().mieRecensioni(email);
+		for(int i=0; i<lista.size(); i++)
+		{
+			System.out.println(lista.get(i));
+		}
+	}
+	public static void provaEliminaRecensione(Integer id, String scritto)
+	{
+		DBManager.getInstance().RecensioneDAO().delete(id,scritto);
+	}
+	
+	public static void provaSavePrenotazione()
+	{
+	 
+		Time time =null; 
+        Date date=null;
+		Prenotazione prenotazione= new Prenotazione(1,"email","Massagi",date,time);
+		DBManager.getInstance().PrenotazioneDAO().save(prenotazione);
+		System.out.println("Prenotazione e stata salvata");
+	}
+	public static void provaEliminaPrenotazione(Integer num)
+	{
+		DBManager.getInstance().PrenotazioneDAO().delete(num);
+		
+	}
 }
