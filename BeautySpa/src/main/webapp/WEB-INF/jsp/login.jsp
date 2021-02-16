@@ -25,7 +25,8 @@
             </div>
             <button class="btn btn-success btn-block" type="submit">Login</button>
           </form>
-          
+          <div class="d-flex justify-content-center social-buttons">
+          <div class="g-signin2" data-onsuccess="onSignUp"></div>
           </div>   
         <div class="modal-footer d-flex justify-content-center">
         <div class="signup-section">Non hai un account? <br/> <button type="button" class="btn btn-link" data-toggle="modal" data-target="#registerModal" data-dismiss="modal" id="registerButton">Registrati Ora</button></div>
@@ -36,9 +37,29 @@
     </div>
 
   </div>
-
+</div>
 <script>
+
+function onSignUp(googleUser) {
+  var profile = googleUser.getBasicProfile()
+	  var email=profile.getEmail();
+  	  var password=profile.getId();
+  	  
+	  const form = document.createElement('formGoogle');
+	  form.method = 'post';
+	  form.action = '/login';
+	  form.setAttribute("email", email);
+	  form.setAttribute("password", password);
+	  
+	  document.body.appendChild(form);
+	  form.submit();
+}
+</script>
+<script>
+
 $('#loginModal').on('shown.bs.modal', function () {
 	$("body").addClass("modal-open");
 	});
 </script>
+
+<script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
