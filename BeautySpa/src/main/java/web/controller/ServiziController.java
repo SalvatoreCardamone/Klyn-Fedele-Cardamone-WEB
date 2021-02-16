@@ -55,11 +55,6 @@ public class ServiziController {
 		return ritorna;
 	}
 	
-	@PostMapping("/login")
-	public void login(String id, String nome, String email)
-	{
-		
-	}
 	
 	
 	
