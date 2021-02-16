@@ -31,7 +31,7 @@ public class RegisterController {
 	{
 		System.out.println("Fine dela registrazione");
 		//return "/HTML/RegistrazioneCompletata.html";
-		return "fReg.html";
+		return "Home";
 	}
 	
 	/*

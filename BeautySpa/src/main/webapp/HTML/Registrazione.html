@@ -45,7 +45,7 @@
    		   <div class="d-flex justify-content-center social-buttons">
    		   	 <div class="g-signin2" data-onsuccess="onSignIn"></div>
           </div>   
-        <div class="modal-footer d-flex justify-content-center">
+        <div class="modal-footer d-flex justify-content-center" method="POST" action="//registrazioneGoogle">
         <div class="signup-section">Hai gia un account? <br/> <button type="button" class="btn btn-link" data-toggle="modal" data-target="#loginModal" data-dismiss="modal" id="loginButton">Accedi</button> </div>
      	</div>
         </div>
@@ -66,6 +66,26 @@ function onSignIn(googleUser) {
   console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
   console.log('Name: ' + profile.getName());
   console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+  $.ajax(
+		  {
+		  ​​
+		  //eticketta ,variabbile
+		  url: "/registrazioneGoogle",
+		  method: "POST",
+		  //data: studente,
+		  //contentType:"json",
+		  data: {​​email: profilo.getEmail(), nome: profilo.getName(), id: profilo.getId()}​​,
+		  success: function(responce)
+		  {​​
+		  	alert(responce);
+		  }​​,
+		  fail:function(jqXHR, textStatus)
+		  {​​
+		  	alert("Request failed:"+ textStatus);
+		  }​​
+		  },
+		  alert("qualcosa")​​
+		  );
   
   //Per richiamare la servlet, BISOGNA PASSARE I 3 PARAMETRI
 }

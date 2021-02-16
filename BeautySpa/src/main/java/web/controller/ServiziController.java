@@ -36,7 +36,7 @@ public class ServiziController {
 		return verifica;
 	}
 	
-	@PostMapping("registrazioneGoogle")
+	@PostMapping("/registrazioneGoogle")
 	public String registrazioneGoogle(String id, String nome, String email)
 	{
 		String ritorna="";
@@ -54,4 +54,13 @@ public class ServiziController {
 		}
 		return ritorna;
 	}
+	
+	@PostMapping("/login")
+	public void login(String id, String nome, String email)
+	{
+		
+	}
+	
+	
+	
 }
