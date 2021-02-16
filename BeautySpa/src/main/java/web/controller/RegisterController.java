@@ -19,11 +19,19 @@ public class RegisterController {
 	public String registraUtente(@RequestParam String email,@RequestParam String password,
 			@RequestParam String nome,@RequestParam String cognome, @RequestParam String telefono)
 	{
-		Utente utente= new Utente(email,password, nome,cognome,false,telefono);
-		DBManager.getInstance().UtenteDAO().save(utente);
-		System.out.println("Ok registo nuovo utente!");
 		
-		return "redirect:/";
+		Utente vedi= DBManager.getInstance().UtenteDAO().trovaUtente(email);
+		if(vedi.getEmail()==null)
+		{
+			return "register";
+		}
+		else
+		{
+			Utente utente= new Utente(email,password, nome,cognome,false,telefono);
+			DBManager.getInstance().UtenteDAO().save(utente);
+			System.out.println("Ok registo nuovo utente!");
+			return "redirect:/";
+		}
 	}
 	
 	@GetMapping("/registrazione")
