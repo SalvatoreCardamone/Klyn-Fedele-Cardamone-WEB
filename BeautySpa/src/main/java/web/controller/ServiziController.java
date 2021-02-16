@@ -1,5 +1,7 @@
 package web.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -37,7 +39,7 @@ public class ServiziController {
 	}
 	
 	@PostMapping("/registrazioneGoogle")
-	public String registrazioneGoogle(String id, String nome, String email)
+	public String registrazioneGoogle(String id, String nome, String email, HttpSession session)
 	{
 		String ritorna="";
 		String []lista=nome.split(" ");
