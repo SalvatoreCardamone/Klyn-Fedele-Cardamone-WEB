@@ -68,23 +68,22 @@ function onSignIn(googleUser) {
   console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
   $.ajax(
 		  {
-		  ​​
 		  //eticketta ,variabbile
 		  url: "/registrazioneGoogle",
 		  method: "POST",
 		  //data: studente,
 		  //contentType:"json",
-		  data: {​​email: profilo.getEmail(), nome: profilo.getName(), id: profilo.getId()}​​,
+		  data: {email: profilo.getEmail(), nome: profilo.getName(), id: profilo.getId()},
 		  success: function(responce)
-		  {​​
+		  {
 		  	alert(responce);
-		  }​​,
-		  fail:function(jqXHR, textStatus)
-		  {​​
-		  	alert("Request failed:"+ textStatus);
-		  }​​
 		  },
-		  alert("qualcosa")​​
+		  fail:function(jqXHR, textStatus)
+		  {
+		  	alert("Request failed:"+ textStatus);
+		  }
+		  },
+		  alert("qualcosa")
 		  );
   
   //Per richiamare la servlet, BISOGNA PASSARE I 3 PARAMETRI
