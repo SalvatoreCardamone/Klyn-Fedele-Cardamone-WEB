@@ -1,5 +1,6 @@
 package web;
 
+import java.io.File;
 import java.sql.Date;
 import java.sql.Time;
 import java.time.Clock;
@@ -8,7 +9,7 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-
+import javax.swing.JFileChooser;
 
 import model.Prenotazione;
 import model.Recensione;
@@ -26,6 +27,7 @@ public class TestDB {
 		DBManager.getInstance().verificaConnesione();
 		
 		//Trattamenti
+		provaSaveTrattamento();
 		//provaListaTratamenti();
 		//provaTrovaTrattamenti("Massagi");
 		
@@ -37,7 +39,7 @@ public class TestDB {
 		//provaUpdateUtente();
 		
 		//Recensioni
-		provaSaveRecensione();
+		//provaSaveRecensione();
 		//provaMieRecensioni("email");
 		//provaEliminaRecensione(2, "email");
 		
@@ -47,6 +49,16 @@ public class TestDB {
 		System.out.println("OK");
 	}
 	
+	public static void provaSaveTrattamento()
+	{
+		JFileChooser chooser = new JFileChooser();
+		chooser.showOpenDialog(null);
+		File f = chooser.getSelectedFile();
+		String filename = f.getAbsolutePath();
+		
+		Trattamento tr= new Trattamento("Massagi",40,"Si fanno i massagi con olio e cremate porfumate",filename);
+		DBManager.getInstance().TrattamentoDAO().save(tr);
+	}
 	public static void provaListaTratamenti()
 	{
 		ArrayList<Trattamento>lista;

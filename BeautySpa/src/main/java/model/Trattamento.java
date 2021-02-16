@@ -4,17 +4,40 @@ public class Trattamento
 {
 	private String nomeTrattamento;
 	private Integer durata;
+	private String descrizione;
+	private String percorso;
+	
 	
 	public Trattamento()
 	{
 		
 	}
 	
-	public Trattamento(String nomeTrattamento, Integer durata)
+	public Trattamento(String nomeTrattamento, Integer durata, String descrizione , String percorso)
 	{
 		this.nomeTrattamento=nomeTrattamento;
 		this.durata=durata;
+		this.descrizione=descrizione;
+		this.percorso=percorso;
 	}
+	
+	
+	public String getDescrizione() {
+		return descrizione;
+	}
+
+	public void setDescrizione(String descrizione) {
+		this.descrizione = descrizione;
+	}
+
+	public String getPercorso() {
+		return percorso;
+	}
+
+	public void setPercorso(String percorso) {
+		this.percorso = percorso;
+	}
+
 	
 	public String getNomeTrattamento() {
 		return nomeTrattamento;
