@@ -41,20 +41,35 @@ public class LoginController
 	}
 	
 	@PostMapping("/loginGoogle")
-	public String loginGoogle(@RequestParam String email,@RequestParam String password, @RequestParam String nomeCognome, HttpSession session) 
+	public String loginGoogle(String email,String password, String nomeCognome, HttpSession session, Model model) 
 	{
 		
 		Utente ut = DBManager.getInstance().UtenteDAO().trovaUtente(email);
 		
-		if (ut.getEmail() == null) //non esiste
+		
+		String ritorna="";
+		String []lista=nomeCognome.split(" ");
+		Utente utente= new Utente(email, password, lista[0],lista[1],true,"---");
+		System.out.println("Nome: "+utente.getNome()+" Cognome: "+utente.getCognome());
+		//DBManager.getInstance().UtenteDAO().save(utente);
+		//Utente ut= DBManager.getInstance().UtenteDAO().trovaUtente(email);
+		System.out.println(ut.getEmail());
+		if(ut.getEmail()==null)
 		{
-			//devo crearlo..
+			DBManager.getInstance().UtenteDAO().save(utente);
+			return "login";
 		}
+		
+		loginUtente(email, password, session, model);
+		return "Home";
+		//return ritorna;
+		
+		
 		
 		//faccio login e setto attributo utente
 		
 		
-		return "redirect:/";
+		//return "redirect:/";
 	}
 	
 }

@@ -14,6 +14,7 @@ import persistence.DBManager;
 @RestController
 public class ServiziController {
 
+	/*
 	@RequestMapping(value = "/loginGoogle", method = RequestMethod.POST)
 	public void loginGoogle(@RequestParam String ID,@RequestParam String nome, @RequestParam String email ) {
 		
@@ -23,8 +24,9 @@ public class ServiziController {
 		System.out.println("Nome: "+utente.getNome()+" Cognome: "+utente.getCognome());
 		DBManager.getInstance().utenteDAO().save(utente);
 		return "";
-		*/
+		
 	}
+	*/
 	
 	@PostMapping("verificaLogin")
 	public String verirficaLogin(String email, String password)
@@ -37,7 +39,7 @@ public class ServiziController {
 		
 		return verifica;
 	}
-	
+	/*
 	@PostMapping("/registrazioneGoogle")
 	public String registrazioneGoogle(String id, String nome, String email, HttpSession session)
 	{
