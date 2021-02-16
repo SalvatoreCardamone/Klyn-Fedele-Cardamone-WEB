@@ -36,8 +36,25 @@ public class LoginController
 	public String logoutUtente(HttpSession session)
 	{
 		session.setAttribute("utente", null);
-		return "Home";
+		return "redirect:/";
 		
+	}
+	
+	@PostMapping("/loginGoogle")
+	public String loginGoogle(@RequestParam String email,@RequestParam String password, @RequestParam String nomeCognome, HttpSession session) 
+	{
+		
+		Utente ut = DBManager.getInstance().UtenteDAO().trovaUtente(email);
+		
+		if (ut.getEmail() == null) //non esiste
+		{
+			//devo crearlo..
+		}
+		
+		//faccio login e setto attributo utente
+		
+		
+		return "redirect:/";
 	}
 	
 }

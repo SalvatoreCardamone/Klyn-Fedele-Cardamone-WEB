@@ -41,18 +41,35 @@
 <script>
 
 function onSignUp(googleUser) {
-  var profile = googleUser.getBasicProfile()
+  var profile = googleUser.getBasicProfile();
 	  var email=profile.getEmail();
   	  var password=profile.getId();
+  	  var nomeCognome=profile.getName();
   	  
-	  const form = document.createElement('form');
-	  form.method = 'post';
-	  form.action = '/login';
-	  form.setAttribute("email", email);
-	  form.setAttribute("password", password);
+      var form = document.createElement("form");
+      var element1 = document.createElement("input"); 
+      var element2 = document.createElement("input");  
+      var element3 = document.createElement("input"); 
+      
+      form.method = 'POST';
+      form.action = '/test';   
+
+      element1.value = email;
+      element1.name='email';
+      form.appendChild(element1);  
+
+      element2.value = password;
+      element2.name = 'password';
+      form.appendChild(element2);
+
+      element3.value = nomeCognome;
+      element3.name = 'nomeCognome';
+      form.appendChild(element3);
+      
+      document.body.appendChild(form);
+
+      form.submit();
 	  
-	  document.body.appendChild(form);
-	  form.submit();
 }
 </script>
 <script>
