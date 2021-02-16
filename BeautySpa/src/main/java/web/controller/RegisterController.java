@@ -23,7 +23,7 @@ public class RegisterController {
 		DBManager.getInstance().UtenteDAO().save(utente);
 		System.out.println("Ok registo nuovo utente!");
 		
-		return "Prova01";
+		return "Home";
 	}
 	
 	@GetMapping("/registrazione")

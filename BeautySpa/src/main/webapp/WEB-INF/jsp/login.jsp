@@ -45,7 +45,7 @@ function onSignUp(googleUser) {
 	  var email=profile.getEmail();
   	  var password=profile.getId();
   	  
-	  const form = document.createElement('formGoogle');
+	  const form = document.createElement('form');
 	  form.method = 'post';
 	  form.action = '/login';
 	  form.setAttribute("email", email);

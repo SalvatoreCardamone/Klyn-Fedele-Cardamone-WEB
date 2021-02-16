@@ -29,4 +29,11 @@ function verificaLogin()
 		}
 	}
 	);
+	
+	
+	function mySubmitFunction()
+{​​
+  someBug()
+  return false;
+}​​
 }

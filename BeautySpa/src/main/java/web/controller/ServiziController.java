@@ -54,6 +54,22 @@ public class ServiziController {
 		}
 		return ritorna;
 	}
+	/*
+	@PostMapping("/registrazione")
+	public String registrazione(String email, String nome, String cognome, String numero)
+	{
+		String ritorna="null";
+		Utente ut= DBManager.getInstance().UtenteDAO().trovaUtente(email);
+		//Riempio Utente
+		if(ut.getEmail()!= null)
+			ritorna="Esiste";
+		else
+		{
+			DBManager.getInstance().UtenteDAO().save(ut);
+		}
+		return ritorna;
+	}
+	*/
 	
 	
 	
