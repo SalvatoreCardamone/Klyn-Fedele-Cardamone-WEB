@@ -45,16 +45,16 @@
 						<div class="booking-form">
 						
 						 <c:if test="${utente != null}">
-							<form>
+							<form method="GET" action="/trattamenti">
 								<div class="form-group">
 									<span class="form-label">Prenotazione a nome di: </span>
-									<input class="form-control" type="text" placeholder="Mario Rossi" value="${utente}<">
+									<input class="form-control" type="text" placeholder="Mario Rossi" value="${utente.nome} ${utente.cognome}" name="nome">
 								</div>
 								<div class="row">
 									<div class="col">
 										<div class="form-group">
 											<span class="form-label">Data Check-In:</span>
-											<input class="form-control" type="date" required>
+											<input class="form-control" type="date" required name="data">
 										</div>
 									</div>
 								</div>
@@ -62,7 +62,7 @@
 									<div class="col">
 										<div class="form-group">
 											<span class="form-label">Numero persone: </span>
-											<select class="form-control">
+											<select class="form-control" name="numeroPersone">
 												<option>1</option>
 												<option>2</option>
 												<option>3</option>
@@ -73,7 +73,7 @@
 									</div>
 								</div>
 								<div class="form-btn">
-									<button class="submit-btn">Check availability</button>
+									<button class="submit-btn" type="submit">Controlla disponibilità</button>
 								</div>
 								</form>
 							</c:if>
