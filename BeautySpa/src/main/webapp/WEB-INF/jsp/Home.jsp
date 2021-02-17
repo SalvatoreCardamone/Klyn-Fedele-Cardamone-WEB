@@ -61,7 +61,7 @@
 
 <div class="bgimg-4">
   <div class="caption">
-  <a href="Booking.html"><button type="button" class="btn btn-outline-primary btn-lg" style="font-size: 2em;">PRENOTA ORA</button> </a>
+  <a href="/Booking"><button type="button" class="btn btn-outline-primary btn-lg" style="font-size: 2em;">PRENOTA ORA</button> </a>
   </div>
 </div>
 
