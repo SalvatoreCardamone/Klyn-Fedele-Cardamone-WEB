@@ -103,22 +103,6 @@
 	<jsp:include page="footer.jsp"/>
 	<!-- /FOOTER -->
 
-<c:forEach items="${reviewList}" var="item">
-   <p> ${item.idRecensione} </p>
-</c:forEach>
-
- <c:if test="${reviewList == null}">
- <script> 
- alert("è nullo!");
- </script>
- </c:if>
- 
-  <c:if test="${reviewList != null}">
-   <script> 
-	 alert("non è nullo!");
-	 </script>
- </c:if>
-
 
 </body>
 

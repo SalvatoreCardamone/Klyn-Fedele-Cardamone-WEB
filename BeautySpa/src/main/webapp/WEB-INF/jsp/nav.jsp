@@ -40,7 +40,7 @@
 		  
 		  <c:if test="${utente != null}">
 		  <div class="dropdown">
-		  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"> Benvenuto ${utente}!
+		  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"> Benvenuto ${utente.nome} ${utente.cognome}!
 		  <span class="caret"></span></button>
 		  <ul class="dropdown-menu">
 		    <li> <a class="dropdown-item" href="#">Profilo</a> </li>

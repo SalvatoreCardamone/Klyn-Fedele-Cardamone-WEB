@@ -108,24 +108,12 @@
     <span class="carousel-control-next-icon"></span>
   </a>
   
+  <c:forEach items="${reviewList}" var="tmp">
+	<div> ${tmp.idRecensione} </div>
+	<div> ${tmp.voto} </div>
+	<div> ${tmp.descrizione} </div>
+	<div> ${tmp.data} </div>
+	<div> ${tmp.scrittoDa} </div>
+  </c:forEach>
   
 </div>
-
-
-
-<script>
-$(document).ready(function() {
-	
-	
-	  var array = ${reviewList};
-	  for(int i=0; i<array.size(); i++){console.log(array);}
-	  
-	
-	  for (i = 1; i < 7; i++) {
-	  $('#review_name'+i).append(i+'<a title="" href="#">Hercules</a>');
-	  $('#review_star'+i).append(i+'<div> MEGA PUGNO ULTRA SONICO </div>');
-	  $('#review_text'+i).append(i+'<p>PINUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU been a good film portrayal of ancient Greece s favourite myth. So why would Hollywood start now? This latest attempt at bringing the son of Zeus to the big screen is brought to us by X-Men: The last Stand director Brett Ratner. If the name of the director wasn t enough to dissuade ...</p>	');
-	  }
-	});
-
-</script>

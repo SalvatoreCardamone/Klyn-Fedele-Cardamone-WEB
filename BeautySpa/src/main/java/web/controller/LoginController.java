@@ -22,7 +22,7 @@ public class LoginController
 		
 		Utente ut = DBManager.getInstance().UtenteDAO().login(email, password);
 		if(ut.getEmail() != null)
-			session.setAttribute("utente", ut.getNome() + " " + ut.getCognome());
+			session.setAttribute("utente", ut);
 		else
 			session.setAttribute("erroreLogin", true);
 		
