@@ -78,16 +78,7 @@ public class ServiziController {
 	}
 	*/
 	
-	@PostMapping("/getRecensioni")
-	public ArrayList<Recensione> getRecesioni(HttpSession session, Model model){
-		
-		ArrayList<Recensione> rec = DBManager.getInstance().RecensioneDAO().getLastRecensioni();
-		session.setAttribute("reviewList", rec);
-		
-		
-		
-		return rec;
-	}
+	
 	
 	
 }

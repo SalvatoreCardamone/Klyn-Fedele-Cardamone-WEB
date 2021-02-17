@@ -41,57 +41,32 @@
 							</p>
 						</div>
 					</div>
-					<div class="col-md-4 col-md-pull-7">
+					<div class="col-md-4 col-md-pull-7"> 
 						<div class="booking-form">
+						
+						 <c:if test="${utente != null}">
 							<form>
 								<div class="form-group">
-									<span class="form-label">Your Destination</span>
-									<input class="form-control" type="text" placeholder="Enter a destination or hotel name">
+									<span class="form-label">Prenotazione a nome di: </span>
+									<input class="form-control" type="text" placeholder="Mario Rossi" value="${utente}<">
 								</div>
 								<div class="row">
-									<div class="col-sm-6">
+									<div class="col">
 										<div class="form-group">
-											<span class="form-label">Check In</span>
-											<input class="form-control" type="date" required>
-										</div>
-									</div>
-									<div class="col-sm-6">
-										<div class="form-group">
-											<span class="form-label">Check out</span>
+											<span class="form-label">Data Check-In:</span>
 											<input class="form-control" type="date" required>
 										</div>
 									</div>
 								</div>
 								<div class="row">
-									<div class="col-sm-4">
+									<div class="col">
 										<div class="form-group">
-											<span class="form-label">Rooms</span>
+											<span class="form-label">Numero persone: </span>
 											<select class="form-control">
 												<option>1</option>
 												<option>2</option>
 												<option>3</option>
-											</select>
-											<span class="select-arrow"></span>
-										</div>
-									</div>
-									<div class="col-sm-4">
-										<div class="form-group">
-											<span class="form-label">Adults</span>
-											<select class="form-control">
-												<option>1</option>
-												<option>2</option>
-												<option>3</option>
-											</select>
-											<span class="select-arrow"></span>
-										</div>
-									</div>
-									<div class="col-sm-4">
-										<div class="form-group">
-											<span class="form-label">Children</span>
-											<select class="form-control">
-												<option>0</option>
-												<option>1</option>
-												<option>2</option>
+												<option>4</option>
 											</select>
 											<span class="select-arrow"></span>
 										</div>
@@ -100,7 +75,21 @@
 								<div class="form-btn">
 									<button class="submit-btn">Check availability</button>
 								</div>
-							</form>
+								</form>
+							</c:if>
+							
+						 <c:if test="${utente == null}">
+						 <div class="card">
+							  <div class="card-body">
+							    <h5 class="card-title">Attenzione</h5>
+							    <p class="card-text">Effettua il login per poter procedere con la tua prenotazione!</p>
+								    <div class="row justify-content-center">
+									  <button type="button" class="btn btn-primary my-2 my-sm-0" data-toggle="modal" data-target="#loginModal" id="loginButton"> Accedi </button>
+									</div>
+							 </div>
+						</div>
+						 </c:if>	
+						 
 						</div>
 					</div>
 				</div>
