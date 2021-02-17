@@ -1,4 +1,6 @@
-
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 
 <div id="SliderReview" class="carousel slide" data-ride="carousel" data-interval="3000">
@@ -109,9 +111,18 @@
   
 </div>
 
+<c:forEach items="${reviewList}" var="tmp">
+<script> alert(${tmp.idRecensione})</script>
+</c:forEach>
 
 <script>
 $(document).ready(function() {
+	
+	
+	  var array = ${reviewList};
+	  for(int i=0; i<array.size(); i++){console.log(array);}
+	  
+	
 	  for (i = 1; i < 7; i++) {
 	  $('#review_name'+i).append(i+'<a title="" href="#">Hercules</a>');
 	  $('#review_star'+i).append(i+'<div> MEGA PUGNO ULTRA SONICO </div>');
