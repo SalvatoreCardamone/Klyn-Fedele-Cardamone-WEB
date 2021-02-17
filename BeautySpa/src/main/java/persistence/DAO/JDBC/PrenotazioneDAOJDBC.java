@@ -3,6 +3,7 @@ package persistence.DAO.JDBC;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.time.Clock;
@@ -10,9 +11,12 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Calendar;
 
 import model.Prenotazione;
+import model.Trattamento;
+import persistence.DBManager;
 import persistence.DBSource;
 import persistence.DAO.PrenotazioneDAO;
 
@@ -82,5 +86,40 @@ public class PrenotazioneDAOJDBC implements PrenotazioneDAO
 			e.printStackTrace();
 		}
 		
+	}
+
+	@Override
+	public ArrayList<Prenotazione> prenotazioniData(Date date) {
+		ArrayList<Prenotazione> lista = new ArrayList<Prenotazione>();
+		Connection conn;
+		try
+		{
+			conn= dbSource.getConnection();
+			String query="SELECT * FROM prenotazione WHERE date=?";
+			PreparedStatement st= conn.prepareStatement(query);
+			st.setDate(1, date);
+			ResultSet rs= st.executeQuery();
+			 while (rs.next()) {
+			    	Integer id=rs.getInt("id");
+			        String nome = rs.getString("utente");
+			        Time time= rs.getTime("time");
+			        Date dateP= rs.getDate("date");
+			        Integer persone= rs.getInt("persone");
+			        Integer trattamento= rs.getInt("trattamento");
+			        
+			        ArrayList<Trattamento>trattamenti= new ArrayList<Trattamento>();
+			        Trattamento passa= new Trattamento();
+			        passa=DBManager.getInstance().TrattamentoDAO().trovaTrattamento(trattamento);
+			        trattamenti.add(passa);
+			        Prenotazione prenotazione= new Prenotazione(id,nome,time,dateP,persone,trattamenti);
+			        lista.add(prenotazione);
+			      }
+			
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		return lista;
 	}
 }

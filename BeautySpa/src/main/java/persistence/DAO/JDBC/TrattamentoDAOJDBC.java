@@ -52,7 +52,7 @@ public class TrattamentoDAOJDBC implements TrattamentoDAO{
 	}
 
 	@Override
-	public Trattamento trovaNomeTrattamento(Integer id) {
+	public Trattamento trovaTrattamento(Integer id) {
 		Connection conn;
 		Trattamento trattamento= new Trattamento();
 		try

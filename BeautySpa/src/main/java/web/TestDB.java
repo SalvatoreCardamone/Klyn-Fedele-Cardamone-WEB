@@ -46,9 +46,12 @@ public class TestDB {
 		//Prenotazione
 		//provaSavePrenotazione();
 		//provaEliminaPrenotazione(11);
+		//provaPrenotazioneData();
 		System.out.println("OK");
 	}
 	
+	
+
 	public static void provaSaveTrattamento()
 	{
 		JFileChooser chooser = new JFileChooser();
@@ -69,7 +72,7 @@ public class TestDB {
 	}
 	public static void provaTrovaTrattamenti(Integer id)
 	{
-		Trattamento trattamento= DBManager.getInstance().TrattamentoDAO().trovaNomeTrattamento(id);
+		Trattamento trattamento= DBManager.getInstance().TrattamentoDAO().trovaTrattamento(id);
 		System.out.println(trattamento);
 	}
 	
@@ -133,7 +136,8 @@ public class TestDB {
 	{
 	 
 		Time time =null; 
-        Date date=null;
+		Calendar calendar = Calendar.getInstance();
+		Date date = new Date(calendar.getTime().getTime());
         Trattamento tr= new Trattamento(1,"Bagnio turco","a",true,"E come un bagnio normale solo che con le sigarette");
         ArrayList<Trattamento> lista= new ArrayList<Trattamento>();
         lista.add(tr);
@@ -145,6 +149,19 @@ public class TestDB {
 	public static void provaEliminaPrenotazione(Integer num)
 	{
 		DBManager.getInstance().PrenotazioneDAO().delete(num);
+		
+	}
+	private static void provaPrenotazioneData() {
+		
+		ArrayList<Prenotazione> lista= new ArrayList<Prenotazione>();
+		Calendar calendar = Calendar.getInstance();
+		Date date = new Date(calendar.getTime().getTime());
+		lista= DBManager.getInstance().PrenotazioneDAO().prenotazioniData(date);
+		
+		for(int i=0; i<lista.size(); i++)
+		{
+			System.out.println(lista.get(i));
+		}
 		
 	}
 }

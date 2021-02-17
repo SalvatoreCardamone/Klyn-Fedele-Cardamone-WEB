@@ -45,7 +45,7 @@
 						<div class="booking-form">
 						
 						 <c:if test="${utente != null}">
-							<form method="GET" action="/trattamenti">
+							<form method="GET" action="/Treatments">
 								<div class="form-group">
 									<span class="form-label">Prenotazione a nome di: </span>
 									<input class="form-control" type="text" placeholder="Mario Rossi" value="${utente.nome} ${utente.cognome}" name="nome">
