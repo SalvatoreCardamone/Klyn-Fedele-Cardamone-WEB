@@ -37,12 +37,10 @@ public class TrattamentoDAOJDBC implements TrattamentoDAO{
 		    	Integer id=rs.getInt("id");
 		        String nome = rs.getString("nome");
 		        String image= rs.getString("image");
-		        Time tempo= rs.getTime("tempo");
-		        Date date= rs.getDate("giorno");
 		        boolean disp=rs.getBoolean("disponibile");
 		        String descrizione= rs.getString("descrizione");
 		        
-		        Trattamento passa= new Trattamento(id,nome,image,tempo,date,disp,descrizione);
+		        Trattamento passa= new Trattamento(id,nome,image,disp,descrizione);
 		        lista.add(passa);
 		      }
 		    } 
@@ -70,16 +68,14 @@ public class TrattamentoDAOJDBC implements TrattamentoDAO{
 				Integer idP= rs.getInt("id");
 				String nome=rs.getString("nome");
 				String image=rs.getString("image");
-				Time tempo= rs.getTime("tempo");
-				Date giorno= rs.getDate("giorno");
+				
 				boolean disp= rs.getBoolean("disponibile");
 				String desc= rs.getString("descrizione");
 				
 				trattamento.setId(idP);
 				trattamento.setNome(nome);
 				trattamento.setImage(image);
-				trattamento.setTempo(tempo);
-				trattamento.setGiorno(giorno);
+				
 				trattamento.setDisponobile(disp);
 				trattamento.setDescrizione(desc);
 			}
@@ -98,7 +94,7 @@ public class TrattamentoDAOJDBC implements TrattamentoDAO{
 		try
 		{
 			conn= dbSource.getConnection();
-			String query="INSERT INTO trattamento(nome , image , tempo , giorno , disponibile , descrizione) values(?,?,?,?,?,?)";
+			String query="INSERT INTO trattamento(nome , image , disponibile , descrizione) values(?,?,?,?)";
 			PreparedStatement st= conn.prepareStatement(query);
 			
 			st.setString(1, trattamento.getNome());
@@ -109,16 +105,16 @@ public class TrattamentoDAOJDBC implements TrattamentoDAO{
 				Date date = new Date(calendar.getTime().getTime());
 			 	st.setTime(3, date);
 			 */
-			st.setTime(3, trattamento.getTempo());
+			//st.setTime(3, trattamento.getTempo());
 			//Volendo si puo caricare il tempo direttamente qui facendo
 			/*
 			 	LocalTime localTime = LocalTime.now();
 			 	Time time = Time.valueOf(localTime)
 			 	st.setDate(4, time);
 			 */
-			st.setDate(4, trattamento.getGiorno());
-			st.setBoolean(5, trattamento.isDisponobile());
-			st.setString(6, trattamento.getDescrizione());
+			//st.setDate(4, trattamento.getGiorno());
+			st.setBoolean(3, trattamento.isDisponobile());
+			st.setString(4, trattamento.getDescrizione());
 			
 			st.executeUpdate();
 			System.out.println("Recensione e stata aggiunta");

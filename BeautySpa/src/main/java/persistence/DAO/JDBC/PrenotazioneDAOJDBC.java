@@ -37,12 +37,12 @@ public class PrenotazioneDAOJDBC implements PrenotazioneDAO
 			PreparedStatement st= conn.prepareStatement(query);
 			st.setString(1,prenotazione.getUtente());
 			//Volendo si puo caricare il tempo direttamente qui facendo
-			/*
-			 	LocalTime localTime = LocalTime.now();
-			 	Time time = Time.valueOf(localTime)
-			 	st.setDate(2, time);
-			 */
-			st.setTime(2, prenotazione.getTime());
+			
+			 LocalTime localTime = LocalTime.now();
+			 Time time = Time.valueOf(localTime);
+			 st.setTime(2, time);
+			 
+			//st.setTime(2, prenotazione.getTime());
 			//Volendo qui si puo occuopare del tempo facendo
 			/*
 			 	Calendar calendar = Calendar.getInstance();

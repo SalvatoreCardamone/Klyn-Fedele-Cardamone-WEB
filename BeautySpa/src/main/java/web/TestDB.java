@@ -27,7 +27,7 @@ public class TestDB {
 		DBManager.getInstance().verificaConnesione();
 		
 		//Trattamenti
-		//provaSaveTrattamento();
+		provaSaveTrattamento();
 		//provaListaTratamenti();
 		//provaTrovaTrattamenti("Massagi");
 		
@@ -48,7 +48,7 @@ public class TestDB {
 		//provaEliminaPrenotazione(11);
 		System.out.println("OK");
 	}
-	//Da testare
+	
 	public static void provaSaveTrattamento()
 	{
 		JFileChooser chooser = new JFileChooser();
@@ -57,7 +57,8 @@ public class TestDB {
 		String filename = f.getAbsolutePath();
 		
 		//Trattamento tr= new Trattamento("Massagi",40,"Si fanno i massagi con olio e cremate porfumate",filename);
-		//DBManager.getInstance().TrattamentoDAO().save(tr);
+		Trattamento tr= new Trattamento(0,"Bagnio turco",filename,true,"E come un bagnio normale solo che con le sigarette");
+		DBManager.getInstance().TrattamentoDAO().save(tr);
 	}
 	public static void provaListaTratamenti()
 	{

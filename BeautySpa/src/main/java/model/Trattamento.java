@@ -8,8 +8,6 @@ public class Trattamento
 	private Integer id;
 	private String nome;
 	private String image;
-	private Time tempo;
-	private Date giorno;
 	private boolean disponibile;
 	private String descrizione;
 	
@@ -19,13 +17,11 @@ public class Trattamento
 		
 	}
 	
-	public Trattamento(Integer id, String nome, String image, Time tempo, Date giorno, boolean disponibile, String descrizione)
+	public Trattamento(Integer id, String nome, String image, boolean disponibile, String descrizione)
 	{
 		this.id=id;
 		this.nome=nome;
 		this.image=image;
-		this.tempo=tempo;
-		this.giorno=giorno;
 		this.disponibile=disponibile;
 		this.descrizione=descrizione;
 	}
@@ -37,7 +33,7 @@ public class Trattamento
 	{
 		String stampa="";
 		
-		stampa="\nid: "+id+"\nnome: "+nome+"\nimage: "+image+"\ntempo: "+tempo+"\ngiorno: "+giorno+"\ndescrizione: "+descrizione;
+		stampa="\nid: "+id+"\nnome: "+nome+"\nimage: "+image+"\ndescrizione: "+descrizione;
 		if(disponibile)
 		{
 			stampa+="\nDisponibile";
@@ -73,22 +69,6 @@ public class Trattamento
 
 	public void setImage(String image) {
 		this.image = image;
-	}
-
-	public Time getTempo() {
-		return tempo;
-	}
-
-	public void setTempo(Time tempo) {
-		this.tempo = tempo;
-	}
-
-	public Date getGiorno() {
-		return giorno;
-	}
-
-	public void setGiorno(Date giorno) {
-		this.giorno = giorno;
 	}
 
 	public boolean isDisponobile() {
