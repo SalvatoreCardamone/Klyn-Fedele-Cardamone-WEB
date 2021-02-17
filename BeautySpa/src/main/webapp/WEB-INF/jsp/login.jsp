@@ -25,8 +25,9 @@
             </div>
             <button class="btn btn-success btn-block" type="submit">Login</button>
           </form>
-          <div class="d-flex justify-content-center social-buttons">
-          <div class="g-signin2" onclick="ClickLogin()" data-onsuccess="onSignUp"></div>
+          
+          	<div class="d-flex justify-content-center social-buttons">
+         		 <div class="g-signin2" onclick="ClickLogin()" data-onsuccess="onSignUp"></div>
           </div>   
         <div class="modal-footer d-flex justify-content-center">
         <div class="signup-section">Non hai un account? <br/> <button type="button" class="btn btn-link" data-toggle="modal" data-target="#registerModal" data-dismiss="modal" id="registerButton">Registrati Ora</button></div>
@@ -38,6 +39,7 @@
 
   </div>
 </div>
+
 <script>
 
 
@@ -51,7 +53,7 @@ function ClickLogin()
 
 
 function onSignUp(googleUser) {
- 
+	
  if (clicked) {
   var profile = googleUser.getBasicProfile();
 	  var email=profile.getEmail();

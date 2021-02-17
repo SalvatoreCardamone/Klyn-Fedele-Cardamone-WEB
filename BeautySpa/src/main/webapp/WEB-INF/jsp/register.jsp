@@ -47,7 +47,8 @@
 
 		<div class="text-center text-muted delimiter">oppure usa un social network!</div>
    		   <div class="d-flex justify-content-center social-buttons">
-   		   	 <div class="g-signin2" data-onsuccess="onSignIn"></div>
+   		   	    <div class="g-signin2" onclick="ClickLogin()" data-onsuccess="onSignUp"></div>
+
           </div>   
         <div class="modal-footer d-flex justify-content-center">
         <div class="signup-section">Hai gia un account? <br/> <button type="button" class="btn btn-link" data-toggle="modal" data-target="#loginModal" data-dismiss="modal" id="loginButton">Accedi</button> </div>
@@ -60,21 +61,58 @@
 </div>
 
 <script>
+
+
+var clicked=false;//Global Variable
+var primoContr=false;//Global Variable
+function ClickLogin()
+{
+    clicked=true;
+}
+   
+
+
+function onSignUp(googleUser) {
+	
+ if (clicked) {
+  var profile = googleUser.getBasicProfile();
+	  var email=profile.getEmail();
+  	  var password=profile.getId();
+  	  var nomeCognome=profile.getName();
+  	  
+      var form = document.createElement("form");
+      var element1 = document.createElement("input"); 
+      var element2 = document.createElement("input");  
+      var element3 = document.createElement("input"); 
+      
+      form.method = 'POST';
+      form.action = '/loginGoogle';   
+
+      element1.value = email;
+      element1.name='email';
+      form.appendChild(element1);  
+
+      element2.value = password;
+      element2.name = 'password';
+      form.appendChild(element2);
+
+      element3.value = nomeCognome;
+      element3.name = 'nomeCognome';
+      form.appendChild(element3);
+      
+      document.body.appendChild(form);
+
+      form.submit();
+        }
+	  
+}
+</script>
+
+<script>
 $('#registerModal').on('shown.bs.modal', function () {
 	$("body").addClass("modal-open");
 	});
 </script>
-<script>
-function onSignIn(googleUser) {
-  var profile = googleUser.getBasicProfile();
-  console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-  console.log('Name: ' + profile.getName());
-  console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
-  
-  
-  //Per richiamare la servlet, necessario Ajax
-  //$.Ajax (...)
-}
-</script>
+
 
  <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
