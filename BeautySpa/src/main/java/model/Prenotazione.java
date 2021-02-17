@@ -25,6 +25,7 @@ public class Prenotazione
 		this.time=time;
 		this.date=date;
 		this.persone=persone;
+		lista= new ArrayList<Trattamento>();
 		for(int i=0; i<l.size(); i++)
 		{
 			lista.add(l.get(i));

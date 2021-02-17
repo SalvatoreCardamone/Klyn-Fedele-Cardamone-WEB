@@ -27,9 +27,9 @@ public class TestDB {
 		DBManager.getInstance().verificaConnesione();
 		
 		//Trattamenti
-		provaSaveTrattamento();
+		//provaSaveTrattamento();
 		//provaListaTratamenti();
-		//provaTrovaTrattamenti("Massagi");
+		//provaTrovaTrattamenti(1);
 		
 		//Utenti
 		//provaSaveUtente();
@@ -44,7 +44,7 @@ public class TestDB {
 		//provaEliminaRecensione(2, "email");
 		
 		//Prenotazione
-		// provaSavePrenotazione();
+		//provaSavePrenotazione();
 		//provaEliminaPrenotazione(11);
 		System.out.println("OK");
 	}
@@ -55,8 +55,6 @@ public class TestDB {
 		chooser.showOpenDialog(null);
 		File f = chooser.getSelectedFile();
 		String filename = f.getAbsolutePath();
-		
-		//Trattamento tr= new Trattamento("Massagi",40,"Si fanno i massagi con olio e cremate porfumate",filename);
 		Trattamento tr= new Trattamento(0,"Bagnio turco",filename,true,"E come un bagnio normale solo che con le sigarette");
 		DBManager.getInstance().TrattamentoDAO().save(tr);
 	}
@@ -69,7 +67,6 @@ public class TestDB {
 			System.out.println("Trattamento"+i+":"+lista.get(i));
 		}
 	}
-	// Da testare
 	public static void provaTrovaTrattamenti(Integer id)
 	{
 		Trattamento trattamento= DBManager.getInstance().TrattamentoDAO().trovaNomeTrattamento(id);
@@ -131,14 +128,18 @@ public class TestDB {
 	{
 		DBManager.getInstance().RecensioneDAO().delete(id,scritto);
 	}
-	//Da testare
+	
 	public static void provaSavePrenotazione()
 	{
 	 
 		Time time =null; 
         Date date=null;
-		//Prenotazione prenotazione= new Prenotazione(1,"email","Massagi",date,time);
-		//DBManager.getInstance().PrenotazioneDAO().save(prenotazione);
+        Trattamento tr= new Trattamento(1,"Bagnio turco","a",true,"E come un bagnio normale solo che con le sigarette");
+        ArrayList<Trattamento> lista= new ArrayList<Trattamento>();
+        lista.add(tr);
+        lista.add(tr);
+		Prenotazione prenotazione= new Prenotazione(1,"email",time,date,2,lista);
+		DBManager.getInstance().PrenotazioneDAO().save(prenotazione);
 		System.out.println("Prenotazione e stata salvata");
 	}
 	public static void provaEliminaPrenotazione(Integer num)
