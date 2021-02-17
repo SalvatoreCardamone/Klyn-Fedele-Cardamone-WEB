@@ -27,7 +27,7 @@ public class TestDB {
 		DBManager.getInstance().verificaConnesione();
 		
 		//Trattamenti
-		provaSaveTrattamento();
+		//provaSaveTrattamento();
 		//provaListaTratamenti();
 		//provaTrovaTrattamenti("Massagi");
 		
@@ -48,7 +48,7 @@ public class TestDB {
 		//provaEliminaPrenotazione(11);
 		System.out.println("OK");
 	}
-	
+	//Da testare
 	public static void provaSaveTrattamento()
 	{
 		JFileChooser chooser = new JFileChooser();
@@ -56,8 +56,8 @@ public class TestDB {
 		File f = chooser.getSelectedFile();
 		String filename = f.getAbsolutePath();
 		
-		Trattamento tr= new Trattamento("Massagi",40,"Si fanno i massagi con olio e cremate porfumate",filename);
-		DBManager.getInstance().TrattamentoDAO().save(tr);
+		//Trattamento tr= new Trattamento("Massagi",40,"Si fanno i massagi con olio e cremate porfumate",filename);
+		//DBManager.getInstance().TrattamentoDAO().save(tr);
 	}
 	public static void provaListaTratamenti()
 	{
@@ -68,9 +68,10 @@ public class TestDB {
 			System.out.println("Trattamento"+i+":"+lista.get(i));
 		}
 	}
-	public static void provaTrovaTrattamenti(String nome)
+	// Da testare
+	public static void provaTrovaTrattamenti(Integer id)
 	{
-		Trattamento trattamento= DBManager.getInstance().TrattamentoDAO().trovaNomeTrattamento(nome);
+		Trattamento trattamento= DBManager.getInstance().TrattamentoDAO().trovaNomeTrattamento(id);
 		System.out.println(trattamento);
 	}
 	
@@ -129,14 +130,14 @@ public class TestDB {
 	{
 		DBManager.getInstance().RecensioneDAO().delete(id,scritto);
 	}
-	
+	//Da testare
 	public static void provaSavePrenotazione()
 	{
 	 
 		Time time =null; 
         Date date=null;
-		Prenotazione prenotazione= new Prenotazione(1,"email","Massagi",date,time);
-		DBManager.getInstance().PrenotazioneDAO().save(prenotazione);
+		//Prenotazione prenotazione= new Prenotazione(1,"email","Massagi",date,time);
+		//DBManager.getInstance().PrenotazioneDAO().save(prenotazione);
 		System.out.println("Prenotazione e stata salvata");
 	}
 	public static void provaEliminaPrenotazione(Integer num)

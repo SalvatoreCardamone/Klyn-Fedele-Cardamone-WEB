@@ -2,35 +2,42 @@ package model;
 
 import java.sql.Date;
 import java.sql.Time;
+import java.util.ArrayList;
 
 public class Prenotazione 
 {
-	private Integer idPrenotazione;
+	private Integer id;
 	private String utente;
-	private Date date;
 	private Time time;
-	private String trattamento;
+	private Date date;
+	private Integer persone;
+	private ArrayList<Trattamento>lista;
 	
 	public Prenotazione()
 	{
-		
+		lista= new ArrayList<Trattamento>();
 	}
 	
-	public Prenotazione(Integer idPrenotazione, String utente, String trattamento, Date date,Time time)
+	public Prenotazione(Integer id, String utente,Time time, Date date, Integer persone, ArrayList<Trattamento>l)
 	{
-		this.idPrenotazione=idPrenotazione;
+		this.id=id;
 		this.utente=utente;
-		this.date=date;
-		this.trattamento=trattamento;
 		this.time=time;
+		this.date=date;
+		this.persone=persone;
+		for(int i=0; i<l.size(); i++)
+		{
+			lista.add(l.get(i));
+		}
+		
 	}
 
-	public Integer getIdPrenotazione() {
-		return idPrenotazione;
+	public Integer getId() {
+		return id;
 	}
 
 	public void setIdPrenotazione(Integer idPrenotazione) {
-		this.idPrenotazione = idPrenotazione;
+		this.id = idPrenotazione;
 	}
 
 	public String getUtente() {
@@ -40,6 +47,14 @@ public class Prenotazione
 	public void setUtente(String utente) {
 		this.utente = utente;
 	}
+	
+	public Time getTime() {
+		return time;
+	}
+
+	public void setTime(Time time) {
+		this.time = time;
+	}
 
 	public Date getDate() {
 		return date;
@@ -48,31 +63,56 @@ public class Prenotazione
 	public void setDate(Date data) {
 		this.date = data;
 	}
-
-	public String getTrattamento() {
-		return trattamento;
+	
+	public Integer getPersone() {
+		return persone;
 	}
 
-	public void setTrattamento(String trattamento) {
-		this.trattamento = trattamento;
+	public void setPersone(Integer persone) {
+		this.persone = persone;
 	}
-	
-	
+
+	public ArrayList<Trattamento> getLista() {
+		return lista;
+	}
+
+	public void setLista(ArrayList<Trattamento> lista) {
+		this.lista = lista;
+	}
+
 	public String toString()
 	{
 		String stampa="";
 		
-		stampa="idPrenotazione: "+idPrenotazione+"\nUtente: "+utente+"\nDate: "+date+"\nTrattamento: "+trattamento+"\n Time: "+time;
-		
+		stampa="idPrenotazione: "+id+"\nUtente: "+utente+"\nDate: "+date+"\n Time: "+time+"\nPersone: "+persone;
+		StampaLista();
 		return stampa;
 	}
 
-	public Time getTime() {
-		return time;
+	public void StampaLista()
+	{
+		for(int i=0; i<lista.size(); i++)
+		{
+			System.out.println(lista.get(i));
+		}
 	}
-
-	public void setTime(Time time) {
-		this.time = time;
+	
+	public int numeroTrattamenti()
+	{
+		return lista.size();
+	}
+	
+	public Trattamento trattamentoNumero(int numero)
+	{
+		if(numero < lista.size())
+		{
+			Trattamento tr= lista.get(numero);
+			return tr;
+		}
+		else
+		{
+			return null;
+		}
 	}
 	
 }

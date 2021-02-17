@@ -6,6 +6,8 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Time;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -21,33 +23,7 @@ public class TrattamentoDAOJDBC implements TrattamentoDAO{
 	{
 		this.dbSource=dbSource;
 	}
-
-	/*
-	@Override
-	public void newTrattamento(Trattamento trattamento) {
-		Connection conn;
-		try
-		{
-		conn= dbSource.getConnection();
-		String quetyUpdate= "INSERT INTO trattamento values(?,?)";
-		PreparedStatement st= conn.prepareStatement(quetyUpdate);
-		
-		st.setString(1, trattamento.getNomeTrattamento());
-		st.setInt(2, trattamento.getDurata());
-		
-		st.executeUpdate();
-		System.out.println("Trattamento e stato aggiunto con sucesso");
-		}
-		catch(Exception e)
-		{
-			System.out.println("Non riesco a fare la query di save nel trattamento");
-		}
-	}
-	*/
 	
-
-	
-	//Da finire
 	@Override
 	public ArrayList<Trattamento> listaTrattamenti() {
 		Connection conn;
@@ -58,14 +34,16 @@ public class TrattamentoDAOJDBC implements TrattamentoDAO{
 		    PreparedStatement st= conn.prepareStatement(query);
 		    ResultSet rs = st.executeQuery();
 		      while (rs.next()) {
-		        String nomeTrattamento = rs.getString("nome");
-		        Integer durata = rs.getInt("durata");
+		    	Integer id=rs.getInt("id");
+		        String nome = rs.getString("nome");
+		        String image= rs.getString("image");
+		        Time tempo= rs.getTime("tempo");
+		        Date date= rs.getDate("giorno");
+		        boolean disp=rs.getBoolean("disponibile");
 		        String descrizione= rs.getString("descrizione");
-		        byte[] b= rs.getBytes("imagini");
-		        String image=new String(b);
-		        Trattamento passa= new Trattamento(nomeTrattamento,durata,descrizione,image);
+		        
+		        Trattamento passa= new Trattamento(id,nome,image,tempo,date,disp,descrizione);
 		        lista.add(passa);
-		        //System.out.println(nomeTrattamento+": "+durata);
 		      }
 		    } 
 		catch (Exception e) 
@@ -76,23 +54,34 @@ public class TrattamentoDAOJDBC implements TrattamentoDAO{
 	}
 
 	@Override
-	public Trattamento trovaNomeTrattamento(String nomeTrattamento) {
+	public Trattamento trovaNomeTrattamento(Integer id) {
 		Connection conn;
 		Trattamento trattamento= new Trattamento();
 		try
 		{
 			conn= dbSource.getConnection();
-			String query= "SELECT * FROM trattamento WHERE nome=?";
+			String query= "SELECT * FROM trattamento WHERE id=?";
 			PreparedStatement st= conn.prepareStatement(query);
 			
-			st.setString(1, nomeTrattamento);
+			st.setInt(1, id);
 			ResultSet rs= st.executeQuery();
 			while(rs.next())
 			{
+				Integer idP= rs.getInt("id");
 				String nome=rs.getString("nome");
-				Integer durata=rs.getInt("durata");
-				trattamento.setNomeTrattamento(nome);
-				trattamento.setDurata(durata);
+				String image=rs.getString("image");
+				Time tempo= rs.getTime("tempo");
+				Date giorno= rs.getDate("giorno");
+				boolean disp= rs.getBoolean("disponibile");
+				String desc= rs.getString("descrizione");
+				
+				trattamento.setId(idP);
+				trattamento.setNome(nome);
+				trattamento.setImage(image);
+				trattamento.setTempo(tempo);
+				trattamento.setGiorno(giorno);
+				trattamento.setDisponobile(disp);
+				trattamento.setDescrizione(desc);
 			}
 		}
 		catch(Exception e)
@@ -109,21 +98,28 @@ public class TrattamentoDAOJDBC implements TrattamentoDAO{
 		try
 		{
 			conn= dbSource.getConnection();
-			String query="INSERT INTO trattamento(nome , durata , descrizione , imagine) values(?,?,?,?)";
+			String query="INSERT INTO trattamento(nome , image , tempo , giorno , disponibile , descrizione) values(?,?,?,?,?,?)";
 			PreparedStatement st= conn.prepareStatement(query);
 			
-			st.setString(1, trattamento.getNomeTrattamento());
-			st.setInt(2,trattamento.getDurata());
-			st.setString(3, trattamento.getDescrizione());
-			st.setString(4, trattamento.getPercorso());
-			//File file = new File(trattamento.getPercorso());
-			//FileInputStream fis = new FileInputStream(file);
-			//byte b = 0;
-			//byte[] arr=trattamento.getPercorso().getBytes();
-			//st.setBytes(4, arr);//(4, fis, (int)file.length());
-			//st.setBinaryStream(4, fis, (int)file.length());
-			//st.setByte(4, arr);
-			//st.setBytes(4, arr);
+			st.setString(1, trattamento.getNome());
+			st.setString(2,trattamento.getImage());
+			//Volendo qui si puo occuopare del tempo facendo
+			/*
+			 	Calendar calendar = Calendar.getInstance();
+				Date date = new Date(calendar.getTime().getTime());
+			 	st.setTime(3, date);
+			 */
+			st.setTime(3, trattamento.getTempo());
+			//Volendo si puo caricare il tempo direttamente qui facendo
+			/*
+			 	LocalTime localTime = LocalTime.now();
+			 	Time time = Time.valueOf(localTime)
+			 	st.setDate(4, time);
+			 */
+			st.setDate(4, trattamento.getGiorno());
+			st.setBoolean(5, trattamento.isDisponobile());
+			st.setString(6, trattamento.getDescrizione());
+			
 			st.executeUpdate();
 			System.out.println("Recensione e stata aggiunta");
 		}

@@ -8,5 +8,5 @@ public interface TrattamentoDAO
 {
 	public void save(Trattamento trattamento);
 	public ArrayList<Trattamento> listaTrattamenti();
-	public Trattamento trovaNomeTrattamento(String nomeTrattamento);
+	public Trattamento trovaNomeTrattamento(Integer id);
 }
