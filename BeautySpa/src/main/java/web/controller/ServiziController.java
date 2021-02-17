@@ -1,14 +1,17 @@
 package web.controller;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpSession;
 
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import model.Utente;
+import model.*;
 import persistence.DBManager;
 
 @RestController
@@ -75,7 +78,16 @@ public class ServiziController {
 	}
 	*/
 	
-	
+	@PostMapping("/getRecensioni")
+	public ArrayList<Recensione> getRecesioni(HttpSession session, Model model){
+		
+		ArrayList<Recensione> rec = DBManager.getInstance().RecensioneDAO().getLastRecensioni();
+		session.setAttribute("reviewList", rec);
+		
+		
+		
+		return rec;
+	}
 	
 	
 }
