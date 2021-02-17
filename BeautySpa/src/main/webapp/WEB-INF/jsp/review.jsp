@@ -111,9 +111,7 @@
   
 </div>
 
-<c:forEach items="${reviewList}" var="tmp">
-<script> alert(${tmp.idRecensione})</script>
-</c:forEach>
+
 
 <script>
 $(document).ready(function() {
