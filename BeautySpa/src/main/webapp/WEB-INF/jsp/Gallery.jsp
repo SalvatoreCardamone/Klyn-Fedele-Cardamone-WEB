@@ -96,11 +96,8 @@
   </div>
   
 </div>
-
-<div> 
-<script src="https://apps.elfsight.com/p/platform.js" defer></script>
-<div class="elfsight-app-68dfa58a-74ce-4d71-bf71-38816499bc5e"></div>
-</div>
+	<!--  REVIEW -->
+	<jsp:include page="Review.jsp"/>
 
 	<!--  FOOTER -->
 	<jsp:include page="footer.jsp"/>
