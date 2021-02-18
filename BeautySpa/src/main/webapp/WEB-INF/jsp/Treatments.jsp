@@ -25,25 +25,42 @@
 	<!-- /NAV -->
 	
 	<h1> Trattamenti disponibili: </h1>
-	<c:forEach items="${trattamenti}" var="item">
-		<p> ${item.id} </p>
-		<p> ${item.nome} </p>
-		<p> ${item.disponibile} </p>
-		<p> ${item.descrizione} </p>
+	<c:forEach items="${listaTrattamenti}" var="item">
+		<p> ${item} </p>
+		<hr/>
 	</c:forEach>
 	
 		<h2> Prenotazioni effettuate: </h2>
-	<c:forEach items="${prenotazioni}" var="item">
-		<p> ${item.id} </p>
-		<p> ${item.utente} </p>
-		<p> ${item.time} </p>
-		<p> ${item.date} </p>
-		<p> ${item.persone} </p>
-		<p> ${item.trattamenti} </p>
-		
+	<c:forEach items="${listaPrenotazioni}" var="item">
+		<p> ${item} </p>
+		<hr/>
 	</c:forEach>
 
-		<!--  FOOTER -->
+
+	<table class="table table-bordered table-dark">
+  <thead>
+    <tr>
+      <th scope="col">-</th>
+      	<c:forEach items="${listaTrattamenti}" var="item">
+      	<th scope="col" id="${item.id}">${item.nome}</th>
+		</c:forEach>
+    </tr>
+  </thead>
+  <tbody>
+  <c:forEach items="${orariDisponibili}" var="ora">
+    <tr>
+      <th scope="row">${ora}</th>
+		<c:forEach items="${listaTrattamenti}" var="item">
+      	<td scope="col" id="${item.id} ${ora}"> test </td>
+		</c:forEach>
+		
+    </tr>
+  </c:forEach>
+
+  </tbody>
+</table>
+
+	<!--  FOOTER -->
 	<jsp:include page="footer.jsp"/>
 	<!-- /FOOTER -->
 		

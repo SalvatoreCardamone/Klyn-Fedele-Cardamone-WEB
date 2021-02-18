@@ -1,6 +1,7 @@
 package web.controller;
 
 import java.sql.Date;
+import java.sql.Time;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpSession;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import model.Orario;
 import model.Prenotazione;
 import model.Recensione;
 import model.Trattamento;
@@ -58,8 +60,10 @@ public class PageController
 		ArrayList<Prenotazione>listaPrenotazioni= new ArrayList<Prenotazione>();
 		listaPrenotazioni= DBManager.getInstance().PrenotazioneDAO().prenotazioniData(data);
 		
+		Orario r = new Orario();
 		session.setAttribute("listaTrattamenti", listaTrattamenti);
 		session.setAttribute("listaPrenotazioni", listaPrenotazioni);
+		session.setAttribute("orariDisponibili", r.orari);
 		
 		return "Treatments";
 	 }
