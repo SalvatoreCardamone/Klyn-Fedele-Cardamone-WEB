@@ -182,8 +182,41 @@ h3 {
 	
 }
 
-
+   
+   
+   /* recensioni */
 #SliderReview {
 	 margin-top: 4px;
 	 margin-bottom: 4px;
+}
+
+.checked {
+  color: orange;
+}
+#Review{
+ padding-top: 20px;
+}
+
+#review_head{
+	font-size: 34pt;
+	text-transform: uppercase;
+	margin-bottom: 10px;
+	text-shadow: #2a8d7b -2px -2px; 
+}
+
+#review_text{
+	color: #29293d;
+	font-family: 'Merriweather', serif; 
+	font-size: 30pt; 
+	font-weight: 300;
+	margin-bottom: 5px; 
+	text-align: center;
+}
+
+#review_author{
+	font-family: 'Helvetica Neue', sans-serif; 
+	font-size: 13pt; 
+	font-weight: bold; 
+	text-align: center; 
+	text-transform: uppercase;
 }
