@@ -26,8 +26,8 @@
     		<li data-target="#Slider" data-slide-to="4"></li>
     		<li data-target="#Slider" data-slide-to="5"></li>
     	</ul>
-	<!-- SliderShower -->
-		<div class="carousel-inner">
+	<!-- SliderShower --> 
+		<div class="carousel-inner" >
  				<c:forEach items="${reviewList}" var="tmp" varStatus="loopCounter">
  					<c:choose>
  						<c:when test = "${loopCounter.count == 1}">
@@ -35,9 +35,9 @@
  							
  							<!-- REVIEW TEXT PRINT -->
 								<div id="review_text"> 
-									<i class="fa fa-quote-left" style="font-size: 15pt; color:#4d1a00;"></i>
+									<i class="fa fa-quote-left" id="quotes"></i>
 										${tmp.descrizione}
-									<i class="fa fa-quote-right" style="font-size: 15pt; color:#4d1a00;"></i> 
+									<i class="fa fa-quote-right" id="quotes"></i> 
 								</div> 
 								<div class="row"> 
 									<div class="col" id="review_author"> ${tmp.scrittoDa} </div>
@@ -62,9 +62,9 @@
  							<div class="carousel-item"> 
  								<!-- REVIEW TEXT PRINT -->
 								<div id="review_text"> 
-									<i class="fa fa-quote-left" style="font-size: 15pt; color:#4d1a00;"></i>
+									<i class="fa fa-quote-left" id="quotes" ></i>
 										${tmp.descrizione}
-									<i class="fa fa-quote-right" style="font-size: 15pt; color:#4d1a00;"></i> 
+									<i class="fa fa-quote-right" id="quotes"></i> 
 								</div> 
 								<div class="row"> 
 									<div class="col" id="review_author"> ${tmp.scrittoDa} </div>

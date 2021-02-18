@@ -195,13 +195,14 @@ h3 {
 }
 #Review{
  padding-top: 20px;
+ background-color: #ecf2f8;
 }
 
 #review_head{
 	font-size: 34pt;
 	text-transform: uppercase;
 	margin-bottom: 10px;
-	text-shadow: #2a8d7b -2px -2px; 
+	text-shadow: #4da6ff -1px -1px; 
 }
 
 #review_text{
@@ -219,4 +220,9 @@ h3 {
 	font-weight: bold; 
 	text-align: center; 
 	text-transform: uppercase;
+}
+
+#quotes{
+	font-size: 15pt;
+	color:#330080;
 }
