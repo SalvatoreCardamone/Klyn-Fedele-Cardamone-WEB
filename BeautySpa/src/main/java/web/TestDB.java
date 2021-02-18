@@ -44,7 +44,7 @@ public class TestDB {
 		//provaEliminaRecensione(2, "email");
 		
 		//Prenotazione
-		//provaSavePrenotazione();
+		provaSavePrenotazione();
 		//provaEliminaPrenotazione(11);
 		//provaPrenotazioneData();
 		System.out.println("OK");
