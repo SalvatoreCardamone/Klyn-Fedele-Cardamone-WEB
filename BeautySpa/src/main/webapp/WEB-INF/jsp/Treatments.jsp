@@ -9,6 +9,9 @@
 <!-- Importing resources -->
 	<jsp:include page="imports.jsp"/>
 
+<link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
+
 	<!-- Do When page is loaded -->
 	<script>
 	$(document).ready(function()
@@ -23,19 +26,6 @@
 	<!--  NAV -->
 	<jsp:include page="nav.jsp"/>
 	<!-- /NAV -->
-	
-	<h1> Trattamenti disponibili: </h1>
-	<c:forEach items="${listaTrattamenti}" var="item">
-		<p> ${item} </p>
-		<hr/>
-	</c:forEach>
-	
-		<h2> Prenotazioni effettuate: </h2>
-	<c:forEach items="${listaPrenotazioni}" var="item">
-		<p> ${item} </p>
-		<hr/>
-	</c:forEach>
-
 
 	<table class="table table-bordered table-dark">
   <thead>
@@ -51,18 +41,55 @@
     <tr>
       <th scope="row">${ora}</th>
 		<c:forEach items="${listaTrattamenti}" var="item">
-      	<td scope="col" id="${item.id} ${ora}"> test </td>
-		</c:forEach>
-		
+		<td scope="col" class="table-success" id="${item.id}${ora}">
+			 <input id="${item.id}${ora}button" type="checkbox" class="gruppo" data-toggle="toggle" data-on="Prenotato" data-off="Disponibile" data-onstyle="success" data-offstyle="light">
+		</td>
+		</c:forEach>	
     </tr>
   </c:forEach>
-
   </tbody>
 </table>
-
+	
 	<!--  FOOTER -->
 	<jsp:include page="footer.jsp"/>
 	<!-- /FOOTER -->
 		
 </body>
+
+<script>
+//Rimpiazza i : per consentire a jquery di accedere con caratteri speciali
+function jq( myid ) {
+	 return "#" + myid.replace( /(:|\.|\[|\]|,|=|@)/g, "\\:" );
+}
+
+var lista = [
+	<c:forEach items="${listaPrenotazioni}" var="item">
+		<c:forEach items="${item.lista}" var="trattamento">
+			"${trattamento.id}${item.time}",
+		</c:forEach>
+	</c:forEach>
+	];
+
+	$(document).ready(function()
+	{
+		for (var i=0; i<lista.length; i++)
+			{ 
+				
+				$(jq(lista[i])).attr("class","table-danger");
+				$(jq(lista[i]+"button")).parent().remove();
+				$(jq(lista[i])).append('<div class="row justify-content-center"> <button type="button" class="btn btn-danger">Occupato</button> </div>');
+			}
+		
+		
+		$( ".toggle" ).click(function() {
+			  alert("ah!");
+			});
+				
+			$( ".gruppo" ).each(function( index ) {
+				});
+	
+	});
+	
+</script>
+
 </html>
