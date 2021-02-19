@@ -51,6 +51,18 @@ public class PageController
 		return "Home";
 	}
 	
+	@GetMapping("/Profile")
+	public String profile(HttpSession session, Model model)
+	{
+		return "Profile";
+	}
+	
+	@GetMapping("/LeTuePrenotazioni")
+	public String letueprenotazioni(HttpSession session, Model model)
+	{
+		return "LeTuePrenotazioni";
+	}
+	
 	
 	 @GetMapping("/Treatments")
 	 public String getRecensioni(HttpSession session, Model model,@RequestParam String nome,@RequestParam Date data,@RequestParam Integer numeroPersone )

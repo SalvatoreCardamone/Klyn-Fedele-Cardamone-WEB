@@ -20,7 +20,7 @@
 							<input type="number" class="form-control" id="id" name="id" value="0" style="display:none">
 						</div>
 						<div class="form-group">
-							<input type="text" class="form-control" id="descrizione" name="descrizione">
+							<input type="text" class="form-control" id="descrizione" name="descrizione" placeholder="Inserisci qui la tua opinione">
 						</div>
 						<div class="form-group">
 							<input type="date" class="form-control" id="data" name="data" value="2005-06-07" style="display:none">
@@ -29,7 +29,7 @@
 							<input type="text" class="form-control" id="autore" value="${utente.email}" name="autore" style="display:none">
 						</div>
 						<div class="form-group">
-							<input type="number" class="form-control" id="voto"  name="voto">
+							<input type="number" class="form-control" id="voto"  name="voto" placeholder="Valutaci da 0 a 5 stelle">
 						</div>
 						<div  class="form-group">
 						<button class="btn btn-success btn-block" type="submit">Invia Recensione</button>
