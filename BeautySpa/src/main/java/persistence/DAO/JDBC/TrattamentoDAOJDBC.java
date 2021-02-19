@@ -36,11 +36,9 @@ public class TrattamentoDAOJDBC implements TrattamentoDAO{
 		      while (rs.next()) {
 		    	Integer id=rs.getInt("id");
 		        String nome = rs.getString("nome");
-		        String image= rs.getString("image");
-		        boolean disp=rs.getBoolean("disponibile");
 		        String descrizione= rs.getString("descrizione");
 		        
-		        Trattamento passa= new Trattamento(id,nome,image,disp,descrizione);
+		        Trattamento passa= new Trattamento(id,nome,descrizione);
 		        lista.add(passa);
 		      }
 		    } 
@@ -67,16 +65,11 @@ public class TrattamentoDAOJDBC implements TrattamentoDAO{
 			{
 				Integer idP= rs.getInt("id");
 				String nome=rs.getString("nome");
-				String image=rs.getString("image");
 				
-				boolean disp= rs.getBoolean("disponibile");
 				String desc= rs.getString("descrizione");
 				
 				trattamento.setId(idP);
 				trattamento.setNome(nome);
-				trattamento.setImage(image);
-				
-				trattamento.setDisponobile(disp);
 				trattamento.setDescrizione(desc);
 			}
 		}
@@ -94,11 +87,11 @@ public class TrattamentoDAOJDBC implements TrattamentoDAO{
 		try
 		{
 			conn= dbSource.getConnection();
-			String query="INSERT INTO trattamento(nome , image , disponibile , descrizione) values(?,?,?,?)";
+			String query="INSERT INTO trattamento(nome , descrizione) values(?,?)";
 			PreparedStatement st= conn.prepareStatement(query);
 			
 			st.setString(1, trattamento.getNome());
-			st.setString(2,trattamento.getImage());
+			//st.setString(2,trattamento.getImage());
 			//Volendo qui si puo occuopare del tempo facendo
 			/*
 			 	Calendar calendar = Calendar.getInstance();
@@ -113,8 +106,8 @@ public class TrattamentoDAOJDBC implements TrattamentoDAO{
 			 	st.setDate(4, time);
 			 */
 			//st.setDate(4, trattamento.getGiorno());
-			st.setBoolean(3, trattamento.isDisponobile());
-			st.setString(4, trattamento.getDescrizione());
+			//st.setBoolean(3, trattamento.isDisponobile());
+			st.setString(2, trattamento.getDescrizione());
 			
 			st.executeUpdate();
 			System.out.println("Recensione e stata aggiunta");

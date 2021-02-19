@@ -7,8 +7,6 @@ public class Trattamento
 {
 	private Integer id;
 	private String nome;
-	private String image;
-	private boolean disponibile;
 	private String descrizione;
 	
 	
@@ -17,12 +15,10 @@ public class Trattamento
 		
 	}
 	
-	public Trattamento(Integer id, String nome, String image, boolean disponibile, String descrizione)
+	public Trattamento(Integer id, String nome, String descrizione)
 	{
 		this.id=id;
 		this.nome=nome;
-		this.image=image;
-		this.disponibile=disponibile;
 		this.descrizione=descrizione;
 	}
 	
@@ -33,16 +29,7 @@ public class Trattamento
 	{
 		String stampa="";
 		
-		stampa="\nid: "+id+"\nnome: "+nome+"\nimage: "+image+"\ndescrizione: "+descrizione;
-		if(disponibile)
-		{
-			stampa+="\nDisponibile";
-		}
-		else
-		{
-			stampa+="\nNon disponibbile";
-		}
-
+		stampa="\nid: "+id+"\nnome: "+nome+"\ndescrizione: "+descrizione;
 		return stampa;
 	}
 	
@@ -61,22 +48,6 @@ public class Trattamento
 
 	public void setNome(String nome) {
 		this.nome = nome;
-	}
-
-	public String getImage() {
-		return image;
-	}
-
-	public void setImage(String image) {
-		this.image = image;
-	}
-
-	public boolean isDisponobile() {
-		return disponibile;
-	}
-
-	public void setDisponobile(boolean disponobile) {
-		this.disponibile = disponobile;
 	}
 
 	public String getDescrizione() {

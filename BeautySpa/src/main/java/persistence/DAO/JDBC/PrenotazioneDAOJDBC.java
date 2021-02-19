@@ -32,8 +32,8 @@ public class PrenotazioneDAOJDBC implements PrenotazioneDAO
 	@Override
 	public void save(Prenotazione prenotazione) {
 		Connection conn;
-		for(int i=0; i<prenotazione.numeroTrattamenti(); i++)
-		{
+		//for(int i=0; i<prenotazione.numeroTrattamenti(); i++)
+		//{
 		try
 		{
 			conn= dbSource.getConnection();
@@ -42,9 +42,9 @@ public class PrenotazioneDAOJDBC implements PrenotazioneDAO
 			st.setString(1,prenotazione.getUtente());
 			//Volendo si puo caricare il tempo direttamente qui facendo
 			
-			 LocalTime localTime = LocalTime.now();
-			 Time time = Time.valueOf(localTime);
-			 st.setTime(2, time);
+			 //LocalTime localTime = LocalTime.now();
+			 //Time time = Time.valueOf(localTime);
+			 st.setTime(2, prenotazione.getTime());
 			 
 			//st.setTime(2, prenotazione.getTime());
 			//Volendo qui si puo occuopare del tempo facendo
@@ -55,7 +55,8 @@ public class PrenotazioneDAOJDBC implements PrenotazioneDAO
 			 */
 			st.setDate(3, prenotazione.getDate());
 			st.setInt(4, prenotazione.getPersone());
-			st.setInt(5, prenotazione.trattamentoNumero(i).getId());
+			//st.setInt(5, prenotazione.trattamentoNumero(i).getId());
+			st.setInt(5, prenotazione.getTrattamento());
 			
 			st.executeUpdate();
 		}
@@ -63,7 +64,7 @@ public class PrenotazioneDAOJDBC implements PrenotazioneDAO
 		{
 			e.printStackTrace();
 		}
-		}
+		//}
 		
 	}
 
@@ -111,7 +112,7 @@ public class PrenotazioneDAOJDBC implements PrenotazioneDAO
 			        Trattamento passa= new Trattamento();
 			        passa=DBManager.getInstance().TrattamentoDAO().trovaTrattamento(trattamento);
 			        trattamenti.add(passa);
-			        Prenotazione prenotazione= new Prenotazione(id,nome,time,dateP,persone,trattamenti);
+			        Prenotazione prenotazione= new Prenotazione(id,nome,time,dateP,persone,trattamento);
 			        lista.add(prenotazione);
 			      }
 			

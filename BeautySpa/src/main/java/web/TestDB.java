@@ -53,10 +53,10 @@ public class TestDB {
 		//provaSavePrenotazione();
 		//provaEliminaPrenotazione(11);
 		//provaPrenotazioneData();
-		String regex = "[0-9]+";
-		System.out.println("12345".matches(regex));
-		System.out.println("abc12".matches(regex));
-		System.out.println("aaa".matches(regex));
+		//String regex = "[0-9]+";
+		//System.out.println("12345".matches(regex));
+		//System.out.println("abc12".matches(regex));
+		//System.out.println("aaa".matches(regex));
 		System.out.println("OK");
 	}
 	
@@ -64,11 +64,11 @@ public class TestDB {
 
 	public static void provaSaveTrattamento()
 	{
-		JFileChooser chooser = new JFileChooser();
-		chooser.showOpenDialog(null);
-		File f = chooser.getSelectedFile();
-		String filename = f.getAbsolutePath();
-		Trattamento tr= new Trattamento(0,"Bagnio turco",filename,true,"E come un bagnio normale solo che con le sigarette");
+		//JFileChooser chooser = new JFileChooser();
+		//chooser.showOpenDialog(null);
+		//File f = chooser.getSelectedFile();
+		//String filename = f.getAbsolutePath();
+		Trattamento tr= new Trattamento(0,"Bagnio turco","E come un bagnio normale solo che con le sigarette");
 		DBManager.getInstance().TrattamentoDAO().save(tr);
 	}
 	public static void provaListaTratamenti()
@@ -148,11 +148,11 @@ public class TestDB {
 		Time time =null; 
 		Calendar calendar = Calendar.getInstance();
 		Date date = new Date(calendar.getTime().getTime());
-        Trattamento tr= new Trattamento(1,"Bagnio turco","a",true,"E come un bagnio normale solo che con le sigarette");
-        ArrayList<Trattamento> lista= new ArrayList<Trattamento>();
-        lista.add(tr);
-        lista.add(tr);
-		Prenotazione prenotazione= new Prenotazione(1,"email",time,date,2,lista);
+        Trattamento tr= new Trattamento(1,"Bagnio turco","E come un bagnio normale solo che con le sigarette");
+        //ArrayList<Trattamento> lista= new ArrayList<Trattamento>();
+        //lista.add(tr);
+        //lista.add(tr);
+		Prenotazione prenotazione= new Prenotazione(1,"email",time,date,2,1);
 		DBManager.getInstance().PrenotazioneDAO().save(prenotazione);
 		System.out.println("Prenotazione e stata salvata");
 	}

@@ -16,12 +16,10 @@ public class UtenteDAOJDBC implements UtenteDAO
 {
 	
 	DBSource dbSource;
-	private static String secretKey;
 	
 	public UtenteDAOJDBC(DBSource dbSource)
 	{
 		this.dbSource=dbSource;
-		 secretKey = "tiPregoCompila";
 	}
 
 	@Override
