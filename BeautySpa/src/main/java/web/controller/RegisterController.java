@@ -3,6 +3,7 @@ package web.controller;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,19 +18,24 @@ public class RegisterController {
 
 	@PostMapping("/registrazione")
 	public String registraUtente(@RequestParam String email,@RequestParam String password,
-			@RequestParam String nome,@RequestParam String cognome, @RequestParam String telefono)
+			@RequestParam String nome,@RequestParam String cognome, @RequestParam String telefono, HttpSession session, Model model)
 	{
-		
+		System.out.println("Email: "+email);
 		Utente vedi= DBManager.getInstance().UtenteDAO().trovaUtente(email);
-		if(vedi.getEmail()==null)
+		String passa="";
+		if(vedi.getEmail()!=null)
 		{
-			return "register";
+			passa="Email esiste gia";
+			session.setAttribute("verifica", passa);
+			return "redirect:/";
 		}
 		else
 		{
 			Utente utente= new Utente(email,password, nome,cognome,false,telefono);
 			DBManager.getInstance().UtenteDAO().save(utente);
 			System.out.println("Ok registo nuovo utente!");
+			passa="Utente e stato registrato";
+			session.setAttribute("verifica", passa);
 			return "redirect:/";
 		}
 	}

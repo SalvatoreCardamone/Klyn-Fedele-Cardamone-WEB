@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-
+import model.Criptazione;
 import model.Utente;
 import persistence.DBSource;
 import persistence.DAO.UtenteDAO;
@@ -16,15 +16,18 @@ public class UtenteDAOJDBC implements UtenteDAO
 {
 	
 	DBSource dbSource;
+	private static String secretKey;
 	
 	public UtenteDAOJDBC(DBSource dbSource)
 	{
 		this.dbSource=dbSource;
+		 secretKey = "tiPregoCompila";
 	}
 
 	@Override
 	public void save(Utente utente) {
 		Connection conn;
+		String pass;
 		try
 		{
 		conn= dbSource.getConnection();
@@ -32,7 +35,9 @@ public class UtenteDAOJDBC implements UtenteDAO
 		PreparedStatement st= conn.prepareStatement(quety);
 		
 		st.setString(1, utente.getEmail());
-		st.setString(2, utente.getPassword());
+		pass=Criptazione.getInstance().encrypt(utente.getPassword());
+		System.out.println(pass);
+		st.setString(2, pass);
 		st.setString(3, utente.getNome());
 		st.setString(4, utente.getCognome());
 		st.setBoolean(5, utente.isConvalidato());
@@ -98,7 +103,8 @@ public class UtenteDAOJDBC implements UtenteDAO
 			while(rs.next())
 			{
 				String email= rs.getString("email");
-				String password= rs.getString("password");
+				String password= Criptazione.getInstance().decrypt(rs.getString("password"));
+				//String password= rs.getString("password");
 				String nome= rs.getString("nome");
 				String cognome= rs.getString("cognome");
 				boolean convalidato= rs.getBoolean("convalidato");
@@ -133,6 +139,7 @@ public class UtenteDAOJDBC implements UtenteDAO
 				String query="UPDATE utente SET password=? , convalidato=? , numero=? WHERE email=?";
 				PreparedStatement st= conn.prepareStatement(query);
 				
+				String pass=Criptazione.encrypt(utente.getPassword());
 				st.setString(1, utente.getPassword());
 				st.setBoolean(2, utente.isConvalidato());
 				st.setString(3,utente.getNumero());
@@ -159,7 +166,9 @@ public class UtenteDAOJDBC implements UtenteDAO
 		    String query = "select * from utente where utente.email=? and utente.password=?";
 		    PreparedStatement st= conn.prepareStatement(query);
 			st.setString(1, email);
-			st.setString(2, password);
+			String pass=Criptazione.getInstance().encrypt(password);
+			st.setString(2, pass);
+			//st.setString(2, password);
 		    ResultSet rs = st.executeQuery();
 		      while (rs.next()) 
 		      {

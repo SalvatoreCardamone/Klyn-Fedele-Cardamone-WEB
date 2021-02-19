@@ -11,6 +11,7 @@ import java.util.Calendar;
 
 import javax.swing.JFileChooser;
 
+import model.Criptazione;
 import model.Prenotazione;
 import model.Recensione;
 import model.Trattamento;
@@ -25,6 +26,11 @@ public class TestDB {
 	public static void main(String[] args) 
 	{
 		DBManager.getInstance().verificaConnesione();
+		
+		//String pass= Criptazione.getInstance().encrypt("Ciao");
+		//System.out.println(pass);
+		//pass=Criptazione.getInstance().decrypt(pass);
+		//System.out.println(pass);
 		
 		//Trattamenti
 		//provaSaveTrattamento();
@@ -44,7 +50,7 @@ public class TestDB {
 		//provaEliminaRecensione(2, "email");
 		
 		//Prenotazione
-		provaSavePrenotazione();
+		//provaSavePrenotazione();
 		//provaEliminaPrenotazione(11);
 		//provaPrenotazioneData();
 		System.out.println("OK");
