@@ -14,6 +14,15 @@
 	$(document).ready(function()
 	{
 		$("#prenota").attr("id","selectedItem");
+		
+		var today = new Date();
+		today.setDate(today.getDate() + 1); //+1 = domani
+		var dd = String(today.getDate()).padStart(2, '0');
+		var mm = String(today.getMonth() + 1).padStart(2, '0'); //Gennaio 0!
+		var yyyy = today.getFullYear();
+
+		today = yyyy + '-' + mm + '-' + dd;
+		$("#check-in").attr("min", today);
 	});
 	</script>
 	
@@ -54,7 +63,7 @@
 									<div class="col">
 										<div class="form-group">
 											<span class="form-label">Data Check-In:</span>
-											<input class="form-control" type="date" required name="data">
+											<input id="check-in" class="form-control" type="date" required name="data">
 										</div>
 									</div>
 								</div>
