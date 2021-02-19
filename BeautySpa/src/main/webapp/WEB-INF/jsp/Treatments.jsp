@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <!DOCTYPE html>
@@ -8,11 +8,6 @@
 
 <!-- Importing resources -->
 	<jsp:include page="imports.jsp"/>
-
-<link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
-
-
 	
 	<!-- Do When page is loaded -->
 	<script>
@@ -52,63 +47,52 @@
 	<jsp:include page="nav.jsp"/>
 	<!-- /NAV -->
 
-<form method="POST" action="/confermaPrenotazione">
-	<c:forEach items="${listaTrattamenti}" var="trattamento">
-		<div class="container-lg row justify-content-center" >
-			<div class="card border-primary" style="width: 30rem;">
-		  	<img class="card-img-top" src="../image/trattamento${trattamento.id}.png" alt="">
+<c:if test="${utente == null}">
+	<div class="row justify-content-center">
+		 <div class="card">
 			  <div class="card-body">
-			    <h5 class="card-title">${trattamento.nome}</h5>
-			    <p class="card-text">${trattamento.descrizione}</p>
-			    	
-			    	<div class="input-group">
-			    	<div class="input-group-prepend">
-						<span class="input-group-text">Seleziona un orario:</span>
+			    <h5 class="card-title">Attenzione</h5>
+			    <p class="card-text">Effettua il login per poter procedere con la tua prenotazione!</p>
+				    <div class="row justify-content-center">
+					  <button type="button" class="btn btn-primary my-2 my-sm-0" data-toggle="modal" data-target="#loginModal" id="loginButton"> Accedi </button>
 					</div>
-					  <select class="custom-select" name="${trattamento.id}">
-					    <option selected value="no">Non prenotare, grazie</option>
-					     <c:forEach items="${orariDisponibili}" var="ora">
-					    	<option value="${ora}" id="${trattamento.id}${ora}">${ora}</option>
-					     </c:forEach>
-					  </select>
-			    </div>
-			  </div>
-			</div>
+			 </div>
 		</div>
-	</c:forEach>
-	
-	<div class="container-fluid">
-	<button class="btn btn-success btn-lg btn-block" type="submit">Continua</button>
 	</div>
-	<hr/>
-</form>
+</c:if>
 
-<!-- versione vecchia
-	<table class="table table-bordered table-dark">
-  <thead>
-    <tr>
-      <th scope="col">-</th>
-      	<c:forEach items="${listaTrattamenti}" var="item">
-      	<th scope="col" id="${item.id}">${item.nome}</th>
+<c:if test="${utente != null}">
+	<form method="POST" action="/confermaPrenotazione">
+		<c:forEach items="${listaTrattamenti}" var="trattamento">
+			<div class="container-lg row justify-content-center" >
+				<div class="card border-primary" style="width: 30rem;">
+			  	<img class="card-img-top" src="../image/trattamento${trattamento.id}.png" alt="">
+				  <div class="card-body">
+				    <h5 class="card-title">${trattamento.nome}</h5>
+				    <p class="card-text">${trattamento.descrizione}</p>
+				    	
+				    	<div class="input-group">
+				    	<div class="input-group-prepend">
+							<span class="input-group-text">Seleziona un orario:</span>
+						</div>
+						  <select class="custom-select" name="trattamento${trattamento.id}">
+						    <option selected value="no">Non prenotare, grazie</option>
+						     <c:forEach items="${orariDisponibili}" var="ora">
+						    	<option value="${ora}" id="${trattamento.id}${ora}">${ora}</option>
+						     </c:forEach>
+						  </select>
+				    </div>
+				  </div>
+				</div>
+			</div>
 		</c:forEach>
-    </tr>
-  </thead>
-  <tbody>
-  <c:forEach items="${orariDisponibili}" var="ora">
-    <tr>
-      <th scope="row">${ora}</th>
-		<c:forEach items="${listaTrattamenti}" var="item">
-		<td scope="col" class="table-success" id="${item.id}${ora}">
-			 <input id="${item.id}${ora}button" type="checkbox" class="gruppo" data-toggle="toggle" data-on="Prenotato" data-off="Disponibile" data-onstyle="success" data-offstyle="outline-light">
-		</td>
-		</c:forEach>	
-    </tr>
-  </c:forEach>
-  </tbody>
-</table>
-	
-	
--->
+		
+		<div class="container-fluid">
+		<button class="btn btn-success btn-lg btn-block" type="submit">Continua</button>
+		</div>
+		<hr/>
+	</form>
+</c:if>
 
 	<!--  FOOTER -->
 	<jsp:include page="footer.jsp"/>
@@ -134,12 +118,9 @@ var lista = [
 	{
 		for (var i=0; i<lista.length; i++)
 			{ 
-				
 				$(jq(lista[i])).attr("class","table-danger");
 				$(jq(lista[i])).attr("disabled","disabled");
-				$(jq(lista[i])).append("<p> Non disponibile </p>")
-				//$(jq(lista[i]+"button")).parent().remove();
-				//$(jq(lista[i])).append('<div class="row justify-content-center"> <button type="button" class="btn btn-danger">Occupato</button> </div>');
+				$(jq(lista[i])).append("<p> Non disponibile </p>");
 			}
 		
 	
