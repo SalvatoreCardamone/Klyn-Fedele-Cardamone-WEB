@@ -16,17 +16,20 @@ import persistence.DBManager;
 @Controller
 public class RegisterController {
 
+	String regex = "\"^\\\\d{10}$\"";
+	
 	@PostMapping("/registrazione")
 	public String registraUtente(@RequestParam String email,@RequestParam String password,
 			@RequestParam String nome,@RequestParam String cognome, @RequestParam String telefono, HttpSession session, Model model)
 	{
 		System.out.println("Email: "+email);
 		Utente vedi= DBManager.getInstance().UtenteDAO().trovaUtente(email);
-		String passa="";
+		String messagio="";
 		if(vedi.getEmail()!=null)
 		{
-			passa="Email esiste gia";
-			session.setAttribute("verifica", passa);
+			messagio="Email esiste gia";
+			session.setAttribute("nonRegistrato", false);
+			session.setAttribute("messagio", messagio);
 			return "redirect:/";
 		}
 		else
@@ -34,8 +37,9 @@ public class RegisterController {
 			Utente utente= new Utente(email,password, nome,cognome,false,telefono);
 			DBManager.getInstance().UtenteDAO().save(utente);
 			System.out.println("Ok registo nuovo utente!");
-			passa="Utente e stato registrato";
-			session.setAttribute("verifica", passa);
+			messagio="Utente "+nome+" "+cognome+" e stato registrato";
+			session.setAttribute("registrato", true);
+			session.setAttribute("messagio", messagio);
 			return "redirect:/";
 		}
 	}

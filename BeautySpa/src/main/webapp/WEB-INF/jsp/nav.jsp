@@ -57,6 +57,21 @@
 		</div>
 		  </c:if>
 		  
+		  
+		  <c:if test="${nonRegistrato eq false}">
+		   <c:set var="nonRegistrato" value="${true}" scope="session" />
+		  <script>
+		  alert("${messagio}");
+		  </script>
+		  </c:if>
+		  
+		  <c:if test="${registrato eq true}">
+		   <c:set var="registrato" value="${false}" scope="session" />
+		  <script>
+		  alert("${messagio}");
+		  </script>
+		  </c:if>
+		  
 		  <c:if test="${erroreLogin eq true}">
 		  <c:set var="erroreLogin" value="${false}" scope="session" />
 		  <script>

@@ -53,6 +53,10 @@ public class TestDB {
 		//provaSavePrenotazione();
 		//provaEliminaPrenotazione(11);
 		//provaPrenotazioneData();
+		String regex = "[0-9]+";
+		System.out.println("12345".matches(regex));
+		System.out.println("abc12".matches(regex));
+		System.out.println("aaa".matches(regex));
 		System.out.println("OK");
 	}
 	

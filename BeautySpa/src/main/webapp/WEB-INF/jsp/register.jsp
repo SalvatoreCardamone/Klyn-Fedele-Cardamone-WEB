@@ -23,7 +23,8 @@
 			</div>
 	
 			<div  class="form-group">
-				<input type="password" class="form-control" type="text" id="Password" placeholder="Inserisci Password" name="password" required/>
+				<input type="password" class="form-control" type="text" id="Password" placeholder="Inserisci Password" name="password" pattern="^([a-zA-Z0-9@*#]{6,30})$"  oninvalid="this.setCustomValidity('Perfavore inserire corettamente la password (da 6 a 30 caratteri comprsi(@*#))')"
+ 					oninput="setCustomValidity('')" required/>
 			</div>
 	
 			<div  class="form-group">
@@ -34,7 +35,8 @@
 				<input class="form-control" type="text" id="Cognome" name="cognome" placeholder="Inserisci Cognome" required/>
 			</div>
 			<div  class="form-group">
-				<input class="form-control" type="tel" id="Telefono" name="telefono" placeholder="Inserisci Numero di Telefono."  required />
+				<input class="form-control" type="tel" id="Telefono" name="telefono" placeholder="Inserisci Numero di Telefono." pattern="^(\(?\+?[0-9]*\)?)?[0-9_\- \(\)]{10,20}$"  oninvalid="this.setCustomValidity('Perfavore inserire corettamente il numero di telefono(da 10a 20 cifre compreso(+_))')"
+ 					oninput="setCustomValidity('')"  />
 			</div>
 			
 			<div  class="form-group">
