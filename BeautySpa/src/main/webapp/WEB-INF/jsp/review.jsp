@@ -44,7 +44,7 @@
 									<div class="col" id="review_date"> ${tmp.data} </div>
  								</div>
  							<!-- STAR PRINT -->
- 								<div class="stars">
+ 								<div class="raw" id="review_star">
  									<c:forEach begin="0" end="4" varStatus="starLoop">
  										<c:choose>
    											<c:when test="${starLoop.count <= tmp.voto}">
@@ -71,7 +71,7 @@
 									<div class="col" id="review_date"> ${tmp.data} </div>
  								</div>
  							<!-- STAR PRINT -->
- 								<div class="stars">
+ 								<div class="raw" id="review_star">
  									<c:forEach begin="0" end="4" varStatus="starLoop">
  										<c:choose>
    											<c:when test="${starLoop.count <= tmp.voto}">
@@ -83,11 +83,19 @@
    										</c:choose>
 									</c:forEach>
 								</div>
-
 							</div>
 						</c:otherwise>
 					</c:choose>
  				</c:forEach>
+ 				
+ 				<c:if test="${utente != null}">
+					  <button type="button" class="btn btn-outline-success my-2 my-sm-0" data-toggle="modal" data-target="#ReviewModal" id="review_button">LASCIA QUI LA TUA RECENSIONE</button>
+				</c:if>
+				<c:if test="${utente == null}">
+					<div class="row justify-content-center">
+						<button type="button" class="btn btn-primary my-2 my-sm-0" data-toggle="modal" data-target="#loginModal" id="review_button"> LASCIA QUI LA TUA RECENSIONE </button>
+					</div>
+				</c:if>	
  		</div>
 
   	<!-- Slider Controls -->
@@ -101,3 +109,8 @@
   
 	</div>
 </div>
+
+
+<!-- Modal for Review PopUp -->
+	<jsp:include page="reviewPopUp.jsp"/>
+<!-- /Modal for Review PopUP -->

@@ -17,6 +17,7 @@ import model.Orario;
 import model.Prenotazione;
 import model.Recensione;
 import model.Trattamento;
+import model.Utente;
 import persistence.DBManager;
 
 @Controller
@@ -66,5 +67,15 @@ public class PageController
 		session.setAttribute("orariDisponibili", r.orari);
 		
 		return "Treatments";
+	 }
+	 
+	 @PostMapping("/LetReview")
+	 public String aggiungiRecensione(@RequestParam Integer id,@RequestParam String descrizione,@RequestParam Date data,@RequestParam String autore, @RequestParam Integer voto )
+	 {
+		 	System.out.println("Ok reewwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwo utente!");
+			Recensione tmp= new Recensione(id, descrizione, data, autore, voto);
+			System.out.println("Ok registo aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaanuovo utente!");
+			DBManager.getInstance().RecensioneDAO().save(tmp);
+			return "Gallery";
 	 }
 }
