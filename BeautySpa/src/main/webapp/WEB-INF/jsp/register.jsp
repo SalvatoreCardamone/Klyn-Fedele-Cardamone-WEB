@@ -40,8 +40,9 @@
 			</div>
 			
 			<div  class="form-group">
-			<!--  button class="btn btn-warning">Verifica dati inseriti</button-->
-			<input class="btn btn-success" value="Registra Utente" type="submit"></input>
+			<div class="g-recaptcha" data-sitekey="6LcNNGAaAAAAAHhayc8JNhQDpfZPH8ROarU-qtrD" data-callback="enableRegister" data-expired-callback="disableRegister"></div>
+      		<br/>
+			<input class="btn btn-success btn-block" id="regbutton" value="Registra Utente" type="submit" disabled></input>
 			</div>
 	
           </form>
@@ -63,7 +64,15 @@
 </div>
 
 <script>
+function enableRegister()
+{
+    $('#regbutton').removeAttr("disabled");
+}
 
+function disableRegister()
+{
+    $('#regbutton').attr("disabled", "disabled");
+}
 
 var clicked=false;//Global Variable
 var primoContr=false;//Global Variable
@@ -118,3 +127,4 @@ $('#registerModal').on('shown.bs.modal', function () {
 
 
  <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
+ <script src="https://www.google.com/recaptcha/api.js" async defer></script>
