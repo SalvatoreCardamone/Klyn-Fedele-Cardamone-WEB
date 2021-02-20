@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import model.Criptazione;
 import model.Orario;
 import model.Prenotazione;
 import model.Recensione;
@@ -61,6 +62,8 @@ public class PageController
 	@GetMapping("/Profile")
 	public String profile(HttpSession session, Model model)
 	{
+		ArrayList<Prenotazione> prenotazione = DBManager.getInstance().UtenteDAO().dammiPrenotazioni((String) session.getAttribute("ut.email"));
+		session.setAttribute("bookingList", prenotazione);
 		return "Profile";
 	}
 	
@@ -150,7 +153,7 @@ public class PageController
 			
 		 	ricordaData=null;
 		 	ricordaPersone=null;
-			return "Profilo";
+			return "Profile";
 	 }
 	
 	public void aggiungiTrattamento(ArrayList<Trattamento>list,ArrayList<String>listaTratt)
@@ -165,6 +168,25 @@ public class PageController
 			}
 		}
 	}
+	
+	
+	 @PostMapping("/modificaUtente")
+	 public String aggiungiRecensione(@RequestParam String Email,@RequestParam String Password,@RequestParam String Nome,@RequestParam String Cognome, @RequestParam String Telefono )
+	 {
+		 
+		/* Utente daCambiare= DBManager.getInstance().UtenteDAO().login(Email);
+		 if(daCambiare.getEmail()!=null)
+		 {
+			 String pass=Criptazione.getInstance().encrypt(Password);
+		 }
+		 */
+		 String pass=Criptazione.getInstance().encrypt(Password);
+		 Utente daCambiare = new Utente(Email,pass,Nome,Cognome,false,Telefono);
+		 DBManager.getInstance().UtenteDAO().update(daCambiare);
+		 System.out.println("Utente cambiato");
+		 //Allert che non si e cambiato
+		 return "Profilo";
+	 }
 	 
 	 
 }

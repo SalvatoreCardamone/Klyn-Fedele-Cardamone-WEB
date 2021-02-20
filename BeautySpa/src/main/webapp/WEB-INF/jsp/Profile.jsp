@@ -55,35 +55,35 @@
                             <div class="col-xs-12 col-sm-10 col-md-10 col-lg-10">
                                 <div class="tab-content">
                                     <div class="tab-pane active" id="basic">
-                                        <form class="container" method="POST" action="/LetReview" id="reviewFormContainer">
+                                        <form class="container" method="POST" action="/modificaUtente" id="reviewFormContainer">
                                             <div class="form-group">
                                                 <label for="input_email" class="col-lg-2 control-label">Email</label>
                                                 <div class="col-lg-10">
-                                                    <input type="email" class="form-control" id="input_email" value="${utente.email}" readonly>
+                                                    <input type="email" class="form-control" id="input_email" name="Email" value="${utente.email}"  readonly>
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label for="input_password" class="col-lg-2 control-label">Password</label>
                                                 <div class="col-lg-10">
-                                                    <input type="password" class="form-control" id="input_password" value="${utente.password}" pattern="^([a-zA-Z0-9@*#]{6,30})$"  oninvalid="this.setCustomValidity('Perfavore inserire corettamente la password (da 6 a 30 caratteri comprsi(@*#))')" oninput="setCustomValidity('')" required/>
+                                                    <input type="password" class="form-control" id="input_password" name="Password" value="${utente.password}" pattern="^([a-zA-Z0-9@*#]{6,30})$"  oninvalid="this.setCustomValidity('Perfavore inserire corettamente la password (da 6 a 30 caratteri comprsi(@*#))')" oninput="setCustomValidity('')"/>
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <div class="row">
                                                     <div class="col">
                                                         <label for="input_nome" class="col-lg-2 control-label">Nome</label>
-                                                        <input type="text" class="form-control" id="input_nome" value="${utente.nome}" required>
+                                                        <input type="text" class="form-control" id="input_nome" name="Nome" value="${utente.nome}"  >
                                                        </div>
                                                        <div class="col">
                                                         <label for="input_cognome" class="col-lg-2 control-label">Cognome</label>
-                                                        <input type="text" class="form-control" id="input_cognome" value="${utente.cognome}" required>
+                                                        <input type="text" class="form-control" id="input_cognome" name="Cognome" value="${utente.cognome}"  >
                                                        </div>
                                                    </div>
                                             </div>
                                             <div class="form-group">
-                                                <label for="input_numero" class="col-lg-2 control-label">Numero di Telefono</label>
+                                                <label for="input_numero" class="col-lg-2 control-label" >Numero di Telefono</label>
                                                 <div class="col-lg-10">
-                                                    <input type="tel" class="form-control" id="input_telefono" value="${utente.numero}" pattern="^(\(?\+?[0-9]*\)?)?[0-9_\- \(\)]{10,20}$"  oninvalid="this.setCustomValidity('Perfavore inserire corettamente il numero di telefono(da 10a 20 cifre compreso(+_))')" oninput="setCustomValidity('')"/>
+                                                    <input type="tel" class="form-control" id="input_telefono" name="Telefono" value="${utente.numero}" pattern="^(\(?\+?[0-9]*\)?)?[0-9_\- \(\)]{10,20}$"  oninvalid="this.setCustomValidity('Perfavore inserire corettamente il numero di telefono(da 10a 20 cifre compreso(+_))')" oninput="setCustomValidity('')"/>
                                                 </div>
                                             </div>
                                             <div  class="form-group">

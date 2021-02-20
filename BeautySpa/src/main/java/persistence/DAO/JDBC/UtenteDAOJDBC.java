@@ -135,14 +135,18 @@ public class UtenteDAOJDBC implements UtenteDAO
 			}
 			else
 			{
-				String query="UPDATE utente SET password=? , convalidato=? , numero=? WHERE email=?";
+				String query="UPDATE utente SET password=? , convalidato=? , numero=?, nome=? , cognome=? WHERE email=?";
 				PreparedStatement st= conn.prepareStatement(query);
 				
 				String pass=Criptazione.encrypt(utente.getPassword());
 				st.setString(1, pass);
 				st.setBoolean(2, utente.isConvalidato());
 				st.setString(3,utente.getNumero());
-				st.setString(4, utente.getEmail());
+				st.setString(4, utente.getNome());
+				st.setString(5,utente.getCognome());
+				
+				st.setString(6,utente.getEmail());
+				
 				
 				st.executeUpdate();
 				System.out.println("Cambiamenti aggiornati!");

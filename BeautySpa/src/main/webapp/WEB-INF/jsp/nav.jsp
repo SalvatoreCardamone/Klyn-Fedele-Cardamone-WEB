@@ -43,7 +43,7 @@
 		  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"> Benvenuto ${utente.nome} ${utente.cognome}!
 		  <span class="caret"></span></button>
 		  <ul class="dropdown-menu">
-		    <li> <a class="dropdown-item" href="/Profilo">Profilo</a> </li>
+		    <li> <a class="dropdown-item" href="/Profile">Profilo</a> </li>
 		    <li> <a class="dropdown-item" href="/LeTuePrenotazioni">Prenotazioni</a> </li>
 		    <li> <div class="dropdown-divider"></div>  </li>
 		    <li>
