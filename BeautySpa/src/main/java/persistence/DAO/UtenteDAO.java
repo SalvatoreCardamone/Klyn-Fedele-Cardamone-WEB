@@ -3,6 +3,7 @@ package persistence.DAO;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.Prenotazione;
 import model.Utente;
 
 public interface UtenteDAO 
@@ -12,4 +13,5 @@ public interface UtenteDAO
 	public Utente trovaUtente(String email); // Retrieve
 	public ArrayList<Utente> findAll();
 	public void update(Utente studente); //Update
+	public ArrayList<Prenotazione> dammiPrenotazioni(String email);
 }

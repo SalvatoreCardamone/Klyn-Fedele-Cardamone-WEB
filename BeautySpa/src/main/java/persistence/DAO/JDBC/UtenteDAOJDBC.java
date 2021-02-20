@@ -1,13 +1,16 @@
 package persistence.DAO.JDBC;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 
 import model.Criptazione;
+import model.Prenotazione;
 import model.Utente;
 import persistence.DBSource;
 import persistence.DAO.UtenteDAO;
@@ -61,8 +64,6 @@ public class UtenteDAOJDBC implements UtenteDAO
 			PreparedStatement st= conn.prepareStatement(query);
 			
 			st.setString(1, email);
-			//st.setString(2, password);
-			
 			ResultSet rs= st.executeQuery();
 			while(rs.next())
 			{
@@ -138,7 +139,7 @@ public class UtenteDAOJDBC implements UtenteDAO
 				PreparedStatement st= conn.prepareStatement(query);
 				
 				String pass=Criptazione.encrypt(utente.getPassword());
-				st.setString(1, utente.getPassword());
+				st.setString(1, pass);
 				st.setBoolean(2, utente.isConvalidato());
 				st.setString(3,utente.getNumero());
 				st.setString(4, utente.getEmail());
@@ -187,6 +188,37 @@ public class UtenteDAOJDBC implements UtenteDAO
 		//Utente utente;
 		//return null;
 		return utente;
+	}
+
+	@Override
+	public ArrayList<Prenotazione> dammiPrenotazioni(String email) 
+	{
+		Connection conn;
+		ArrayList<Prenotazione>lista= new ArrayList<Prenotazione>();
+		try
+		{
+			conn= dbSource.getConnection();
+		    String query = "SELECT * FROM prenotazione WHERE utente=?";
+		    PreparedStatement st= conn.prepareStatement(query);
+			st.setString(1,email);
+		    ResultSet rs = st.executeQuery();
+		      while (rs.next()) 
+		      {
+		    	  Integer id= rs.getInt("id");
+		    	  String utent=rs.getString("utente");
+		    	  Time time= rs.getTime("time");
+		    	  Date date= rs.getDate("date");
+		    	  Integer persone= rs.getInt("persone");
+		    	  Integer trattamento= rs.getInt("trattamento");
+		    	  Prenotazione pr= new Prenotazione(id,utent,time,date,persone,trattamento);
+		    	  lista.add(pr);
+		      }
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		return lista;
 	}
 
 }

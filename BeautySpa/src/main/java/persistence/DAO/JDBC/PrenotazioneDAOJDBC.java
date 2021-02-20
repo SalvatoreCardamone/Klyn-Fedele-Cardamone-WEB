@@ -40,22 +40,9 @@ public class PrenotazioneDAOJDBC implements PrenotazioneDAO
 			String query= "INSERT INTO prenotazione(utente , time , date , persone , trattamento) values(?,?,?,?,?)";
 			PreparedStatement st= conn.prepareStatement(query);
 			st.setString(1,prenotazione.getUtente());
-			//Volendo si puo caricare il tempo direttamente qui facendo
-			
-			 //LocalTime localTime = LocalTime.now();
-			 //Time time = Time.valueOf(localTime);
-			 st.setTime(2, prenotazione.getTime());
-			 
-			//st.setTime(2, prenotazione.getTime());
-			//Volendo qui si puo occuopare del tempo facendo
-			/*
-			 	Calendar calendar = Calendar.getInstance();
-				Date date = new Date(calendar.getTime().getTime());
-			 	st.setTime(3, date);
-			 */
+			st.setTime(2, prenotazione.getTime());
 			st.setDate(3, prenotazione.getDate());
 			st.setInt(4, prenotazione.getPersone());
-			//st.setInt(5, prenotazione.trattamentoNumero(i).getId());
 			st.setInt(5, prenotazione.getTrattamento());
 			
 			st.executeUpdate();
@@ -64,8 +51,6 @@ public class PrenotazioneDAOJDBC implements PrenotazioneDAO
 		{
 			e.printStackTrace();
 		}
-		//}
-		
 	}
 
 	@Override
@@ -107,11 +92,6 @@ public class PrenotazioneDAOJDBC implements PrenotazioneDAO
 			        Date dateP= rs.getDate("date");
 			        Integer persone= rs.getInt("persone");
 			        Integer trattamento= rs.getInt("trattamento");
-			        
-			        //ArrayList<Trattamento>trattamenti= new ArrayList<Trattamento>();
-			        //Trattamento passa= new Trattamento();
-			        //passa=DBManager.getInstance().TrattamentoDAO().trovaTrattamento(trattamento);
-			        //trattamenti.add(passa);
 			        Prenotazione prenotazione= new Prenotazione(id,nome,time,dateP,persone,trattamento);
 			        lista.add(prenotazione);
 			      }
@@ -122,5 +102,32 @@ public class PrenotazioneDAOJDBC implements PrenotazioneDAO
 			e.printStackTrace();
 		}
 		return lista;
+	}
+
+	@Override
+	public ArrayList<String> dammiDescrizioneTrattamenti(ArrayList<Prenotazione> lista) {
+		Connection conn;
+		ArrayList<String> descrizioni= new ArrayList<String>();
+		for(int i=0; i<lista.size(); i++)
+		{
+			try
+			{
+				conn= dbSource.getConnection();
+				String query="SELECT * FROM trattamento WHERE id=?";
+				PreparedStatement st= conn.prepareStatement(query);
+				st.setInt(1, lista.get(i).getTrattamento());
+				ResultSet rs= st.executeQuery();
+				while (rs.next()) 
+				{
+					String descrizione=rs.getString("descrizione");
+					descrizioni.add(descrizione);
+				}
+			}
+			catch(Exception e)
+			{
+				e.printStackTrace();
+			}
+		}
+		return descrizioni;
 	}
 }

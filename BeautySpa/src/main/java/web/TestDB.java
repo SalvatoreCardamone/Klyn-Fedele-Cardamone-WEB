@@ -57,10 +57,23 @@ public class TestDB {
 		//System.out.println("12345".matches(regex));
 		//System.out.println("abc12".matches(regex));
 		//System.out.println("aaa".matches(regex));
+		
+		//Piu complessi
+		//provaDiVederePrenotazioni("nazikkln@gmail.com");
 		System.out.println("OK");
 	}
 	
 	
+
+	private static void provaDiVederePrenotazioni(String email) {
+		ArrayList<Prenotazione>listaPrenotazioni=DBManager.getInstance().UtenteDAO().dammiPrenotazioni(email);
+		ArrayList<String>listaDescrizioni= DBManager.getInstance().PrenotazioneDAO().dammiDescrizioneTrattamenti(listaPrenotazioni);
+		
+		System.out.println(listaPrenotazioni);
+		System.out.println(listaDescrizioni);		
+	}
+
+
 
 	public static void provaSaveTrattamento()
 	{

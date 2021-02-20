@@ -11,4 +11,5 @@ public interface PrenotazioneDAO
 	public void save(Prenotazione prenotazione);
 	public void delete(Integer idPrenotazione);
 	public ArrayList<Prenotazione> prenotazioniData(Date date);
+	public ArrayList<String> dammiDescrizioneTrattamenti(ArrayList<Prenotazione> lista);
 }

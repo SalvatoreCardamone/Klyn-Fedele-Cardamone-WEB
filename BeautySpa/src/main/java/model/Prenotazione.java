@@ -12,11 +12,10 @@ public class Prenotazione
 	private Date date;
 	private Integer persone;
 	private Integer trattamento;
-	//private ArrayList<Trattamento>lista;
 	
 	public Prenotazione()
 	{
-		//lista= new ArrayList<Trattamento>();
+		
 	}
 	
 	public Prenotazione(Integer id, String utente,Time time, Date date, Integer persone,Integer trattamento) //ArrayList<Trattamento>l)
@@ -27,14 +26,6 @@ public class Prenotazione
 		this.date=date;
 		this.persone=persone;
 		this.trattamento=trattamento;
-		/*
-		lista= new ArrayList<Trattamento>();
-		for(int i=0; i<l.size(); i++)
-		{
-			lista.add(l.get(i));
-		}
-		*/
-		
 	}
 
 	public Integer getId() {
@@ -77,52 +68,13 @@ public class Prenotazione
 		this.persone = persone;
 	}
 
-	/*
-	public ArrayList<Trattamento> getLista() {
-		return lista;
-	}
-
-	public void setLista(ArrayList<Trattamento> lista) {
-		this.lista = lista;
-	}
-	*/
-
 	public String toString()
 	{
 		String stampa="";
-		
 		stampa="idPrenotazione: "+id+"\nUtente: "+utente+"\nDate: "+date+"\n Time: "+time+"\nPersone: "+persone+"\nTrattamento: "+trattamento;
-		//StampaLista();
 		return stampa;
 	}
-	/*
-	public void StampaLista()
-	{
-		for(int i=0; i<lista.size(); i++)
-		{
-			System.out.println(lista.get(i));
-		}
-	}
 	
-	public int numeroTrattamenti()
-	{
-		return lista.size();
-	}
-	
-	public Trattamento trattamentoNumero(int numero)
-	{
-		if(numero < lista.size())
-		{
-			Trattamento tr= lista.get(numero);
-			return tr;
-		}
-		else
-		{
-			return null;
-		}
-	}
-	*/
-
 	public Integer getTrattamento() {
 		return trattamento;
 	}
