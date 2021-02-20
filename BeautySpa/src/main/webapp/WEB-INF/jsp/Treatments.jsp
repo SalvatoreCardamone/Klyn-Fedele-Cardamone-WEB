@@ -108,9 +108,7 @@ function jq( myid ) {
 
 var lista = [
 	<c:forEach items="${listaPrenotazioni}" var="item">
-		<c:forEach items="${item.lista}" var="trattamento">
-			"${trattamento.id}${item.time}",
-		</c:forEach>
+			"${item.trattamento}${item.time}",
 	</c:forEach>
 	];
 

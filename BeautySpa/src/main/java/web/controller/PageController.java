@@ -26,9 +26,7 @@ import persistence.DBManager;
 @Controller
 public class PageController 
 {
-	private String ricordaNome;
-	private String ricordaCognome;
-	private String ricordaEmail;
+	
 	private Date ricordaData;
 	private Integer ricordaPersone;
 	
@@ -82,7 +80,6 @@ public class PageController
 		ArrayList<Prenotazione>listaPrenotazioni= new ArrayList<Prenotazione>();
 		listaPrenotazioni= DBManager.getInstance().PrenotazioneDAO().prenotazioniData(data);
 		
-		ricordaNome=nome;
 		ricordaData=data;
 		ricordaPersone=numeroPersone;
 		
@@ -120,16 +117,8 @@ public class PageController
 			 @RequestParam String trattamento8,
 			 HttpServletRequest richiesta,
 			 HttpServletResponse risposta)
-	 {
-		 	//System.out.println(risposta.get);
-			String []lista=ricordaNome.split(" ");
-			String nome=lista[0];
-			String cognome=lista[1];
-			
-			
+	 {		
 			ArrayList<Trattamento>list= new ArrayList<Trattamento>();
-			//Trattamento tr= new Trattamento();
-			
 			
 			ArrayList<String>listaTratt=new ArrayList();
 			listaTratt.add(trattamento1);
@@ -145,7 +134,6 @@ public class PageController
 			
 			//System.out.println(list);
 			String ricordaUtente=(String) session.getAttribute("emailUtente");
-			System.out.println(ricordaUtente);
 			Utente ut=(Utente) session.getAttribute("utente");
 			
 			//Time time=java.sql.Time.valueOf("String");
@@ -160,7 +148,6 @@ public class PageController
 				}
 			}
 			
-		 	ricordaNome=null;
 		 	ricordaData=null;
 		 	ricordaPersone=null;
 			return "Profilo";

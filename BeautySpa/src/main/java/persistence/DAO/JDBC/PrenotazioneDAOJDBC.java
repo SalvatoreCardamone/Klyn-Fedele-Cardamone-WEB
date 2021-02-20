@@ -108,10 +108,10 @@ public class PrenotazioneDAOJDBC implements PrenotazioneDAO
 			        Integer persone= rs.getInt("persone");
 			        Integer trattamento= rs.getInt("trattamento");
 			        
-			        ArrayList<Trattamento>trattamenti= new ArrayList<Trattamento>();
-			        Trattamento passa= new Trattamento();
-			        passa=DBManager.getInstance().TrattamentoDAO().trovaTrattamento(trattamento);
-			        trattamenti.add(passa);
+			        //ArrayList<Trattamento>trattamenti= new ArrayList<Trattamento>();
+			        //Trattamento passa= new Trattamento();
+			        //passa=DBManager.getInstance().TrattamentoDAO().trovaTrattamento(trattamento);
+			        //trattamenti.add(passa);
 			        Prenotazione prenotazione= new Prenotazione(id,nome,time,dateP,persone,trattamento);
 			        lista.add(prenotazione);
 			      }
