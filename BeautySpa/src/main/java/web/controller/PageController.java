@@ -171,7 +171,13 @@ public class PageController
 	
 	
 	 @PostMapping("/modificaUtente")
-	 public String aggiungiRecensione(@RequestParam String Email,@RequestParam String Password,@RequestParam String Nome,@RequestParam String Cognome, @RequestParam String Telefono )
+	 public String aggiungiRecensione(@RequestParam String Email,
+			 @RequestParam String Password,
+			 @RequestParam String Nome,
+			 @RequestParam String Cognome,
+			 @RequestParam String Telefono,
+			 @RequestParam String oldPassword,
+			 HttpSession session, Model model)
 	 {
 		 
 		/* Utente daCambiare= DBManager.getInstance().UtenteDAO().login(Email);
@@ -180,12 +186,51 @@ public class PageController
 			 String pass=Criptazione.getInstance().encrypt(Password);
 		 }
 		 */
-		 String pass=Criptazione.getInstance().encrypt(Password);
-		 Utente daCambiare = new Utente(Email,pass,Nome,Cognome,false,Telefono);
+		 Utente ut=(Utente) session.getAttribute("utente");
+		 Utente verifica=DBManager.getInstance().UtenteDAO().trovaUtente(ut.getEmail());
+		 String pass;
+		 if(Password.equals("") || oldPassword.equals(""))
+		 {
+			 System.out.println("Password nulla");
+			 pass=verifica.getPassword();
+		 }
+		 else
+		 {
+			Utente daVerificare=DBManager.getInstance().UtenteDAO().login(Email, oldPassword);
+			if(daVerificare.getEmail().equals(""))
+			{
+				 pass=verifica.getPassword();
+			}
+			else
+			{
+				pass=Criptazione.getInstance().encrypt(Password);
+			}
+		 }
+		 
+		 if(Nome.equals(""))
+		 {
+			Nome=verifica.getNome();
+		 }
+		 if(Cognome.equals(""))
+		 {
+			Cognome=verifica.getCognome();
+		 }
+		 if(Telefono.equals(""))
+		 {
+			Telefono=verifica.getNumero();
+		 }
+		 
+		 //System.out.println(pass);
+		 Utente daCambiare = new Utente(Email,pass,Nome,Cognome,true,Telefono);
+		 //System.out.println("Utente da Cambiare \n"+daCambiare);
+		 //session.setAttribute("ut.nome", Nome);
+		 //session.setAttribute("ut.cognome", Cognome);
+		 session.setAttribute("utente", daCambiare);
+		 //session.setAttribute("utente.cognome", Cognome);
 		 DBManager.getInstance().UtenteDAO().update(daCambiare);
-		 System.out.println("Utente cambiato");
+		 //System.out.println("Utente cambiato");
 		 //Allert che non si e cambiato
-		 return "Profilo";
+		 return "Profile";
 	 }
 	 
 	 

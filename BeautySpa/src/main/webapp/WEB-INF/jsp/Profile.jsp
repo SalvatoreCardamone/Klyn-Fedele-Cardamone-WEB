@@ -63,9 +63,13 @@
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label for="input_password" class="col-lg-2 control-label">Password</label>
+                                             	<label for="input_password" class="col-lg-2 control-label">Vechia password</label>
                                                 <div class="col-lg-10">
-                                                    <input type="password" class="form-control" id="input_password" name="Password" value="${utente.password}" pattern="^([a-zA-Z0-9@*#]{6,30})$"  oninvalid="this.setCustomValidity('Perfavore inserire corettamente la password (da 6 a 30 caratteri comprsi(@*#))')" oninput="setCustomValidity('')"/>
+                                                    <input type="password" class="form-control" placeholder="Inserisci password vechia" id="input_password" name="oldPassword"  pattern="^([a-zA-Z0-9@*#]{6,30})$"  oninvalid="this.setCustomValidity('Perfavore inserire corettamente la password (da 6 a 30 caratteri comprsi(@*#))')" oninput="setCustomValidity('')"/>
+                                                </div>
+                                                <label for="input_password" class="col-lg-2 control-label">Nuova password</label>
+                                                <div class="col-lg-10">
+                                                    <input type="password" class="form-control" placeholder="Inserisci nuova password" id="input_password" name="Password"  pattern="^([a-zA-Z0-9@*#]{6,30})$"  oninvalid="this.setCustomValidity('Perfavore inserire corettamente la password (da 6 a 30 caratteri comprsi(@*#))')" oninput="setCustomValidity('')"/>
                                                 </div>
                                             </div>
                                             <div class="form-group">

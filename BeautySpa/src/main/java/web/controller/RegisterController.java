@@ -22,7 +22,7 @@ public class RegisterController {
 	public String registraUtente(@RequestParam String email,@RequestParam String password,
 			@RequestParam String nome,@RequestParam String cognome, @RequestParam String telefono, HttpSession session, Model model)
 	{
-		System.out.println("Email: "+email);
+		//System.out.println("Email: "+email);
 		Utente vedi= DBManager.getInstance().UtenteDAO().trovaUtente(email);
 		String messagio="";
 		if(vedi.getEmail()!=null)
@@ -36,7 +36,7 @@ public class RegisterController {
 		{
 			Utente utente= new Utente(email,password, nome,cognome,false,telefono);
 			DBManager.getInstance().UtenteDAO().save(utente);
-			System.out.println("Ok registo nuovo utente!");
+			//System.out.println("Ok registo nuovo utente!");
 			messagio="Utente "+nome+" "+cognome+" e stato registrato";
 			session.setAttribute("registrato", true);
 			session.setAttribute("messagio", messagio);
@@ -47,7 +47,7 @@ public class RegisterController {
 	@GetMapping("/registrazione")
 	public String fineRegistrazione()
 	{
-		System.out.println("Fine dela registrazione");
+		//System.out.println("Fine dela registrazione");
 		//return "/HTML/RegistrazioneCompletata.html";
 		return "Home";
 	}
