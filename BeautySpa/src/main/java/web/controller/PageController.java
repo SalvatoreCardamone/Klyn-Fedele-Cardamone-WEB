@@ -110,7 +110,7 @@ public class PageController
 	 {
 			Recensione tmp= new Recensione(id, descrizione, data, autore, voto);
 			DBManager.getInstance().RecensioneDAO().save(tmp);
-			return "Gallery";
+			return "redirect:/Gallery";
 	 }
 	 
 	 

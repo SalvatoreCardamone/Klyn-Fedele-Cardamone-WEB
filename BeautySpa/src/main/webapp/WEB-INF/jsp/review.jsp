@@ -89,11 +89,11 @@
  				</c:forEach>
  				
  				<c:if test="${utente != null}">
-					  <button type="button" class="btn btn-outline-success my-2 my-sm-0" data-toggle="modal" data-target="#ReviewModal" id="review_button">LASCIA QUI LA TUA RECENSIONE</button>
+					  <button type="button" class="btn btn-outline-success my-2 my-sm-0" data-toggle="modal" data-target="#ReviewModal" id="review_button"> LASCIA QUI LA TUA RECENSIONE </button>
 				</c:if>
 				<c:if test="${utente == null}">
 					<div class="row justify-content-center">
-						<button type="button" class="btn btn-primary my-2 my-sm-0" data-toggle="modal" data-target="#loginModal" id="review_button"> LASCIA QUI LA TUA RECENSIONE </button>
+						<button type="button" class="btn btn-primary my-2 my-sm-0" data-toggle="modal" data-target="#loginModal" id="review_button"> ACCEDI PER SCRIVERE UNA RECENSIONE </button>
 					</div>
 				</c:if>	
  		</div>

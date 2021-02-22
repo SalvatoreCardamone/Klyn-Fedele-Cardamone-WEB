@@ -5,7 +5,6 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-	<!-- For the stars -->
   	
 	<!-- Importing resources -->
 	<jsp:include page="imports.jsp"/>
