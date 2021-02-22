@@ -138,7 +138,7 @@ public class PrenotazioneDAOJDBC implements PrenotazioneDAO
 		HashMap<Date, Integer> lista= new HashMap<Date, Integer>();
 		try {
 		conn= dbSource.getConnection();
-		String query="SELECT date, COUNT(*) as Counter FROM prenotazione WHERE utente = ? GROUP BY date";
+		String query="SELECT date, COUNT(*) as Counter FROM prenotazione WHERE utente = ? GROUP BY date ORDER BY date DESC";
 		PreparedStatement st=conn.prepareStatement(query);
 		st.setString(1, mail);
 		ResultSet rs= st.executeQuery();
