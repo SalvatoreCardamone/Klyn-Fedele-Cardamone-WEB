@@ -75,6 +75,12 @@ public class PageController
 	public String deleteBooking(HttpSession session, Model model,@RequestParam Integer id)
 	{
 		DBManager.getInstance().PrenotazioneDAO().delete(id);
+		 Utente ut=(Utente) session.getAttribute("utente");
+		 String tmp=(String) ut.getEmail();
+		ArrayList<Prenotazione> prenotazione = DBManager.getInstance().UtenteDAO().dammiPrenotazioni(tmp);
+		session.setAttribute("bookingList", prenotazione);
+		ArrayList<Trattamento> trattamento = DBManager.getInstance().TrattamentoDAO().listaTrattamenti();
+		session.setAttribute("serviceList", trattamento);
 		return "Profile";
 	}
 	
@@ -156,7 +162,7 @@ public class PageController
 			
 		 	ricordaData=null;
 		 	ricordaPersone=null;
-			return "Profile";
+			return "Home";
 	 }
 	
 	public void aggiungiTrattamento(ArrayList<Trattamento>list,ArrayList<String>listaTratt)

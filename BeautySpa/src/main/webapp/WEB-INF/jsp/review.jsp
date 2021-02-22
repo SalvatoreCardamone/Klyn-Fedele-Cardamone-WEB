@@ -15,7 +15,7 @@
 
 <div class="col-sm-10 ml-auto mr-auto text-center" id="Review">
 	<h2 class="" id="review_head">Leggi le recensioni dei nostri clienti</h2>
-	<div id="SliderReview" class="carousel slide" data-ride="carousel" data-interval="3000">
+	<div id="SliderReview" class="carousel slide" data-ride="carousel" data-interval="8000">
 	
 	<!-- Indicators -->
     	<ul class="carousel-indicators">
