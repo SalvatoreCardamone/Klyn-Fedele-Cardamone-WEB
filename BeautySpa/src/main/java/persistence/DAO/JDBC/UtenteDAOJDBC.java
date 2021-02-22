@@ -204,7 +204,7 @@ public class UtenteDAOJDBC implements UtenteDAO
 		try
 		{
 			conn= dbSource.getConnection();
-		    String query = "SELECT * FROM prenotazione WHERE utente=?";
+		    String query = "SELECT * FROM prenotazione WHERE utente=? ORDER BY date DESC, time";
 		    PreparedStatement st= conn.prepareStatement(query);
 			st.setString(1,email);
 		    ResultSet rs = st.executeQuery();
