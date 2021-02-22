@@ -11,4 +11,5 @@ public interface RecensioneDAO
 	public ArrayList<Recensione> mieRecensioni(String emailUtente);
 	public void delete(Integer idRecensione, String scrittoDa);
 	public ArrayList<Recensione> getLastRecensioni();
+	public ArrayList<Recensione> findAll();
 }

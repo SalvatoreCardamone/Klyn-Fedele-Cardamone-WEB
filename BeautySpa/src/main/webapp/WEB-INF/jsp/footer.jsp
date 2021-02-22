@@ -42,6 +42,23 @@
             <strong> TUTTI I DIRITTI RISERVATI. </strong>
         </p>
 
+		<div class="dropdown dropup">
+		  <button class="btn btn-outline-primary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		    Area Riservata
+		  </button>
+		  
+			<form class="dropdown-menu p-4" method="POST" action="/PageAdmin">
+			  <div class="form-group">
+			    <input type="text" class="form-control"  placeholder="Nome" name="nomeAdmin">
+			  </div>
+			  <div class="form-group">
+			    <input type="password" class="form-control"  placeholder="Password" name="passwordAdmin">
+			  </div>
+
+			  <button type="submit" class="btn btn-primary">Accedi</button>
+			</form>
+		</div>
+
       </div>
       
       <div class="col-md-5 col-lg-4 ml-lg-0">
@@ -79,3 +96,4 @@
 
 </footer>
 <!-- Footer -->
+

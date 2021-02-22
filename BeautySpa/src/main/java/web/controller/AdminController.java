@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import model.Prenotazione;
+import model.Recensione;
 import model.Trattamento;
 import model.Utente;
 import persistence.DBManager;
@@ -17,27 +18,32 @@ import persistence.DBManager;
 @Controller
 public class AdminController 
 {
-	private final String nomeAdmin="admin";
-	private final String passwordAdmin="admin";
+	private final String nome="admin";
+	private final String password="admin";
 	
-	@PostMapping("/verificaAdmin")
-	public String admin(@RequestParam String email,@RequestParam String password, HttpSession session, Model model)
+	@PostMapping("/PageAdmin")
+	public String pageAdmin(HttpSession session, Model model, @RequestParam String nomeAdmin, @RequestParam String passwordAdmin)
 	{
-		ArrayList<Utente>listaUtenti=DBManager.getInstance().UtenteDAO().findAll();
-		session.setAttribute("adminTuttiUtenti", listaUtenti);
-		return "PageAdmin";
-	}
-	
-	@PostMapping("/adminTuttiUtenti")
-	public String adminTuttiUtenti(@RequestParam String email,@RequestParam String password, HttpSession session, Model model)
-	{
-		ArrayList<Utente>listaUtenti=DBManager.getInstance().UtenteDAO().findAll();
-		session.setAttribute("adminTuttiUtenti", listaUtenti);
-		return "PageAdmin";
+		if(nomeAdmin.equals(nome) && passwordAdmin.equals(password))
+		{
+			//Stampo tutti gli utenti
+			ArrayList<Utente>listaUtenti=DBManager.getInstance().UtenteDAO().findAll();
+			session.setAttribute("listaUtenti", listaUtenti);
+			
+			//Stampo tutte le recensioni
+			ArrayList<Recensione>listaRecensioni = DBManager.getInstance().RecensioneDAO().findAll();
+			session.setAttribute("listaRecensioni", listaRecensioni);
+			
+			return "PageAdmin";
+		}
+			
+		
+		session.setAttribute("messaggio", "ACCESSO NEGATO");
+			return "redirect:/";
 	}
 	
 	@PostMapping("/adminTuttiPrenotazioni")
-	public String adminTuttiPrenotazioni(@RequestParam String email,@RequestParam String password, HttpSession session, Model model)
+	public String adminTuttiPrenotazioni(HttpSession session, Model model)
 	{
 		ArrayList<Prenotazione>lista= DBManager.getInstance().PrenotazioneDAO().findAll();
 		session.setAttribute("adminListaPrenotazione", lista);

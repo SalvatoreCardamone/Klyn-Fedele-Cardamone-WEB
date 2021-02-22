@@ -10,18 +10,59 @@
     <!-- Importing resources -->
     <jsp:include page="imports.jsp"/>
 </head>
-<body>
-    <form>                    		
-    <button type="submit" action="/adminPrenotazioni" id="booking-review_button"> Vedi tutti utenti</button>
-	<button type="submit" action="/adminTuttiPrenotazioni" id="booking-review_button"> Vedi tutti prenotazioni</button>								
-	<button type="submit" action="/adminPrenotazioniUtente" id="booking-review_button"> Vedi prenotazioni di un certo utente(id)</button>
-	<button type="submit" action="/adminEliminaPrenotazione" id="booking-review_button"> Elimina una prenotazione(id)</button>								
-	<button type="submit" action="/adminUpdateTrattamento" id="booking-review_button"> Modifica Trattamento</button>
-	</form>
+<body>         		
 	
-	<table>
-	
-	</table>
+	<h2> Lista Utenti </h2>
+	<table class="table">
+  <thead class="thead-light">
+    <tr>
+      <th scope="col">EMAIL</th>
+      <th scope="col">NOME</th>
+      <th scope="col">COGNOME</th>
+      <th scope="col">TELEFONO</th>
+    </tr>
+  </thead>
+  <tbody>
+  
+  <c:forEach items="${listaUtenti}" var="utente">
+    <tr>
+      <th scope="row">${utente.email}</th>
+      <td>${utente.nome}</td>
+      <td>${utente.cognome}</td>
+      <td>${utente.numero}</td>
+    </tr>
+ </c:forEach>
+  </tbody>
+</table>
+<hr/>
+  
+  
+ <h2> Lista Recensioni </h2>
+	<table class="table">
+  <thead class="thead-light">
+    <tr>
+      <th scope="col">ID Recensione</th>
+      <th scope="col">Descrizione</th>
+      <th scope="col">Data</th>
+      <th scope="col">Creatore</th>
+      <th scope="col">Voto</th>
+    </tr>
+  </thead>
+  <tbody>
+  
+  <c:forEach items="${listaRecensioni}" var="recensione">
+    <tr>
+      <th scope="row">${recensione.idRecensione}</th>
+      <td>${recensione.descrizione}</td>
+      <td>${recensione.data}</td>
+      <td>${recensione.scrittoDa}</td>
+      <td>${recensione.voto}</td>
+    </tr>
+ </c:forEach>
+  </tbody>
+</table>
+<hr/>
+  
 	
 </body>
 </html>

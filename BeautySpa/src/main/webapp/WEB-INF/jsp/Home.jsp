@@ -68,7 +68,7 @@
 	<!--  FOOTER -->
 	<jsp:include page="footer.jsp"/>
 	<!-- /FOOTER -->
-	<a href="/PageAdmin"><button type="button" class="btn btn-outline-primary btn-lg" style="font-size: 2em;">Area riservata</button> </a>
+	
 </body>
 
 </html>

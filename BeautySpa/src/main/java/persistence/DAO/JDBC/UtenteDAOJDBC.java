@@ -102,12 +102,11 @@ public class UtenteDAOJDBC implements UtenteDAO
 			while(rs.next())
 			{
 				String email= rs.getString("email");
-				String password= Criptazione.getInstance().decrypt(rs.getString("password"));
 				String nome= rs.getString("nome");
 				String cognome= rs.getString("cognome");
 				boolean convalidato= rs.getBoolean("convalidato");
 				String telefono= rs.getString("numero");
-				Utente ut= new Utente(email,password,nome,cognome,convalidato,telefono);
+				Utente ut= new Utente(email,"Criptata",nome,cognome,convalidato,telefono);
 				lista.add(ut);
 			}
 			

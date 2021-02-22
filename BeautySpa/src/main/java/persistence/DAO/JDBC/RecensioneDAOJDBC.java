@@ -137,4 +137,36 @@ public class RecensioneDAOJDBC implements RecensioneDAO
 		return lista;
 	}
 
+
+	@Override
+	public ArrayList<Recensione> findAll() {
+		ArrayList<Recensione> lista= new ArrayList<Recensione>();
+		Connection conn;
+		try
+		{
+			conn=dbSource.getConnection();
+			String query="SELECT * FROM recensione";
+			PreparedStatement st= conn.prepareStatement(query);
+			ResultSet rs= st.executeQuery();
+			while(rs.next())
+			{
+				Integer idRecensione=rs.getInt("id");
+				String descrizione=rs.getString("descrizione");
+				Date date=rs.getDate("date");
+				String scrittoDa=rs.getString("scritto");
+				Integer voto= rs.getInt("voto");
+				
+				Recensione passa= new Recensione(idRecensione, descrizione,date, scrittoDa, voto);
+				lista.add(passa);
+			}
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		
+		return lista;
+	}
+
+	
 }
