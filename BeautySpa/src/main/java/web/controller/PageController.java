@@ -1,5 +1,14 @@
 package web.controller;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.sql.Date;
 import java.sql.Time;
 import java.util.ArrayList;
@@ -9,13 +18,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.itextpdf.text.Chunk;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.FontFactory;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
+import com.itextpdf.text.pdf.draw.DottedLineSeparator;
 
 import model.Criptazione;
 import model.Orario;
@@ -91,10 +108,80 @@ public class PageController
 	}
 	
 	@GetMapping("/PrintBooking")
-	public String printBooking(HttpSession session, Model model,@RequestParam Integer idStampa, @RequestParam Date idDataDaStampare)
+	public String printBooking(HttpSession session, Model model,@RequestParam Date idDataDaStampare, HttpServletResponse response) throws DocumentException, IOException
 	{
 		
-		System.out.println("chiamata");
+		Utente ut=(Utente) session.getAttribute("utente");
+		String tmp=(String) ut.getEmail();
+		Document document = new Document();
+		String nomeFile= new String (idDataDaStampare+tmp+".pdf");
+		PdfWriter.getInstance(document, new FileOutputStream(nomeFile));
+
+		document.open();
+		
+		
+		
+		PdfPTable table = new PdfPTable(3);
+		ArrayList<Prenotazione> prenotazione = DBManager.getInstance().UtenteDAO().dammiPrenotazioni(tmp);
+		ArrayList<Trattamento> trattamento = DBManager.getInstance().TrattamentoDAO().listaTrattamenti();
+		
+		Font font = FontFactory.getFont(FontFactory.COURIER, 16);
+		Paragraph testa = new Paragraph(ut.getNome() + " " +ut.getCognome() + " ha effetturato una prenotazione per il giorno " + idDataDaStampare.toString() + "per i seguenti trattamenti:" , font);
+		document.add(testa);
+		DottedLineSeparator separator = new DottedLineSeparator();
+        separator.setPercentage(59500f / 523f);
+        Chunk linebreak = new Chunk(separator);
+		document.add(linebreak);
+		for (int i = 0 ; i<prenotazione.size(); i++) {
+				
+				if(prenotazione.get(i).getDate().equals(idDataDaStampare))  {
+				table.addCell(prenotazione.get(i).getTime().toString());
+				table.addCell(prenotazione.get(i).getPersone().toString());
+					for(int j=0; j<trattamento.size(); j++){
+						if(trattamento.get(j).getId()==prenotazione.get(i).getTrattamento())
+						table.addCell(trattamento.get(j).getNome());
+				}
+			}
+		}
+
+		document.add(table);
+		document.close();
+		
+		
+		/*OutputStream out = null;
+		String filePath = "C:\\Users\\salva\\git\\Klyn-Fedele-Cardamone-WEB\\BeautySpa";
+		File file = new File(filePath);
+
+		if(file.exists()){
+			out = response.getOutputStream();
+			response.setContentType(nomeFile + ";charset=UTF-8");
+			response.setHeader("Content-Disposition","inline;filename="+nomeFile);
+			FileInputStream fis = new FileInputStream(file);
+			ByteArrayOutputStream bos = new ByteArrayOutputStream();
+			byte[] buf = new byte[4096];
+			
+			try {
+				for (int readNum; (readNum = fis.read(buf)) != -1;) {
+					bos.write(buf, 0, readNum);
+				}
+			} catch (IOException ex) { 
+				ex.printStackTrace();
+			}
+			
+			byte[] bytes = bos.toByteArray();
+			int lengthRead = 0;
+			InputStream is = new ByteArrayInputStream(bytes);
+			
+			while ((lengthRead = is.read(buf)) > 0) {
+				out.write(buf);
+			}
+			
+			fis.close();
+			bos.close();
+			is.close();
+			out.close();
+		}
+		*/
 		return "Profile";
 	}
 	

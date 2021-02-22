@@ -80,7 +80,6 @@
                         						<c:forEach items="${listaCount}" var="tmpCount"> 
                										<c:if test="${tmpCount.value == loopBooking.count}">
                         								<form action="/PrintBooking">
-                        									<input type="number" name="idStampa" value="${tmp.id}" style="display:none">
                         									<input type="date" name="idDataDaStampare" value="${tmpCount.key}" style="display:none">
                         									<button type="submit" onclick="PrintBooking()" id="booking-review_button"> stampa</button>
                         							</form>
