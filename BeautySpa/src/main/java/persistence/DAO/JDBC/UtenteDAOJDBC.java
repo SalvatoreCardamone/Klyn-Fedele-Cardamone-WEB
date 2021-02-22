@@ -103,7 +103,6 @@ public class UtenteDAOJDBC implements UtenteDAO
 			{
 				String email= rs.getString("email");
 				String password= Criptazione.getInstance().decrypt(rs.getString("password"));
-				//String password= rs.getString("password");
 				String nome= rs.getString("nome");
 				String cognome= rs.getString("cognome");
 				boolean convalidato= rs.getBoolean("convalidato");

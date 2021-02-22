@@ -54,6 +54,12 @@ public class PageController
 		return "Info";
 	}
 	
+	@GetMapping("/PageAdmin")
+	public String pageAdmin(HttpSession session, Model model)
+	{
+		return "PageAdmin";
+	}
+	
 	@GetMapping("/")
 	public String home(HttpSession session, Model model)
 	{

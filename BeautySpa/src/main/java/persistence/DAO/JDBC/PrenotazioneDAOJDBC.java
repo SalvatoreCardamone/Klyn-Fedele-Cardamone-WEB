@@ -15,8 +15,10 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 
+import model.Criptazione;
 import model.Prenotazione;
 import model.Trattamento;
+import model.Utente;
 import persistence.DBManager;
 import persistence.DBSource;
 import persistence.DAO.PrenotazioneDAO;
@@ -151,6 +153,35 @@ public class PrenotazioneDAOJDBC implements PrenotazioneDAO
 		}
 		catch(Exception e) {e.printStackTrace();}
 		
+		return lista;
+	}
+
+	@Override
+	public ArrayList<Prenotazione> findAll() {
+		ArrayList<Prenotazione> lista= new ArrayList<Prenotazione>();
+		Connection conn;
+		try
+		{
+			conn=dbSource.getConnection();
+			String query="SELECT * FROM prenotazione";
+			PreparedStatement st= conn.prepareStatement(query);
+			ResultSet rs= st.executeQuery();
+			while(rs.next())
+			{
+				Integer idPrenotazione= rs.getInt("id");
+				String utente= rs.getString("utente");
+				Time time= rs.getTime("time");
+				Date date= rs.getDate("date");
+				Integer persone= rs.getInt("persone");
+				Integer trattamento= rs.getInt("trattamento");
+				Prenotazione pren= new Prenotazione(idPrenotazione,utente, time,date,persone,trattamento);
+				lista.add(pren);
+			}
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
 		return lista;
 	}
 }

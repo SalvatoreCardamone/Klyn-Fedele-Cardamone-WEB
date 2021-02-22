@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import model.Prenotazione;
-import model.Utente;
 
 public interface PrenotazioneDAO 
 {
@@ -14,4 +13,5 @@ public interface PrenotazioneDAO
 	public ArrayList<Prenotazione> prenotazioniData(Date date);
 	public ArrayList<String> dammiDescrizioneTrattamenti(ArrayList<Prenotazione> lista);
 	public HashMap<Date, Integer> countDate(String mail);
+	public ArrayList<Prenotazione> findAll();
 }

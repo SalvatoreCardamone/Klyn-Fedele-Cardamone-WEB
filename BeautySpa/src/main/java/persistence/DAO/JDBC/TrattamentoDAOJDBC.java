@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 import model.Trattamento;
+import model.Utente;
 import persistence.DBSource;
 import persistence.DAO.TrattamentoDAO;
 
@@ -91,22 +92,6 @@ public class TrattamentoDAOJDBC implements TrattamentoDAO{
 			PreparedStatement st= conn.prepareStatement(query);
 			
 			st.setString(1, trattamento.getNome());
-			//st.setString(2,trattamento.getImage());
-			//Volendo qui si puo occuopare del tempo facendo
-			/*
-			 	Calendar calendar = Calendar.getInstance();
-				Date date = new Date(calendar.getTime().getTime());
-			 	st.setTime(3, date);
-			 */
-			//st.setTime(3, trattamento.getTempo());
-			//Volendo si puo caricare il tempo direttamente qui facendo
-			/*
-			 	LocalTime localTime = LocalTime.now();
-			 	Time time = Time.valueOf(localTime)
-			 	st.setDate(4, time);
-			 */
-			//st.setDate(4, trattamento.getGiorno());
-			//st.setBoolean(3, trattamento.isDisponobile());
 			st.setString(2, trattamento.getDescrizione());
 			
 			st.executeUpdate();
@@ -116,5 +101,53 @@ public class TrattamentoDAOJDBC implements TrattamentoDAO{
 		{
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public void updateTrattamento(Trattamento trattamento) 
+	{
+		Connection conn;
+		try
+		{
+			conn= dbSource.getConnection();
+			Trattamento tr= trovaTrattamento(trattamento.getId());
+			if(tr.getId() == null)
+			{
+				//trattamento non trovato
+			}
+			else
+			{
+				String query="UPDATE trattamento SET nome=? , descrizione=? WHERE id=?";
+				PreparedStatement st= conn.prepareStatement(query);
+				
+				st.setString(1, trattamento.getNome());
+				st.setString(2, trattamento.getDescrizione());
+				st.setInt(3, trattamento.getId());				
+				st.executeUpdate();
+				System.out.println("Cambiamenti aggiornati!");
+			}
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public void delete(Integer idTrattamento) {
+		Connection conn;
+		try
+		{
+			conn= dbSource.getConnection();
+			String query="DELETE FROM trattamento WHERE id=?";
+			PreparedStatement st= conn.prepareStatement(query);
+			st.setInt(1, idTrattamento);
+			st.executeUpdate();
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		
 	}
 }
