@@ -62,15 +62,20 @@ public class PageController
 	@GetMapping("/Profile")
 	public String profile(HttpSession session, Model model)
 	{
-		ArrayList<Prenotazione> prenotazione = DBManager.getInstance().UtenteDAO().dammiPrenotazioni((String) session.getAttribute("ut.email"));
+		 Utente ut=(Utente) session.getAttribute("utente");
+		 String tmp=(String) ut.getEmail();
+		ArrayList<Prenotazione> prenotazione = DBManager.getInstance().UtenteDAO().dammiPrenotazioni(tmp);
 		session.setAttribute("bookingList", prenotazione);
+		ArrayList<Trattamento> trattamento = DBManager.getInstance().TrattamentoDAO().listaTrattamenti();
+		session.setAttribute("serviceList", trattamento);
 		return "Profile";
 	}
 	
-	@GetMapping("/LeTuePrenotazioni")
-	public String letueprenotazioni(HttpSession session, Model model)
+	@GetMapping("/DeleteBooking")
+	public String deleteBooking(HttpSession session, Model model,@RequestParam Integer id)
 	{
-		return "LeTuePrenotazioni";
+		DBManager.getInstance().PrenotazioneDAO().delete(id);
+		return "Profile";
 	}
 	
 	
@@ -97,9 +102,7 @@ public class PageController
 	 @PostMapping("/LetReview")
 	 public String aggiungiRecensione(@RequestParam Integer id,@RequestParam String descrizione,@RequestParam Date data,@RequestParam String autore, @RequestParam Integer voto )
 	 {
-		 	System.out.println("Ok reewwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwo utente!");
 			Recensione tmp= new Recensione(id, descrizione, data, autore, voto);
-			System.out.println("Ok registo aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaanuovo utente!");
 			DBManager.getInstance().RecensioneDAO().save(tmp);
 			return "Gallery";
 	 }

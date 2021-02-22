@@ -40,14 +40,43 @@
                 <div class="tab-content">
                     <div class="tab-pane" id="tab2">
                         <div class="row">
-                            <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
-                                <p>
-                                    <br>
-                                       Claudio Bisio
-                                    <br>
-                                </p>
+                               	<table>
+                        			<c:forEach items="${bookingList}" var="tmp">
+                        				<tr>
+                        					<th> 
+                        						<div class=col-sm>
+                        							${tmp.date}
+                        						</div>
+                        					</th>
+                        					<th> 
+                        						<div class=col-sm>
+                        							${tmp.time}
+                        						</div>
+                        					</th>
+                        					<th> 
+                        						<c:forEach items="${serviceList}" var="tmpY">
+                        							<c:choose>
+                        								<c:when test="${tmpY.id == tmp.trattamento}">
+                        									${tmpY.nome}
+                        								</c:when>	
+                        							</c:choose>
+                        						</c:forEach>
+                        					</th>
+                        					<th>
+                        						<div class=col-sm>
+                        							${tmp.persone} &nbsp Persone
+                        						</div>
+                        					</th>
+                        					<th>
+                        						<form action="/DeleteBooking">
+                        							<input type="number" id="id" name="id" value="${tmp.id}" style="display:none">
+                        							<button type="submit" onclick="deleteBooking()"> cancella</button>
+                        						</form>
+                        					</th>
+                        				</tr>
+                        			</c:forEach>
+                        		</table>
                                 <hr>
-                            </div>
                         </div>
                     </div>
                     <div class="tab-pane active" id="tab">
@@ -110,7 +139,16 @@
     <jsp:include page="footer.jsp"/>
     <!-- /FOOTER -->
 
- 
-
 </body>
+
+<script>
+	function deleteBooking(){
+			
+		
+		
+		
+	}
+</script>
+
 </html>
+
