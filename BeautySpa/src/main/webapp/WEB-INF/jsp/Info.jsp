@@ -61,9 +61,13 @@
                             <div class="form-group">
                                 <textarea rows="8" name="message" class="form-control rounded-0" placeholder="Scrivi qui..." required="required"></textarea>
                             </div>
-
+			
+							<div class="form-group">
+							<div class="g-recaptcha" data-sitekey="6LcNNGAaAAAAAHhayc8JNhQDpfZPH8ROarU-qtrD" data-callback="enableSend" data-expired-callback="disableSend"></div>
+							</div>
+							
                             <div class="form-group mb-0">
-                                <button class="btn btn-primary btn-lg btn-block" id="sendButton" type="submit">INVIA</button>
+                                <button class="btn btn-primary btn-lg btn-block" id="sendButton" type="submit" disabled>INVIA</button>
                             </div>
                         </form>
                 </div>
@@ -76,4 +80,17 @@
 	<!-- /FOOTER -->
 	
 </body>
+
+<script>
+function enableSend()
+{
+    $('#sendButton').removeAttr("disabled");
+}
+
+function disableSend()
+{
+    $('#sendButton').attr("disabled", "disabled");
+}
+</script>
+
 </html>
