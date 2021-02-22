@@ -62,7 +62,7 @@
 </c:if>
 
 <c:if test="${utente != null}">
-	<form method="POST" action="/confermaPrenotazione">
+	<form method="POST" action="/confermaPrenotazione" onsubmit="return validateForm()">
 		<c:forEach items="${listaTrattamenti}" var="trattamento">
 			<div class="container-lg row justify-content-center" >
 				<div class="card border-primary" style="width: 30rem;">
@@ -75,7 +75,7 @@
 				    	<div class="input-group-prepend">
 							<span class="input-group-text">Seleziona un orario:</span>
 						</div>
-						  <select class="custom-select" name="trattamento${trattamento.id}">
+						  <select class="custom-select orarioScelto" name="trattamento${trattamento.id}">
 						    <option selected value="no">Non prenotare, grazie</option>
 						     <c:forEach items="${orariDisponibili}" var="ora">
 						    	<option value="${ora}" id="${trattamento.id}${ora}">${ora}</option>
@@ -124,6 +124,28 @@ var lista = [
 	
 	});
 	
+function checkIfDuplicateExists(w){
+	return new Set(w).size !== w.length;
+}	
+	
+function validateForm() 
+{
+	var orari = [];
+	
+	$(".orarioScelto").each(function( index ) {
+		if($(this).val() != "no")
+			orari.push($(this).val());
+	});
+	
+	
+	if(checkIfDuplicateExists(orari))
+		{
+			alert("Attenzione: è stato selezionato lo stesso orario per 2 o più trattamenti. \nPerfavore cambiare gli orari scelti e riprovare.");
+			return false;
+		}
+		
+	return true;
+}
 	
 </script>
 
