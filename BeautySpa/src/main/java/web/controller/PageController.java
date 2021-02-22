@@ -3,6 +3,7 @@ package web.controller;
 import java.sql.Date;
 import java.sql.Time;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -62,12 +63,17 @@ public class PageController
 	@GetMapping("/Profile")
 	public String profile(HttpSession session, Model model)
 	{
-		 Utente ut=(Utente) session.getAttribute("utente");
-		 String tmp=(String) ut.getEmail();
+		Utente ut=(Utente) session.getAttribute("utente");
+		String tmp=(String) ut.getEmail();
 		ArrayList<Prenotazione> prenotazione = DBManager.getInstance().UtenteDAO().dammiPrenotazioni(tmp);
 		session.setAttribute("bookingList", prenotazione);
 		ArrayList<Trattamento> trattamento = DBManager.getInstance().TrattamentoDAO().listaTrattamenti();
 		session.setAttribute("serviceList", trattamento);
+		
+		HashMap<Date,Integer> listaCount = new HashMap<Date, Integer>();
+		listaCount=DBManager.getInstance().PrenotazioneDAO().countDate(tmp);
+		session.setAttribute("listaCount", listaCount);
+		
 		return "Profile";
 	}
 	
@@ -75,8 +81,8 @@ public class PageController
 	public String deleteBooking(HttpSession session, Model model,@RequestParam Integer id)
 	{
 		DBManager.getInstance().PrenotazioneDAO().delete(id);
-		 Utente ut=(Utente) session.getAttribute("utente");
-		 String tmp=(String) ut.getEmail();
+		Utente ut=(Utente) session.getAttribute("utente");
+		String tmp=(String) ut.getEmail();
 		ArrayList<Prenotazione> prenotazione = DBManager.getInstance().UtenteDAO().dammiPrenotazioni(tmp);
 		session.setAttribute("bookingList", prenotazione);
 		ArrayList<Trattamento> trattamento = DBManager.getInstance().TrattamentoDAO().listaTrattamenti();

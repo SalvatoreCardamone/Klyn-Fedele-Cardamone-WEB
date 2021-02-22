@@ -42,7 +42,7 @@
                     <div class="container-fluid">
                         <div class="row">
                                	<table>
-                        			<c:forEach items="${bookingList}" var="tmp">
+                        			<c:forEach items="${bookingList}" var="tmp" >
                         				<tr>
                         					<th> 
                         						<div class="col-sm" id="booking-review_element">
@@ -77,9 +77,15 @@
                         						</form>
                         					</th>
                         					<th>
-                        						<form action="/DeleteBooking">
-                        						<button type="submit" onclick="" id="booking-review_button"> stampa</button>
-                        						</form>
+                        						<c:forEach items="${listaCount}" var="tmpCount"> 
+                        							<div> valore nella hash ${tmpCount.value}</div>
+                        							<div> valore del loop ${loopBooking}</div>
+                        							<c:if test="${tmpCount.value == loopBooking}">
+                        								<form action="/DeleteBooking">
+                        								<button type="submit" onclick="" id="booking-review_button"> stampa</button>
+                        								</form>
+                        							</c:if>
+                        						</c:forEach>
                         					</th>
                         				</tr>
                         			</c:forEach>

@@ -13,6 +13,7 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 
 import model.Prenotazione;
 import model.Trattamento;
@@ -129,5 +130,27 @@ public class PrenotazioneDAOJDBC implements PrenotazioneDAO
 			}
 		}
 		return descrizioni;
+	}
+
+	@Override
+	public HashMap<Date, Integer> countDate(String mail) {
+		Connection conn;
+		HashMap<Date, Integer> lista= new HashMap<Date, Integer>();
+		try {
+		conn= dbSource.getConnection();
+		String query="SELECT date, COUNT(*) as Counter FROM prenotazione WHERE utente = ? GROUP BY date";
+		PreparedStatement st=conn.prepareStatement(query);
+		st.setString(1, mail);
+		ResultSet rs= st.executeQuery();
+		Integer n=0;
+			while(rs.next()) {
+				n=n+rs.getInt("Counter");
+				lista.put(rs.getDate("date"), n);
+			}
+		
+		}
+		catch(Exception e) {e.printStackTrace();}
+		
+		return lista;
 	}
 }
