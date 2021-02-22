@@ -90,6 +90,13 @@ public class PageController
 		return "Profile";
 	}
 	
+	@GetMapping("/PrintBooking")
+	public String printBooking(HttpSession session, Model model,@RequestParam Integer idStampa, @RequestParam Date idDataDaStampare)
+	{
+		
+		System.out.println("chiamata");
+		return "Profile";
+	}
 	
 	 @GetMapping("/Treatments")
 	 public String getRecensioni(HttpSession session, Model model,@RequestParam String nome,@RequestParam Date data,@RequestParam Integer numeroPersone )

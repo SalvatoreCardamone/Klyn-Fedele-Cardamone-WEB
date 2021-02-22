@@ -42,7 +42,7 @@
                     <div class="container-fluid">
                         <div class="row">
                                	<table>
-                        			<c:forEach items="${bookingList}" var="tmp" >
+                        			<c:forEach items="${bookingList}" var="tmp" varStatus="loopBooking">
                         				<tr>
                         					<th> 
                         						<div class="col-sm" id="booking-review_element">
@@ -78,12 +78,12 @@
                         					</th>
                         					<th>
                         						<c:forEach items="${listaCount}" var="tmpCount"> 
-                        							<div> valore nella hash ${tmpCount.value}</div>
-                        							<div> valore del loop ${loopBooking}</div>
-                        							<c:if test="${tmpCount.value == loopBooking}">
-                        								<form action="/DeleteBooking">
-                        								<button type="submit" onclick="" id="booking-review_button"> stampa</button>
-                        								</form>
+               										<c:if test="${tmpCount.value == loopBooking.count}">
+                        								<form action="/PrintBooking">
+                        									<input type="number" name="idStampa" value="${tmp.id}" style="display:none">
+                        									<input type="date" name="idDataDaStampare" value="${tmpCount.key}" style="display:none">
+                        									<button type="submit" onclick="PrintBooking()" id="booking-review_button"> stampa</button>
+                        							</form>
                         							</c:if>
                         						</c:forEach>
                         					</th>
@@ -155,7 +155,9 @@
 </body>
 
 <script>
+
 	function Modifica(){
+	
 			
 		
 			if( document.getElementById('input_password_nuova').disabled== false)
