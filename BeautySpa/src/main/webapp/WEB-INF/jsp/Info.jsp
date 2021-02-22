@@ -43,7 +43,7 @@
 
 <h2 class="info_header"> Dubbi? Scrivici una e-mail! </h2>
                 <div class="container">
-                        <form action="mailto:marcofedele1997@live.it" method="POST" onsubmit="return alert('Email inviata con successo!')">
+                        <form action="/sendEmail" method="POST" >
                             <div class="form-group">
                                 <input type="text" name="name" class="form-control rounded-0" placeholder="Nome e Cognome" required="required" />
                             </div>
@@ -53,9 +53,9 @@
                             <div class="form-group">
                                 <select class="form-control" name="inquiry" required>
                                     <option value="" selected> -- Tipo di domanda -- </option>
-                                    <option value="booking">Prenotazioni</option>
-                                    <option value="service">Servizi</option>
-                                    <option value="other">Altro</option>
+                                    <option value="prenotazione">Prenotazioni</option>
+                                    <option value="servizio">Servizi</option>
+                                    <option value="altro">Altro</option>
                                 </select>
                             </div>
                             <div class="form-group">

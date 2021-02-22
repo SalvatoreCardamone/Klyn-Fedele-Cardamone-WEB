@@ -24,7 +24,7 @@ public class LoginController
 		if(ut.getEmail() != null)
 			session.setAttribute("utente", ut);
 		else
-			session.setAttribute("erroreLogin", true);
+			session.setAttribute("messaggio", "Attenzione: E-mail e/o password inserite non corrette!");
 		
 		//model.addAttribute();// prenod con $
 		return "redirect:/"; 

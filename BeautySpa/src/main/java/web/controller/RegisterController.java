@@ -28,7 +28,6 @@ public class RegisterController {
 		if(vedi.getEmail()!=null)
 		{
 			messagio="Email esiste gia";
-			session.setAttribute("nonRegistrato", false);
 			session.setAttribute("messagio", messagio);
 			return "redirect:/";
 		}
@@ -38,7 +37,6 @@ public class RegisterController {
 			DBManager.getInstance().UtenteDAO().save(utente);
 			//System.out.println("Ok registo nuovo utente!");
 			messagio="Utente "+nome+" "+cognome+" e stato registrato";
-			session.setAttribute("registrato", true);
 			session.setAttribute("messagio", messagio);
 			return "redirect:/";
 		}
