@@ -44,7 +44,6 @@
 		  <span class="caret"></span></button>
 		  <ul class="dropdown-menu">
 		    <li> <a class="dropdown-item" href="/Profile">Profilo</a> </li>
-		    <li> <a class="dropdown-item" href="/LeTuePrenotazioni">Prenotazioni</a> </li>
 		    <li> <div class="dropdown-divider"></div>  </li>
 		    <li>
 		    <form method="POST" action="/logout">

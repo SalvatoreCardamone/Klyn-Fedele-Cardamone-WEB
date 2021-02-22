@@ -39,17 +39,18 @@
                 </ul>
                 <div class="tab-content">
                     <div class="tab-pane" id="tab2">
+                    <div class="container-fluid">
                         <div class="row">
                                	<table>
                         			<c:forEach items="${bookingList}" var="tmp">
                         				<tr>
                         					<th> 
-                        						<div class=col-sm>
+                        						<div class="col-sm" id="booking-review_element">
                         							${tmp.date}
                         						</div>
                         					</th>
                         					<th> 
-                        						<div class=col-sm>
+                        						<div class="col-sm" id="booking-review_element">
                         							${tmp.time}
                         						</div>
                         					</th>
@@ -57,25 +58,27 @@
                         						<c:forEach items="${serviceList}" var="tmpY">
                         							<c:choose>
                         								<c:when test="${tmpY.id == tmp.trattamento}">
+                        									<div class="col-sm" id="booking-review_element">
                         									${tmpY.nome}
+                        									</div>
                         								</c:when>	
                         							</c:choose>
                         						</c:forEach>
                         					</th>
                         					<th>
-                        						<div class=col-sm>
+                        						<div class="col-sm" id="booking-review_element">
                         							${tmp.persone} &nbsp Persone
                         						</div>
                         					</th>
                         					<th>
                         						<form action="/DeleteBooking">
                         							<input type="number" id="id" name="id" value="${tmp.id}" style="display:none">
-                        							<button type="submit" onclick="deleteBooking()"> cancella</button>
+                        							<button type="submit" onclick="deleteBooking()" id="booking-review_button"> cancella</button>
                         						</form>
                         					</th>
                         					<th>
                         						<form action="/DeleteBooking">
-                        						<button type="submit" onclick=""> stampa</button>
+                        						<button type="submit" onclick="" id="booking-review_button"> stampa</button>
                         						</form>
                         					</th>
                         				</tr>
@@ -83,6 +86,7 @@
                         		</table>
                                 <hr>
                         </div>
+                    </div>
                     </div>
                     <div class="tab-pane active" id="tab">
                         <div class="row">

@@ -240,3 +240,26 @@ h3 {
 #review_button{
 	padding-bottom: 40px;
 }
+
+  /* */
+#booking-review_element{
+	
+}
+
+#booking-review_button{
+  border: none;
+  display: block;
+  text-align: center;
+  cursor: pointer;
+  text-transform: uppercase;
+  outline: none;
+  overflow: hidden;
+  position: relative;
+  color: #fff;
+  font-weight: 700;
+  font-size: 15px;
+  background-color: #222;
+  padding: 17px 60px;
+  margin: 0 auto;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.20);
+}
