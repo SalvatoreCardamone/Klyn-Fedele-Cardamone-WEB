@@ -78,7 +78,7 @@
 						  <select class="custom-select orarioScelto" name="trattamento${trattamento.id}">
 						    <option selected value="no">Non prenotare, grazie</option>
 						     <c:forEach items="${orariDisponibili}" var="ora">
-						    	<option value="${ora}" id="${trattamento.id}${ora}">${ora}</option>
+						    	<option value="${ora}" id="${trattamento.id}${ora}" class="${ora}">${ora}</option>
 						     </c:forEach>
 						  </select>
 				    </div>
@@ -106,22 +106,42 @@ function jq( myid ) {
 	 return "#" + myid.replace( /(:|\.|\[|\]|,|=|@)/g, "\\:" );
 }
 
+function jq2( myid ) {
+	 return "." + myid.replace( /(:|\.|\[|\]|,|=|@)/g, "\\:" );
+}
+
 var lista = [
 	<c:forEach items="${listaPrenotazioni}" var="item">
 			"${item.trattamento}${item.time}",
 	</c:forEach>
 	];
 
+var lista2 = [
+	<c:forEach items="${listaPrenotazioni}" var="item">
+	<c:if test="${item.utente == utente.email}">
+		"${item.time}",
+	</c:if>
+	</c:forEach>
+];
+
 	$(document).ready(function()
 	{
+		//Segno in rosso se prenotato da qualcun'altro a quell'ora
 		for (var i=0; i<lista.length; i++)
 			{ 
 				$(jq(lista[i])).attr("class","table-danger");
 				$(jq(lista[i])).attr("disabled","disabled");
 				$(jq(lista[i])).append("<p> Non disponibile </p>");
 			}
-		
-	
+		//Segno in giallo se io quel giorno ho quell'ora occupata
+		for (var i=0; i<lista2.length; i++)
+			{
+				$(jq2(lista2[i])).each(function( index ) {
+					$(this).attr("class","table-warning");
+					$(this).attr("disabled","disabled");
+					$(this).append("<p> Occupato da te </p>");
+				});
+			}
 	});
 	
 function checkIfDuplicateExists(w){
@@ -140,10 +160,15 @@ function validateForm()
 	
 	if(checkIfDuplicateExists(orari))
 		{
-			alert("Attenzione: è stato selezionato lo stesso orario per 2 o più trattamenti. \nPerfavore cambiare gli orari scelti e riprovare.");
+			alert("Attenzione: l'orario di 2 o più trattamenti coincide. \nPerfavore cambiare gli orari scelti e riprovare.");
 			return false;
 		}
 		
+	if (orari.length == 0)
+		{
+			alert("Attenzione: selezionare almeno 1 trattamento per continuare con la prenotazione.")
+			return false;
+		}
 	return true;
 }
 	
