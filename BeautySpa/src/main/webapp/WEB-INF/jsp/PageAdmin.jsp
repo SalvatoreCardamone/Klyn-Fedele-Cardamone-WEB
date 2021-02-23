@@ -9,11 +9,16 @@
 <head>
     <!-- Importing resources -->
     <jsp:include page="imports.jsp"/>
+    <script src='../JavaScript/Admin.js'></script>
 </head>
 <body>         		
 	
+	<button onclick="visualizzaUtente();">Visualizza Utenti</button>
+	
+	
+	
 	<h2> Lista Utenti </h2>
-	<table class="table">
+	<table class="table" var=>
   <thead class="thead-light">
     <tr>
       <th scope="col">EMAIL</th>
@@ -25,8 +30,8 @@
   <tbody>
   
   <c:forEach items="${listaUtenti}" var="utente">
-    <tr>
-      <th scope="row">${utente.email}</th>
+    <tr id="${utente.email}">
+      <th scope="row" >${utente.email}</th>
       <td>${utente.nome}</td>
       <td>${utente.cognome}</td>
       <td>${utente.numero}</td>

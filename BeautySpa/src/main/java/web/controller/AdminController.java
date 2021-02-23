@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import model.Prenotazione;
 import model.Recensione;
@@ -41,31 +42,46 @@ public class AdminController
 		session.setAttribute("messaggio", "ACCESSO NEGATO");
 			return "redirect:/";
 	}
+	/*
+	@PostMapping("/adminListaUtenti")
+	public ArrayList<Utente> dammiUtentiController()
+	{
+		ArrayList<Utente>listaUtenti=DBManager.getInstance().UtenteDAO().findAll();
+		return listaUtenti;
+	}
+	*/
+	@PostMapping("/adminListaPrenotazioni")
+	public ArrayList<Recensione> dammiPrenotazioni(HttpSession session, Model model)
+	{
+		ArrayList<Recensione>listaRecensioni = DBManager.getInstance().RecensioneDAO().findAll();
+		return listaRecensioni;
+	}
+	
 	
 	@PostMapping("/adminTuttiPrenotazioni")
-	public String adminTuttiPrenotazioni(HttpSession session, Model model)
+	public ArrayList<Prenotazione> adminTuttiPrenotazioni(HttpSession session, Model model)
 	{
 		ArrayList<Prenotazione>lista= DBManager.getInstance().PrenotazioneDAO().findAll();
-		session.setAttribute("adminListaPrenotazione", lista);
-		return "PageAdmin";
+		//session.setAttribute("adminListaPrenotazione", lista);
+		return lista;
 	}
 	
 	@PostMapping("/adminPrenotazioniUtente")
-	public String adminPrenotazioniUtente(@RequestParam String emailUtente,HttpSession session, Model model)
+	public ArrayList<Prenotazione> adminPrenotazioniUtente(@RequestParam String emailUtente,HttpSession session, Model model)
 	{
 		ArrayList<Prenotazione>listaPrenotazioni=DBManager.getInstance().UtenteDAO().dammiPrenotazioni(emailUtente);
-		session.setAttribute("adminPrenotaioniUtente", listaPrenotazioni);
-		return "PageAdmin";
+		//session.setAttribute("adminPrenotaioniUtente", listaPrenotazioni);
+		return listaPrenotazioni;
 	}
 	
 	@PostMapping("/adminEliminaPrenotazione")
-	public String adminEliminaPrenotazione(@RequestParam Integer idPrenotazione,HttpSession session, Model model)
+	public void adminEliminaPrenotazione(@RequestParam Integer idPrenotazione,HttpSession session, Model model)
 	{
 		DBManager.getInstance().PrenotazioneDAO().delete(idPrenotazione);
-		session.setAttribute("messageAdmin", "Trattamento e stato eliminato");
-		return "PageAdmin";
+		adminTuttiPrenotazioni(session,model);
+		
 	}
-	
+	/*
 	@PostMapping("/adminEliminaTrattamento")
 	public String adminEliminaTrattamento(@RequestParam Integer idTrattamento,HttpSession session, Model model)
 	{
@@ -82,14 +98,14 @@ public class AdminController
 		session.setAttribute("messageAdmin", "Trattamento e stato aggiunto");
 		return "PageAdmin";
 	}
-	
+	*/
 	@PostMapping("/adminUpdateTrattamento")
-	public String adminUpdateTrattamento(@RequestParam Integer idTrattamento,@RequestParam String nomeTrattamento ,@RequestParam String descrizioneTrattamento, HttpSession session, Model model)
+	public ArrayList<Trattamento> adminUpdateTrattamento(@RequestParam Integer idTrattamento,@RequestParam String nomeTrattamento ,@RequestParam String descrizioneTrattamento, HttpSession session, Model model)
 	{
 		Trattamento tr= new Trattamento(idTrattamento,nomeTrattamento,descrizioneTrattamento);
 		DBManager.getInstance().TrattamentoDAO().updateTrattamento(tr);
 		ArrayList<Trattamento> lista= DBManager.getInstance().TrattamentoDAO().listaTrattamenti();
 		session.setAttribute("adminListaTrattamenti", lista);
-		return "PageAdmin";
+		return lista;
 	}
 }
