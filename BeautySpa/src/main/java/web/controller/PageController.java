@@ -104,6 +104,10 @@ public class PageController
 		session.setAttribute("bookingList", prenotazione);
 		ArrayList<Trattamento> trattamento = DBManager.getInstance().TrattamentoDAO().listaTrattamenti();
 		session.setAttribute("serviceList", trattamento);
+		
+		HashMap<Date,Integer> listaCount = new HashMap<Date, Integer>();
+		listaCount=DBManager.getInstance().PrenotazioneDAO().countDate(tmp);
+		session.setAttribute("listaCount", listaCount);
 		return "Profile";
 	}
 	
