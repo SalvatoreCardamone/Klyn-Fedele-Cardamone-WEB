@@ -15,7 +15,8 @@
 	
 	<button onclick="visualizzaUtente();">Visualizza Utenti</button>
 	
-	
+	<table id="tabellaUtenti">
+	</table>
 	
 	<h2> Lista Utenti </h2>
 	<table class="table" var=>
