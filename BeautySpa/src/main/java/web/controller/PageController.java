@@ -113,7 +113,7 @@ public class PageController
 		HashMap<Date,Integer> listaCount = new HashMap<Date, Integer>();
 		listaCount=DBManager.getInstance().PrenotazioneDAO().countDate(tmp);
 		session.setAttribute("listaCount", listaCount);
-		return "Profile";
+		return "redirect:/Profile";
 	}
 	
 	@GetMapping("/PrintBooking")
@@ -240,9 +240,6 @@ public class PageController
 	 }
 	 
 	 
-	 
-	 //@SuppressWarnings("deprecation")
-	 //Temporaneo
 	@PostMapping("/confermaPrenotazione")
 	 public String confermaprenotazione(HttpSession session, Model model,
 			 @RequestParam String trattamento1,
@@ -258,7 +255,7 @@ public class PageController
 	 {		
 			ArrayList<Trattamento>list= new ArrayList<Trattamento>();
 			
-			ArrayList<String>listaTratt=new ArrayList();
+			ArrayList<String>listaTratt=new ArrayList<String>();
 			listaTratt.add(trattamento1);
 			listaTratt.add(trattamento2);
 			listaTratt.add(trattamento3);
@@ -270,11 +267,8 @@ public class PageController
 			
 			aggiungiTrattamento(list,listaTratt);
 			
-			//System.out.println(list);
-			String ricordaUtente=(String) session.getAttribute("emailUtente");
 			Utente ut=(Utente) session.getAttribute("utente");
 			
-			//Time time=java.sql.Time.valueOf("String");
 			for(int i=0; i<listaTratt.size(); i++)
 			{
 				if(!listaTratt.get(i).equals("no"))
@@ -288,7 +282,7 @@ public class PageController
 			
 		 	ricordaData=null;
 		 	ricordaPersone=null;
-			return "Home";
+			return "redirect:/Profile";
 	 }
 	
 	public void aggiungiTrattamento(ArrayList<Trattamento>list,ArrayList<String>listaTratt)

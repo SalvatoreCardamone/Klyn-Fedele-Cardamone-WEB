@@ -9,6 +9,7 @@
 <head>
     <!-- Importing resources -->
     <jsp:include page="imports.jsp"/>
+    
 </head>
 <body>
 
@@ -24,78 +25,87 @@
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
             <div class="well profile">
-                <img class="user img-circle pull-left clearfix" height="54" src="https://bootdey.com/img/Content/user_1.jpg" alt="">
-                <h3 class="name pull-left clearfix">juan andres posada</h3>
+                <h3 class="name pull-left clearfix">Il tuo profilo</h3>
                 <div class="clearfix"></div>
-                <ul class="nav nav-tabs">
-                    <li class="active">
-                        <a href="#tab" data-toggle="tab">
-                            Account
+                <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" data-toggle="pill" href="#tab-prenotazioni" role="tab"  aria-selected="true">
+                        Prenotazioni
                         </a>
                     </li>
-                    <li class="">
-                        <a href="#tab2" data-toggle="tab">
-                            Prenotazioni
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#tab-account" role="tab" aria-selected="false">
+                        Account
                         </a>
                     </li>
                 </ul>
+                <hr/>
                 <div class="tab-content">
-                    <div class="tab-pane" id="tab2">
+                    <div class="tab-pane active" id="tab-prenotazioni">
                     <div class="container-fluid">
                         <div class="row">
-                               	<table>
+                               <table class="table table-hover">
+							   <thead class="thead-light">
+							    <tr>
+							      <th scope="col">Data:</th>
+							      <th scope="col">Ora:</th>
+							      <th scope="col">Trattamento:</th>
+							      <th scope="col" colspan="2">N. Persone:</th>
+							    </tr>
+							  </thead>
+                              
+                              <tbody>
                         			<c:forEach items="${bookingList}" var="tmp" varStatus="loopBooking">
                         				<tr>
-                        					<th> 
-                        						<div class="col-sm" id="booking-review_element">
-                        							${tmp.date}
-                        						</div>
-                        					</th>
-                        					<th> 
-                        						<div class="col-sm" id="booking-review_element">
-                        							${tmp.time}
-                        						</div>
-                        					</th>
-                        					<th> 
+                        					<td scope="row"> 
+                        						${tmp.date}
+                        					</td>
+                        					<td> 
+                        						${tmp.time}
+                        					</td>
+                        					<td> 
                         						<c:forEach items="${serviceList}" var="tmpY">
                         							<c:choose>
                         								<c:when test="${tmpY.id == tmp.trattamento}">
-                        									<div class="col-sm" id="booking-review_element">
                         									${tmpY.nome}
-                        									</div>
                         								</c:when>	
                         							</c:choose>
                         						</c:forEach>
-                        					</th>
-                        					<th>
-                        						<div class="col-sm" id="booking-review_element">
-                        							${tmp.persone} &nbsp Persone
+                        					</td>
+                        					<td>
+                        						<div class="col-sm" >
+                        							${tmp.persone}
                         						</div>
-                        					</th>
+                        					</td>
                         					<th>
                         						<form action="/DeleteBooking">
                         							<input type="number" id="id" name="id" value="${tmp.id}" style="display:none">
-                        							<button type="submit" id="booking-review_button"> cancella</button>
+                        							<button type="submit" class="btn btn-outline-danger"> cancella</button>
                         						</form>
                         					</th>
-                        					<th>
-                        						<c:forEach items="${listaCount}" var="tmpCount"> 
-               										<c:if test="${tmpCount.value == loopBooking.count}">
+                        				</tr>
+                        				<c:forEach items="${listaCount}" var="tmpCount"> 
+               								<c:if test="${tmpCount.value == loopBooking.count}">
+               									<tr style="background-color: #FFFFFF !important"> 
+	               									<th colspan="6">  
                         								<form action="/PrintBooking" target="_blank">
                         									<input type="date" name="idDataDaStampare" value="${tmpCount.key}" style="display:none">
-                        									<button type="submit" id="booking-review_button"> stampa</button>
-                        							</form>
-                        							</c:if>
-                        						</c:forEach>
-                        					</th>
-                        				</tr>
+                        									<button type="submit" class="btn btn-outline-success btn-block btn-lg"> stampa prenotazione del ${tmpCount.key} </button>
+                        								</form>
+	                        						</th>
+                        						</tr>
+                        					</c:if>
+                        				</c:forEach>
+                        				
                         			</c:forEach>
+                        		</tbody>
                         		</table>
                                 <hr>
                         </div>
                     </div>
                     </div>
-                    <div class="tab-pane active" id="tab">
+                    <div class="tab-pane" id="tab-account">
                         <div class="row">
                             <div class="col-xs-12 col-sm-10 col-md-10 col-lg-10">
                                 <div class="tab-content">
@@ -108,23 +118,24 @@
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                             	<label for="input_password" class="col-lg-2 control-label" disabled="true">Vechia password</label>
-                                                <div class="col-lg-10">
-                                                    <input type="password" class="form-control" placeholder="Inserisci password vechia" id="input_password_vecchia" name="oldPassword"  pattern="^([a-zA-Z0-9@*#]{6,30})$"  oninvalid="this.setCustomValidity('Perfavore inserire corettamente la password (da 6 a 30 caratteri comprsi(@*#))')" oninput="setCustomValidity('')" disabled/>
+                                            <label for="input_password" class="col control-label">Password</label>
+                                            <div class="row">
+                                                <div class="col">
+                                                    <input type="password" class="form-control" placeholder="Inserisci vecchia password" id="input_password_vecchia" name="oldPassword"  pattern="^([a-zA-Z0-9@*#]{6,30})$"  oninvalid="this.setCustomValidity('Perfavore inserire corettamente la password (da 6 a 30 caratteri comprsi(@*#))')" oninput="setCustomValidity('')" disabled required/>
                                                 </div>
-                                                <label for="input_password" class="col-lg-2 control-label" disabled>Nuova password</label>
-                                                <div class="col-lg-10">
-                                                    <input type="password" class="form-control" placeholder="Inserisci nuova password" id="input_password_nuova" name="Password"  pattern="^([a-zA-Z0-9@*#]{6,30})$"  oninvalid="this.setCustomValidity('Perfavore inserire corettamente la password (da 6 a 30 caratteri comprsi(@*#))')" oninput="setCustomValidity('')" disabled/>
-                                                </div>
+                                                <div class="col">
+                                                 <input type="password" class="form-control" placeholder="Inserisci nuova password" id="input_password_nuova" name="Password"  pattern="^([a-zA-Z0-9@*#]{6,30})$"  oninvalid="this.setCustomValidity('Perfavore inserire corettamente la password (da 6 a 30 caratteri comprsi(@*#))')" oninput="setCustomValidity('')" disabled required/>       
+                                           		</div>
+                                           	</div>
                                             </div>
                                             <div class="form-group">
                                                 <div class="row">
                                                     <div class="col">
-                                                        <label for="input_nome" class="col-lg-2 control-label">Nome</label>
+                                                        <label for="input_nome" class="col control-label">Nome</label>
                                                         <input type="text" class="form-control" id="input_nome" name="Nome" value="${utente.nome}" disabled >
                                                        </div>
                                                        <div class="col">
-                                                        <label for="input_cognome" class="col-lg-2 control-label">Cognome</label>
+                                                        <label for="input_cognome" class="col control-label">Cognome</label>
                                                         <input type="text" class="form-control" id="input_cognome" name="Cognome" value="${utente.cognome}"  disabled>
                                                        </div>
                                                    </div>
@@ -146,7 +157,9 @@
             </div>
         </div>
     </div>
-</div>                    
+</div>                   
+
+ 
 </c:if>
 
 <c:if test="${utente == null}">
@@ -173,7 +186,7 @@
 
 	function Modifica(){
 	
-			
+			$("#bottoneModifica").text("Conferma modifiche");
 		
 			if( document.getElementById('input_password_nuova').disabled== false)
 				{
