@@ -1,5 +1,7 @@
 package web.controller;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -14,6 +16,7 @@ import java.sql.Time;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -81,6 +84,8 @@ public class PageController
 	public String profile(HttpSession session, Model model)
 	{
 		Utente ut=(Utente) session.getAttribute("utente");
+		if (ut != null)
+		{
 		String tmp=(String) ut.getEmail();
 		ArrayList<Prenotazione> prenotazione = DBManager.getInstance().UtenteDAO().dammiPrenotazioni(tmp);
 		session.setAttribute("bookingList", prenotazione);
@@ -90,7 +95,7 @@ public class PageController
 		HashMap<Date,Integer> listaCount = new HashMap<Date, Integer>();
 		listaCount=DBManager.getInstance().PrenotazioneDAO().countDate(tmp);
 		session.setAttribute("listaCount", listaCount);
-		
+		}
 		return "Profile";
 	}
 	
@@ -112,7 +117,7 @@ public class PageController
 	}
 	
 	@GetMapping("/PrintBooking")
-	public String printBooking(HttpSession session, Model model,@RequestParam Date idDataDaStampare, HttpServletResponse response) throws DocumentException, IOException
+	public void printBooking(HttpSession session, Model model,@RequestParam Date idDataDaStampare, HttpServletResponse response) throws DocumentException, IOException
 	{
 		
 		Utente ut=(Utente) session.getAttribute("utente");
@@ -140,26 +145,70 @@ public class PageController
         Chunk linebreak = new Chunk(separator);
 		document.add(linebreak);
 		
-		for (int i = 0 ; i<prenotazione.size(); i++) {
+		table.addCell("Trattamento:");
+		table.addCell("Ora:");
+		table.addCell("N. persone:");
+		
+		StringBuilder codice = new StringBuilder();
+		
+		for (int i = 0 ; i<prenotazione.size(); i++) 
+		{
+			if(prenotazione.get(i).getDate().equals(idDataDaStampare))  
+			{
+				for(int j=0; j<trattamento.size(); j++)
+				{
+					if(trattamento.get(j).getId()==prenotazione.get(i).getTrattamento())
+					{
+						table.addCell(trattamento.get(j).getNome());
+						codice.append(prenotazione.get(i).getId() + "-");
+						break;
+					}
+				}
 				
-				if(prenotazione.get(i).getDate().equals(idDataDaStampare))  {
 				table.addCell(prenotazione.get(i).getTime().toString());
 				table.addCell(prenotazione.get(i).getPersone().toString());
-					for(int j=0; j<trattamento.size(); j++){
-						if(trattamento.get(j).getId()==prenotazione.get(i).getTrattamento())
-						table.addCell(trattamento.get(j).getNome());
-				}
+				
 			}
 		}
 
 		document.add(table);
+
+		codice.deleteCharAt(codice.length()-1);
+		Paragraph coda = new Paragraph("Codice prenotazione: " + codice.toString(), font);
+		document.add(linebreak);
+		document.add(coda);
+		
 		document.close();
 		
-		String name = new String("../" + targetDir.getName() + "/" + targetFile.getName());
-		session.setAttribute("pdfprint", name);
+		String name = new String(targetFile.getAbsolutePath());
+		response.setContentType("application/pdf;charset=UTF-8");
+		response.addHeader("Content-Disposition", "inline; filename=" + name);
 		
+        BufferedInputStream input = null;
+        BufferedOutputStream output = null;
+
+            // Open file.
+        	input = new BufferedInputStream(new FileInputStream(name), 10240);
+
+            response.reset();
+            response.setHeader("Content-type", "application/pdf"); 
+            response.setContentLength((int)targetFile.length());
+
+            response.setHeader("Content-disposition", "inline; filename=" + name);
+            response.setHeader("pragma", "public");
+            output = new BufferedOutputStream(response.getOutputStream(), 10240);
+
+            byte[] buffer = new byte[10240];
+            int length;
+            while ((length = input.read(buffer)) > 0) {
+                output.write(buffer, 0, length);
+            }
+
+            output.flush();
+            output.close();
+            input.close();
+      
 		
-		return "redirect:/Profile";
 	}
 	
 	 @GetMapping("/Treatments")

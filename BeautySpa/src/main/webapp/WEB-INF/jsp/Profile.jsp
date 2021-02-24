@@ -17,6 +17,8 @@
     <!--  NAV -->
     <jsp:include page="nav.jsp"/>
     <!-- /NAV -->
+    
+<c:if test="${utente != null}">
 <div class="container bootstrap snippets bootdey">
     <hr>
     <div class="row">
@@ -73,15 +75,15 @@
                         					<th>
                         						<form action="/DeleteBooking">
                         							<input type="number" id="id" name="id" value="${tmp.id}" style="display:none">
-                        							<button type="submit" onclick="deleteBooking()" id="booking-review_button"> cancella</button>
+                        							<button type="submit" id="booking-review_button"> cancella</button>
                         						</form>
                         					</th>
                         					<th>
                         						<c:forEach items="${listaCount}" var="tmpCount"> 
                										<c:if test="${tmpCount.value == loopBooking.count}">
-                        								<form action="/PrintBooking">
+                        								<form action="/PrintBooking" target="_blank">
                         									<input type="date" name="idDataDaStampare" value="${tmpCount.key}" style="display:none">
-                        									<button type="submit" onclick="PrintBooking()" id="booking-review_button"> stampa</button>
+                        									<button type="submit" id="booking-review_button"> stampa</button>
                         							</form>
                         							</c:if>
                         						</c:forEach>
@@ -145,11 +147,21 @@
         </div>
     </div>
 </div>                    
-    
-    <c:if test="${pdfprint != null}">
-    <p> ${pdfprint} </p>
-    <embed src="${pdfprint}" width="500" height="375" type="application/pdf"> </embed>
-    </c:if>
+</c:if>
+
+<c:if test="${utente == null}">
+	<div class="row justify-content-center">
+		 <div class="card">
+			  <div class="card-body">
+			    <h5 class="card-title">Attenzione</h5>
+			    <p class="card-text">Effettua il login per poter visualizzare il tuo profilo!</p>
+				    <div class="row justify-content-center">
+					  <button type="button" class="btn btn-primary my-2 my-sm-0" data-toggle="modal" data-target="#loginModal" id="loginButton"> Accedi </button>
+					</div>
+			 </div>
+		</div>
+	</div>
+</c:if> 
     
     <!--  FOOTER -->
     <jsp:include page="footer.jsp"/>
