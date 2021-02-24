@@ -119,23 +119,27 @@ public class PageController
 		String tmp=(String) ut.getEmail();
 		Document document = new Document();
 		String nomeFile= new String (idDataDaStampare+tmp+".pdf");
-		PdfWriter.getInstance(document, new FileOutputStream(nomeFile));
+		
+		File targetDir=new File("PdfPrenotazioni");
+		File targetFile=new File(targetDir, nomeFile);
+		FileOutputStream fos = new FileOutputStream(targetFile);
+		
+		PdfWriter.getInstance(document, fos);
 
 		document.open();
-		
-		
 		
 		PdfPTable table = new PdfPTable(3);
 		ArrayList<Prenotazione> prenotazione = DBManager.getInstance().UtenteDAO().dammiPrenotazioni(tmp);
 		ArrayList<Trattamento> trattamento = DBManager.getInstance().TrattamentoDAO().listaTrattamenti();
 		
 		Font font = FontFactory.getFont(FontFactory.COURIER, 16);
-		Paragraph testa = new Paragraph(ut.getNome() + " " +ut.getCognome() + " ha effetturato una prenotazione per il giorno " + idDataDaStampare.toString() + "per i seguenti trattamenti:" , font);
+		Paragraph testa = new Paragraph(ut.getNome() + " " +ut.getCognome() + " ha effettuato una prenotazione per il giorno " + idDataDaStampare.toString() + " per i seguenti trattamenti:" , font);
 		document.add(testa);
 		DottedLineSeparator separator = new DottedLineSeparator();
         separator.setPercentage(59500f / 523f);
         Chunk linebreak = new Chunk(separator);
 		document.add(linebreak);
+		
 		for (int i = 0 ; i<prenotazione.size(); i++) {
 				
 				if(prenotazione.get(i).getDate().equals(idDataDaStampare))  {
@@ -151,42 +155,11 @@ public class PageController
 		document.add(table);
 		document.close();
 		
+		String name = new String("../" + targetDir.getName() + "/" + targetFile.getName());
+		session.setAttribute("pdfprint", name);
 		
-		/*OutputStream out = null;
-		String filePath = "C:\\Users\\salva\\git\\Klyn-Fedele-Cardamone-WEB\\BeautySpa";
-		File file = new File(filePath);
-
-		if(file.exists()){
-			out = response.getOutputStream();
-			response.setContentType(nomeFile + ";charset=UTF-8");
-			response.setHeader("Content-Disposition","inline;filename="+nomeFile);
-			FileInputStream fis = new FileInputStream(file);
-			ByteArrayOutputStream bos = new ByteArrayOutputStream();
-			byte[] buf = new byte[4096];
-			
-			try {
-				for (int readNum; (readNum = fis.read(buf)) != -1;) {
-					bos.write(buf, 0, readNum);
-				}
-			} catch (IOException ex) { 
-				ex.printStackTrace();
-			}
-			
-			byte[] bytes = bos.toByteArray();
-			int lengthRead = 0;
-			InputStream is = new ByteArrayInputStream(bytes);
-			
-			while ((lengthRead = is.read(buf)) > 0) {
-				out.write(buf);
-			}
-			
-			fis.close();
-			bos.close();
-			is.close();
-			out.close();
-		}
-		*/
-		return "Profile";
+		
+		return "redirect:/Profile";
 	}
 	
 	 @GetMapping("/Treatments")

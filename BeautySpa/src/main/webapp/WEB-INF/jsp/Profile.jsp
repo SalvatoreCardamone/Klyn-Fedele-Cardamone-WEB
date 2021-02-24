@@ -146,6 +146,10 @@
     </div>
 </div>                    
     
+    <c:if test="${pdfprint != null}">
+    <p> ${pdfprint} </p>
+    <embed src="${pdfprint}" width="500" height="375" type="application/pdf"> </embed>
+    </c:if>
     
     <!--  FOOTER -->
     <jsp:include page="footer.jsp"/>
