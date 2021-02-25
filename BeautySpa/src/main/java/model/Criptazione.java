@@ -29,7 +29,7 @@ public class Criptazione {
 		 salt = "ssssshhhhhhh!!";
 	}
 	
-	public static String encrypt(String strToEncrypt)
+	public String encrypt(String strToEncrypt)
     {
         try
         {
@@ -52,7 +52,7 @@ public class Criptazione {
     }
 
     
-    public static String decrypt(String strToDecrypt) {
+    public String decrypt(String strToDecrypt) {
         try
         {
             byte[] iv = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };

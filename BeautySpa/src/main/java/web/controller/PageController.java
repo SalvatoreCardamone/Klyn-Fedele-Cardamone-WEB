@@ -381,10 +381,39 @@ public class PageController
 			}
 		 
 		 Utente daCambiare = new Utente(email,nuovaPassword,ut.getNome(),ut.getCognome(),ut.isConvalidato(),ut.getNumero());
-		 session.setAttribute("utente", daCambiare);
+		
 		 DBManager.getInstance().UtenteDAO().update(daCambiare);
+		 daCambiare.setPassword(null);
+		 session.setAttribute("utente", daCambiare);
 		 
 		 return "redirect:/Profile";
 	 }
 	 
+	 
+	 @PostMapping("/modificaCredenziali")
+	 public String modificaCredenziali(@RequestParam String nome, @RequestParam String cognome, HttpSession session, Model model)
+	 {
+		 Utente ut = (Utente) session.getAttribute("utente");
+		 Utente ricordaDati= DBManager.getInstance().UtenteDAO().trovaUtente(ut.getEmail());//Serve per la password!
+		 ricordaDati.setNome(nome);
+		 ricordaDati.setCognome(cognome);
+		 DBManager.getInstance().UtenteDAO().update(ricordaDati);
+		 ricordaDati.setPassword(null);
+		 session.setAttribute("utente", ricordaDati);
+		 session.setAttribute("messaggio", "Dati anagrafici aggiornati!");
+		 return "redirect:/Profile";
+	 }
+	 
+	 @PostMapping("/modificaTelefono")
+	 public String modificaTelefono(@RequestParam String telefono, HttpSession session, Model model)
+	 {
+		 Utente ut = (Utente) session.getAttribute("utente");
+		 Utente ricordaDati= DBManager.getInstance().UtenteDAO().trovaUtente(ut.getEmail());
+		 ricordaDati.setNumero(telefono);
+		 DBManager.getInstance().UtenteDAO().update(ricordaDati);
+		 ricordaDati.setPassword(null);
+		 session.setAttribute("utente", ricordaDati);
+		 session.setAttribute("messaggio", "Numero aggiornato");
+		 return "redirect:/Profile";
+	 }
 }

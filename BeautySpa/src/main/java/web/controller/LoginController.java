@@ -27,6 +27,7 @@ public class LoginController
 			session.setAttribute("messaggio", "Attenzione: E-mail e/o password inserite non corrette!");
 		
 		//model.addAttribute();// prenod con $
+		session.setAttribute("google", false);
 		return "redirect:/"; 
 		
 	}
@@ -35,6 +36,7 @@ public class LoginController
 	public String logoutUtente(HttpSession session)
 	{
 		session.setAttribute("utente", null);
+		session.setAttribute("google", false);
 		return "redirect:/";
 		
 	}
@@ -54,6 +56,7 @@ public class LoginController
 		}
 		
 		loginUtente(email, password, session, model);
+		session.setAttribute("google", true);
 		return "redirect:/";
 	}
 	

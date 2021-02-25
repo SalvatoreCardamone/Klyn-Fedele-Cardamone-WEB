@@ -120,9 +120,9 @@
                              <form method="POST" action="/modificaPassword">
 							 <div class="input-group-append">
 							 
-								  <input type="password" name="vecchiaPassword" class="form-control" placeholder="Vecchia Password" required>
-								  <input type="password" name="nuovaPassword" class="form-control" placeholder="Nuova Password" pattern="^([a-zA-Z0-9@*#]{6,30})$"  oninvalid="this.setCustomValidity('Perfavore inserire correttamente la password (da 6 a 30 caratteri compresi(@*#))')" oninput="setCustomValidity('')" required>
-								  <button type="submit" class="btn btn-outline-primary" type="button">Modifica</button>
+								  <input type="password" id="vecPassword" name="vecchiaPassword" class="form-control" placeholder="Vecchia Password" required>
+								  <input type="password" id="nowPassword" name="nuovaPassword" class="form-control" placeholder="Nuova Password" pattern="^([a-zA-Z0-9@*#]{6,30})$"  oninvalid="this.setCustomValidity('Perfavore inserire correttamente la password (da 6 a 30 caratteri compresi(@*#))')" oninput="setCustomValidity('')" required>
+								  <button type="submit" id="buttonPasModifica" class="btn btn-outline-primary" type="button">Modifica</button>
 							
 							 </div>
 							 </form>
@@ -131,21 +131,27 @@
 					<div class="row">
                            <div class="input-group form-group">
                              <label for="input_name" class="col-lg-2 control-label">Nome:</label>
+                              <form method="POST" action="/modificaCredenziali">
 							 <div class="input-group-append">
-								  <input type="text" class="form-control" placeholder="${utente.nome}" required>
-								  <input type="text" class="form-control" placeholder="${utente.cognome}" required>
-								  <button class="btn btn-outline-primary" type="button">Modifica</button>
+							 
+								  <input  name="nome" type="text" class="form-control" placeholder="${utente.nome}"  required>
+								  <input name="cognome" type="text" class="form-control" placeholder="${utente.cognome}" required>
+								  <button type="submit" class="btn btn-outline-primary" type="button">Modifica</button>
+								  
 							 </div>
+							  </form>
 							</div>     
                      </div>
                      <div class="row">
                            <div class="input-group form-group">
                              <label for="input_telephone" class="col-lg-2 control-label">Telefono:</label>
-                             
+                              <form method="POST" action="/modificaTelefono">
 							 <div class="input-group-append">
-							 	<input type="tel" class="form-control" placeholder="${utente.numero}" required>
-								<button class="btn btn-outline-primary" type="button">Modifica</button>
+							 	<input name="telefono" type="tel" class="form-control" placeholder="${utente.numero}" pattern="^(\(?\+?[0-9]*\)?)?[0-9_\- \(\)]{10,20}$"  oninvalid="this.setCustomValidity('Perfavore inserire corettamente il numero di telefono(da 10a 20 cifre compreso(+_))')"
+ 									oninput="setCustomValidity('')"  required>
+								<button type="submit" class="btn btn-outline-primary" type="button">Modifica</button>
 							 </div>
+							 </form>
 							</div>     
                      </div>
                      
@@ -170,6 +176,15 @@
 		</div>
 	</div>
 </c:if> 
+    
+ <c:if test="${google eq true}">
+		  <script>
+		  	$("#vecPassword").prop( "disabled", true );
+			$("#nowPassword").prop( "disabled", true );
+			$("#buttonPasModifica").prop( "disabled", true );
+			document.getElementById("buttonPasModifica").innerHTML = "Entrato con google";
+		  </script>
+		  </c:if>
     
     <!--  FOOTER -->
     <jsp:include page="footer.jsp"/>
