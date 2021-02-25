@@ -300,7 +300,7 @@ public class PageController
 	
 	
 	 @PostMapping("/modificaUtente")
-	 public String aggiungiRecensione(@RequestParam String Email,
+	 public String modificaUtente(@RequestParam String Email,
 			 @RequestParam String Password,
 			 @RequestParam String Nome,
 			 @RequestParam String Cognome,
@@ -316,6 +316,7 @@ public class PageController
 		 }
 		 */
 		 Utente ut=(Utente) session.getAttribute("utente");
+		 System.out.println(ut);
 		 Utente verifica=DBManager.getInstance().UtenteDAO().trovaUtente(ut.getEmail());
 		 String pass;
 		 if(Password.equals("") || oldPassword.equals(""))

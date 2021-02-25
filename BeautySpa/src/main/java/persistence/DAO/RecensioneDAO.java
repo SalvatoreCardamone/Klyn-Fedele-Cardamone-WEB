@@ -9,7 +9,9 @@ public interface RecensioneDAO
 {
 	public void save(Recensione recensione);
 	public ArrayList<Recensione> mieRecensioni(String emailUtente);
-	public void delete(Integer idRecensione, String scrittoDa);
+	public void delete(Integer idRecensione);
 	public ArrayList<Recensione> getLastRecensioni();
 	public ArrayList<Recensione> findAll();
+	public void update(Recensione recensione);
+	public Recensione trovaRecensione(Integer id);
 }

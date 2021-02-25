@@ -150,9 +150,9 @@ public class TestDB {
 			System.out.println(lista.get(i));
 		}
 	}
-	public static void provaEliminaRecensione(Integer id, String scritto)
+	public static void provaEliminaRecensione(Integer id)
 	{
-		DBManager.getInstance().RecensioneDAO().delete(id,scritto);
+		DBManager.getInstance().RecensioneDAO().delete(id);
 	}
 	
 	public static void provaSavePrenotazione()

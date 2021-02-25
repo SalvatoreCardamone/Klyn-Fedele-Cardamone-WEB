@@ -17,6 +17,7 @@ import java.util.HashMap;
 
 import model.Criptazione;
 import model.Prenotazione;
+import model.Recensione;
 import model.Trattamento;
 import model.Utente;
 import persistence.DBManager;
@@ -183,5 +184,79 @@ public class PrenotazioneDAOJDBC implements PrenotazioneDAO
 			e.printStackTrace();
 		}
 		return lista;
+	}
+
+	@Override
+	public Prenotazione trovaPrenotazione(Integer id) {
+		Connection conn;
+		Prenotazione prenotazione= new Prenotazione();
+		try
+		{
+			conn= dbSource.getConnection();
+			String query= "SELECT * FROM prenotazione WHERE id=?";
+			PreparedStatement st= conn.prepareStatement(query);
+			
+			st.setInt(1, id);
+			ResultSet rs= st.executeQuery();
+			while(rs.next())
+			{
+				Integer idP= rs.getInt("id");
+				String utente= rs.getString("utente");
+				Time time= rs.getTime("time");
+				Date date= rs.getDate("date");
+				Integer persone= rs.getInt("persone");
+				Integer trattamento= rs.getInt("trattamento");
+				
+				prenotazione.setIdPrenotazione(idP);
+				prenotazione.setUtente(utente);
+				prenotazione.setTime(time);
+				prenotazione.setDate(date);
+				prenotazione.setPersone(persone);
+				prenotazione.setTrattamento(trattamento);
+			}
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		
+		return prenotazione;
+	}
+
+	@Override
+	public void update(Prenotazione prenotazione) {
+		Connection conn;
+		try
+		{
+			conn= dbSource.getConnection();
+			Prenotazione pr= trovaPrenotazione(prenotazione.getId());
+			if(pr.getId() == null)
+			{
+				//trattamento non trovato
+			}
+			else
+			{
+				
+				String query="UPDATE prenotazione SET time=? , date=? , persone=? , trattamento=? WHERE id=?";
+				PreparedStatement st= conn.prepareStatement(query);
+				
+				System.out.println(pr);
+				st.setTime(1, prenotazione.getTime());
+				st.setDate(2, prenotazione.getDate());
+				st.setInt(3, prenotazione.getPersone());
+				st.setInt(4, prenotazione.getTrattamento());
+				
+				st.setInt(5, prenotazione.getId());
+				
+				st.executeUpdate();
+				System.out.println("Cambiamenti aggiornati!");
+			}
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		
+		
 	}
 }

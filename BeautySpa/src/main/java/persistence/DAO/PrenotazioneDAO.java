@@ -14,4 +14,6 @@ public interface PrenotazioneDAO
 	public ArrayList<String> dammiDescrizioneTrattamenti(ArrayList<Prenotazione> lista);
 	public HashMap<Date, Integer> countDate(String mail);
 	public ArrayList<Prenotazione> findAll();
+	public Prenotazione trovaPrenotazione(Integer id);
+	public void update(Prenotazione prenotazione);
 }

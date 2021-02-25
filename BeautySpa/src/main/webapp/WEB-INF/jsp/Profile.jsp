@@ -199,6 +199,7 @@
 			}
 			else{
 				$("#input_password_nuova").prop( "disabled", false);
+				$("#input_password_nuova").prop( "pattern", "^([a-zA-Z0-9@*#]{6,30})$");
 				$("#input_password_vecchia").prop( "disabled", false);
 				$("#input_nome").prop( "disabled",false );
 				$("#input_cognome").prop( "disabled", false );
