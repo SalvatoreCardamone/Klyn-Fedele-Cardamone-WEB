@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 import model.Recensione;
-import model.Trattamento;
 import persistence.DBSource;
 import persistence.DAO.RecensioneDAO;
 
@@ -22,7 +21,6 @@ public class RecensioneDAOJDBC implements RecensioneDAO
 		this.dbSource=dbSource;
 	}
 	 
-
 	@Override
 	public void save(Recensione recensione) 
 	{
@@ -33,7 +31,6 @@ public class RecensioneDAOJDBC implements RecensioneDAO
 			String query="INSERT INTO recensione(descrizione , date , scritto , voto) values(?,?,?,?)";
 			PreparedStatement st= conn.prepareStatement(query);
 			
-			//st.setInt(1, recensione.getIdRecensione());
 			st.setString(1,recensione.getDescrizione());
 			Calendar calendar = Calendar.getInstance();
 			Date date = new Date(calendar.getTime().getTime());
@@ -42,7 +39,6 @@ public class RecensioneDAOJDBC implements RecensioneDAO
 			st.setInt(4, recensione.getVoto());
 			
 			st.executeUpdate();
-			System.out.println("Recensione e stata aggiunta");
 		}
 		catch(Exception e)
 		{
@@ -59,7 +55,6 @@ public class RecensioneDAOJDBC implements RecensioneDAO
 			conn= dbSource.getConnection();
 			String query="SELECT * FROM recensione WHERE scritto=?";
 			PreparedStatement st= conn.prepareStatement(query);
-			
 			
 			st.setString(1, emailUtente);
 			ResultSet rs= st.executeQuery();
@@ -82,7 +77,6 @@ public class RecensioneDAOJDBC implements RecensioneDAO
 		return lista;
 	}
 
-
 	@Override
 	public void delete(Integer idRecensione) {
 		Connection conn;
@@ -95,15 +89,12 @@ public class RecensioneDAOJDBC implements RecensioneDAO
 			st.setInt(1, idRecensione);
 			
 			st.executeUpdate();
-			System.out.println("Recensione eliminata");
 		}
 		catch(Exception e)
 		{
 			e.printStackTrace();
 		}
-		
 	}
-
 
 	@Override
 	public ArrayList<Recensione> getLastRecensioni() {
@@ -114,9 +105,6 @@ public class RecensioneDAOJDBC implements RecensioneDAO
 			conn= dbSource.getConnection();
 			String query="SELECT * FROM recensione ORDER BY date DESC LIMIT 6";
 			PreparedStatement st= conn.prepareStatement(query);
-			
-			
-			
 			ResultSet rs= st.executeQuery();
 			while(rs.next())
 			{
@@ -136,7 +124,6 @@ public class RecensioneDAOJDBC implements RecensioneDAO
 		}
 		return lista;
 	}
-
 
 	@Override
 	public ArrayList<Recensione> findAll() {
@@ -168,7 +155,6 @@ public class RecensioneDAOJDBC implements RecensioneDAO
 		return lista;
 	}
 
-
 	@Override
 	public void update(Recensione recensione) {
 		Connection conn;
@@ -192,16 +178,13 @@ public class RecensioneDAOJDBC implements RecensioneDAO
 				
 				st.setInt(5, recensione.getIdRecensione());
 				st.executeUpdate();
-				System.out.println("Cambiamenti aggiornati!");
 			}
 		}
 		catch(Exception e)
 		{
 			e.printStackTrace();
-		}
-		
+		}	
 	}
-
 
 	@Override
 	public Recensione trovaRecensione(Integer id) {
@@ -236,6 +219,4 @@ public class RecensioneDAOJDBC implements RecensioneDAO
 		}
 		return recensione;
 	}
-
-	
 }

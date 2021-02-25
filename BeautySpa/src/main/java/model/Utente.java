@@ -1,7 +1,5 @@
 package model;
 
-import java.util.ArrayList;
-
 public class Utente {
 
 	private String email;
@@ -11,10 +9,7 @@ public class Utente {
 	private String numero;
 	private boolean convalidato;
 	
-	public Utente()
-	{
-		
-	}
+	public Utente(){}
 	
 	public Utente(String email, String password, String nome, String cognome, boolean convalidato, String numero)
 	{
@@ -70,12 +65,9 @@ public class Utente {
 		return numero;
 	}
 
-
 	public void setNumero(String numero) {
 		this.numero = numero;
 	}
-	
-	
 	
 	public String toString()
 	{
@@ -86,7 +78,6 @@ public class Utente {
 			stampa+="Convalidato!";
 		else
 			stampa+="Non Convalidato!";
-		
 		return stampa;
 	}
 }

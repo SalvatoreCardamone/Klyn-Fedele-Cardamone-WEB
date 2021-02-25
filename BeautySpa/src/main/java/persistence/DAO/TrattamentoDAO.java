@@ -1,6 +1,5 @@
 package persistence.DAO;
 
-import java.sql.Date;
 import java.util.ArrayList;
 
 import model.Trattamento;

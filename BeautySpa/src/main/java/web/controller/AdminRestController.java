@@ -34,7 +34,6 @@ public class AdminRestController {
 	{
 		
 		ArrayList<Recensione>listaRecensione=DBManager.getInstance().RecensioneDAO().findAll();
-		System.out.println("Lista size "+listaRecensione.size());
 		return listaRecensione;
 	}
 	
@@ -50,16 +49,16 @@ public class AdminRestController {
 	@PostMapping("adminEliminaPrenotazione")
 	public ArrayList<Prenotazione>  adminEliminaPrenotazione(Integer idRecensione,HttpSession session, Model model)
 	{
-		ArrayList<Prenotazione>lista;
+		ArrayList<Prenotazione>listaPrenotazioni;
 		DBManager.getInstance().PrenotazioneDAO().delete(idRecensione);
-		lista=DBManager.getInstance().PrenotazioneDAO().findAll();
-		return lista;
+		listaPrenotazioni=DBManager.getInstance().PrenotazioneDAO().findAll();
+		session.setAttribute("listaPrenotazioni", listaPrenotazioni);
+		return listaPrenotazioni;
 	}
 	
 	@PostMapping("adminUpdateTrattamento")
 	public ArrayList<Trattamento> adminUpdateTrattamento(Integer idTrattamento,String nomeTrattamento ,String descrizioneTrattamento, HttpSession session, Model model)
 	{
-		//System.out.println(idTrattamento+" "+nomeTrattamento+" "+descrizioneTrattamento);
 		Trattamento tr= new Trattamento(idTrattamento,nomeTrattamento,descrizioneTrattamento);
 		DBManager.getInstance().TrattamentoDAO().updateTrattamento(tr);
 		ArrayList<Trattamento> lista= DBManager.getInstance().TrattamentoDAO().listaTrattamenti();
@@ -79,6 +78,8 @@ public class AdminRestController {
 		
 		Recensione rc= new Recensione(idRecensione,descrizioneRecensione,dateRecensione,scrittoRecensione,votoRecensione);
 		DBManager.getInstance().RecensioneDAO().update(rc);
+		ArrayList<Recensione>listaRecensioni = DBManager.getInstance().RecensioneDAO().findAll();
+		session.setAttribute("listaRecensioni", listaRecensioni);
 		return null;
 	}
 	
@@ -95,9 +96,9 @@ public class AdminRestController {
 	{
 		
 		Prenotazione pr=new Prenotazione(idPrenotazione,utentePrenotazione,timePrenotazione,datePrenotazione,personePrenotazione,trattamentoPrenotazione);
-		//Recensione rc= new Recensione(idRecensione,descrizioneRecensione,dateRecensione,scrittoRecensione,votoRecensione);
-		//DBManager.getInstance().RecensioneDAO().update(rc);
 		DBManager.getInstance().PrenotazioneDAO().update(pr);
+		ArrayList<Prenotazione>listaPrenotazioni=DBManager.getInstance().PrenotazioneDAO().findAll();
+		session.setAttribute("listaPrenotazioni", listaPrenotazioni);
 		return null;
 	}
 	

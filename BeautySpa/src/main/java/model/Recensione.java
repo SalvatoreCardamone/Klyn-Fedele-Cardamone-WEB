@@ -6,13 +6,10 @@ public class Recensione {
 	private Integer idRecensione;
 	private String descrizione;
 	private Date date;
-	private String scrittoDa;//Utente
+	private String scrittoDa;//Email utente
 	private Integer voto;
 	
-	public Recensione()
-	{
-		
-	}
+	public Recensione(){}
 	
 	public Recensione(Integer idRecensione, String descrizione, Date data, String scrittoDa, Integer voto)
 	{
@@ -66,9 +63,7 @@ public class Recensione {
 	public String toString()
 	{
 		String stampa="";
-		
 		stampa="idRecensione: "+idRecensione+"\ndescrizione: "+descrizione+"\nData: "+date+"\nScrittoDa: "+scrittoDa+"\nVoto: "+voto.toString();
-
 		return stampa;
 	}
 	

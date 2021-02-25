@@ -2,7 +2,6 @@ package model;
 
 import java.sql.Date;
 import java.sql.Time;
-import java.util.ArrayList;
 
 public class Prenotazione 
 {
@@ -13,12 +12,9 @@ public class Prenotazione
 	private Integer persone;
 	private Integer trattamento;
 	
-	public Prenotazione()
-	{
-		
-	}
+	public Prenotazione(){}
 	
-	public Prenotazione(Integer id, String utente,Time time, Date date, Integer persone,Integer trattamento) //ArrayList<Trattamento>l)
+	public Prenotazione(Integer id, String utente,Time time, Date date, Integer persone,Integer trattamento)
 	{
 		this.id=id;
 		this.utente=utente;
@@ -68,19 +64,19 @@ public class Prenotazione
 		this.persone = persone;
 	}
 
-	public String toString()
-	{
-		String stampa="";
-		stampa="idPrenotazione: "+id+"\nUtente: "+utente+"\nDate: "+date+"\n Time: "+time+"\nPersone: "+persone+"\nTrattamento: "+trattamento;
-		return stampa;
-	}
-	
 	public Integer getTrattamento() {
 		return trattamento;
 	}
 
 	public void setTrattamento(Integer trattamento) {
 		this.trattamento = trattamento;
+	}
+	
+	public String toString()
+	{
+		String stampa="";
+		stampa="idPrenotazione: "+id+"\nUtente: "+utente+"\nDate: "+date+"\n Time: "+time+"\nPersone: "+persone+"\nTrattamento: "+trattamento;
+		return stampa;
 	}
 	
 }

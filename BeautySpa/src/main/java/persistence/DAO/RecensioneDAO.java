@@ -3,7 +3,6 @@ package persistence.DAO;
 import java.util.ArrayList;
 
 import model.Recensione;
-import model.Utente;
 
 public interface RecensioneDAO 
 {

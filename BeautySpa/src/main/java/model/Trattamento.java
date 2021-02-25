@@ -1,19 +1,12 @@
 package model;
 
-import java.sql.Date;
-import java.sql.Time;
-
 public class Trattamento 
 {
 	private Integer id;
 	private String nome;
 	private String descrizione;
 	
-	
-	public Trattamento()
-	{
-		
-	}
+	public Trattamento(){}
 	
 	public Trattamento(Integer id, String nome, String descrizione)
 	{
@@ -21,18 +14,6 @@ public class Trattamento
 		this.nome=nome;
 		this.descrizione=descrizione;
 	}
-	
-	
-	
-	
-	public String toString()
-	{
-		String stampa="";
-		
-		stampa="\nid: "+id+"\nnome: "+nome+"\ndescrizione: "+descrizione;
-		return stampa;
-	}
-	
 
 	public Integer getId() {
 		return id;
@@ -56,6 +37,14 @@ public class Trattamento
 
 	public void setDescrizione(String descrizione) {
 		this.descrizione = descrizione;
+	}
+	
+	public String toString()
+	{
+		String stampa="";
+		
+		stampa="\nid: "+id+"\nnome: "+nome+"\ndescrizione: "+descrizione;
+		return stampa;
 	}
 	
 }

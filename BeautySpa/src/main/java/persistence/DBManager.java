@@ -17,14 +17,11 @@ public class DBManager
 	static {
 		try {
 		Class.forName("org.postgresql.Driver");
-		//questi vanno messi in file di configurazione!!!
 																 //Nome DB		ok		password
 		dataSource=new DBSource("jdbc:postgresql://localhost:5432/BeautySpaDB","postgres","admin");
 		}
 		catch (Exception e) {
-		//System.err.println("PostgresDAOFactory.class: failed to load MySQL JDBC driver\n"+e);
-		//e.printStackTrace();
-			System.out.println("Si e verificato un errore di connesione al database");
+		System.out.println("Si e verificato un errore di connesione al database");
 		}
 	}
 	
@@ -35,10 +32,7 @@ public class DBManager
 		return instance;
 	}
 	
-	private DBManager()
-	{
-		
-	}
+	private DBManager(){}
 	
 	public static DBSource getDataSource()
 	{

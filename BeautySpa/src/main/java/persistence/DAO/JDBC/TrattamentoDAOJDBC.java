@@ -1,18 +1,11 @@
 package persistence.DAO.JDBC;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Time;
-import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.Calendar;
 
 import model.Trattamento;
-import model.Utente;
 import persistence.DBSource;
 import persistence.DAO.TrattamentoDAO;
 
@@ -95,7 +88,6 @@ public class TrattamentoDAOJDBC implements TrattamentoDAO{
 			st.setString(2, trattamento.getDescrizione());
 			
 			st.executeUpdate();
-			System.out.println("Recensione e stata aggiunta");
 		}
 		catch(Exception e)
 		{
@@ -124,7 +116,6 @@ public class TrattamentoDAOJDBC implements TrattamentoDAO{
 				st.setString(2, trattamento.getDescrizione());
 				st.setInt(3, trattamento.getId());				
 				st.executeUpdate();
-				System.out.println("Cambiamenti aggiornati!");
 			}
 		}
 		catch(Exception e)

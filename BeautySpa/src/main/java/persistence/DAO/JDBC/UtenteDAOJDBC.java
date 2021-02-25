@@ -4,10 +4,8 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Time;
 import java.util.ArrayList;
-import java.util.List;
 
 import model.Criptazione;
 import model.Prenotazione;
@@ -37,7 +35,6 @@ public class UtenteDAOJDBC implements UtenteDAO
 		
 		st.setString(1, utente.getEmail());
 		pass=Criptazione.getInstance().encrypt(utente.getPassword());
-		System.out.println(pass);
 		st.setString(2, pass);
 		st.setString(3, utente.getNome());
 		st.setString(4, utente.getCognome());
@@ -45,11 +42,11 @@ public class UtenteDAOJDBC implements UtenteDAO
 		st.setString(6, utente.getNumero());
 		
 		st.executeUpdate();
-		System.out.println("Utente e stato aggiunto con sucesso");
+		
 		}
 		catch(Exception e)
 		{
-			System.out.println("Non riesco a fare la query di save");
+			e.printStackTrace();
 		}
 	}
 
@@ -136,7 +133,6 @@ public class UtenteDAOJDBC implements UtenteDAO
 				String query="UPDATE utente SET password=? , convalidato=? , numero=?, nome=? , cognome=? WHERE email=?";
 				PreparedStatement st= conn.prepareStatement(query);
 				
-				//String pass=Criptazione.encrypt(utente.getPassword());
 				st.setString(1, utente.getPassword());
 				st.setBoolean(2, utente.isConvalidato());
 				st.setString(3,utente.getNumero());
@@ -144,7 +140,6 @@ public class UtenteDAOJDBC implements UtenteDAO
 				st.setString(5,utente.getCognome());
 				
 				st.setString(6,utente.getEmail());
-				
 				
 				st.executeUpdate();
 				System.out.println("Cambiamenti aggiornati!");
@@ -169,7 +164,6 @@ public class UtenteDAOJDBC implements UtenteDAO
 			st.setString(1, email);
 			String pass=Criptazione.getInstance().encrypt(password);
 			st.setString(2, pass);
-			//st.setString(2, password);
 		    ResultSet rs = st.executeQuery();
 		      while (rs.next()) 
 		      {
@@ -186,11 +180,7 @@ public class UtenteDAOJDBC implements UtenteDAO
 		catch(Exception e)
 		{
 			e.printStackTrace();
-			//System.out.println("Non riesco a fare la query di login!");
 		}
-		//Rimane di passare i parametri al HTML per cambiarli
-		//Utente utente;
-		//return null;
 		return utente;
 	}
 

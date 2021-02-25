@@ -11,15 +11,12 @@ import javax.crypto.spec.PBEKeySpec;
 import javax.crypto.spec.SecretKeySpec;
 
 public class Criptazione {
-	
-	
 	private static Criptazione instance = null; 
 	
 	private static String secretKey;
 	private static String salt;
 	
 	 public static Criptazione getInstance() {
-	        // Crea l'oggetto solo se NON esiste:
 	        if (instance == null) {
 	            instance = new Criptazione();
 	        }

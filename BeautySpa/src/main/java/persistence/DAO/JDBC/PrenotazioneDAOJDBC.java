@@ -5,22 +5,10 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Time;
-import java.text.SimpleDateFormat;
-import java.time.Clock;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.HashMap;
 
-import model.Criptazione;
 import model.Prenotazione;
-import model.Recensione;
-import model.Trattamento;
-import model.Utente;
-import persistence.DBManager;
 import persistence.DBSource;
 import persistence.DAO.PrenotazioneDAO;
 
@@ -36,8 +24,6 @@ public class PrenotazioneDAOJDBC implements PrenotazioneDAO
 	@Override
 	public void save(Prenotazione prenotazione) {
 		Connection conn;
-		//for(int i=0; i<prenotazione.numeroTrattamenti(); i++)
-		//{
 		try
 		{
 			conn= dbSource.getConnection();
@@ -68,8 +54,6 @@ public class PrenotazioneDAOJDBC implements PrenotazioneDAO
 			
 			st.setInt(1, idPrenotazione);
 			st.executeUpdate();
-			
-			System.out.println("Prenotazione eliminata");
 		}
 		catch(Exception e)
 		{
@@ -98,8 +82,7 @@ public class PrenotazioneDAOJDBC implements PrenotazioneDAO
 			        Integer trattamento= rs.getInt("trattamento");
 			        Prenotazione prenotazione= new Prenotazione(id,nome,time,dateP,persone,trattamento);
 			        lista.add(prenotazione);
-			      }
-			
+			      }	
 		}
 		catch(Exception e)
 		{
@@ -219,7 +202,6 @@ public class PrenotazioneDAOJDBC implements PrenotazioneDAO
 		{
 			e.printStackTrace();
 		}
-		
 		return prenotazione;
 	}
 
@@ -236,27 +218,21 @@ public class PrenotazioneDAOJDBC implements PrenotazioneDAO
 			}
 			else
 			{
-				
 				String query="UPDATE prenotazione SET time=? , date=? , persone=? , trattamento=? WHERE id=?";
 				PreparedStatement st= conn.prepareStatement(query);
 				
-				System.out.println(pr);
 				st.setTime(1, prenotazione.getTime());
 				st.setDate(2, prenotazione.getDate());
 				st.setInt(3, prenotazione.getPersone());
 				st.setInt(4, prenotazione.getTrattamento());
 				
 				st.setInt(5, prenotazione.getId());
-				
 				st.executeUpdate();
-				System.out.println("Cambiamenti aggiornati!");
 			}
 		}
 		catch(Exception e)
 		{
 			e.printStackTrace();
 		}
-		
-		
 	}
 }
