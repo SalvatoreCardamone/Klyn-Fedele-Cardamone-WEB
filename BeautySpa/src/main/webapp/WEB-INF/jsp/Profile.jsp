@@ -13,8 +13,6 @@
 </head>
 <body>
 
- 
-
     <!--  NAV -->
     <jsp:include page="nav.jsp"/>
     <!-- /NAV -->
@@ -42,7 +40,7 @@
                 </ul>
                 <hr/>
                 <div class="tab-content">
-                    <div class="tab-pane active" id="tab-prenotazioni">
+                    <div class="tab-pane fade show active" id="tab-prenotazioni">
                     <div class="container-fluid">
                         <div class="row">
                                <table class="table table-hover">
@@ -51,11 +49,14 @@
 							      <th scope="col">Data:</th>
 							      <th scope="col">Ora:</th>
 							      <th scope="col">Trattamento:</th>
-							      <th scope="col" colspan="2">N. Persone:</th>
+							      <th scope="col">N. Persone:</th>
+							      <th scope="col">Azione:</th>
 							    </tr>
 							  </thead>
-                              
                               <tbody>
+                              <c:if test="${empty bookingList}">
+                              	<tr> <th colspan="6"> <a href="/Booking" class="btn btn-lg btn-primary btn-block">Nessuna prenotazione! <br/> Prenota ora il tuo trattamento </a> </th> </tr>
+                              </c:if>
                         			<c:forEach items="${bookingList}" var="tmp" varStatus="loopBooking">
                         				<tr>
                         					<td scope="row"> 
@@ -105,7 +106,7 @@
                         </div>
                     </div>
                     </div>
-                    <div class="tab-pane" id="tab-account">
+                    <div class="tab-pane fade" id="tab-account">
                     <div class="row">
                     	<div class="input-group form-group">
 	                         <label for="input_email" class="col-lg-2 control-label">Email:</label>
@@ -191,9 +192,6 @@
     <!-- /FOOTER -->
 
 </body>
-
-	
-			
 
 </html>
 

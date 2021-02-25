@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
     
     
@@ -13,16 +13,28 @@
 </head>
 <body>         		
 	
-	<!--  button onclick="visualizzaUtente();">Visualizza Utenti</button>
-	
-	<table id="tabellaUtenti">
-	</table>
-	
-	
-	<button onclick="tableCreateUtenti()">CreaTabella</button-->
-	
+<a href="/" class="btn btn-danger btn-lg btn-block">Ritorna al sito</a>
+<hr/>
+
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+  <li class="nav-item">
+    <a class="nav-link active"  data-toggle="tab" href="#utenti" role="tab"  aria-selected="true">Utenti</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link"  data-toggle="tab" href="#recensioni" role="tab"  aria-selected="false">Recensioni</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link"  data-toggle="tab" href="#prenotazioni" role="tab"  aria-selected="false">Prenotazioni</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link"  data-toggle="tab" href="#trattamenti" role="tab" aria-selected="false">Trattamenti</a>
+  </li>
+</ul>
+
+<div class="tab-content" id="myTabContent">
+<div class="tab-pane fade show active" id="utenti" role="tabpanel">
 	<h2> Lista Utenti </h2>
-	<table class="table" >
+	<table class="table table-hover" >
   <thead class="thead-light">
     <tr>
       <th scope="col">EMAIL</th>
@@ -32,7 +44,6 @@
     </tr>
   </thead>
   <tbody>
-  
   <c:forEach items="${listaUtenti}" var="utente">
     <tr id="${utente.email}">
       <th scope="row" >${utente.email}</th>
@@ -44,13 +55,9 @@
   </tbody>
 </table>
 <hr/>
-  
-  
-  <!--  button onclick="visualizzaRecensioni()"> visualizza recensioni</button>
-  
-  <table id="tabellaRecensioni">
-	</table-->
-  
+</div>
+
+<div class="tab-pane fade" id="recensioni" role="tabpanel">
  <h2> Lista Recensioni </h2>
 	<table class="table" >
   <thead class="thead-light">
@@ -60,12 +67,11 @@
       <th scope="col">Data</th>
       <th scope="col">Creatore</th>
       <th scope="col">Voto</th>
-      <th scope="col">Cancella</th>
+      <th scope="col">elimina</th>
       <th scope="col">Modifica</th>
     </tr>
   </thead>
   <tbody>
-  
   <c:forEach items="${listaRecensioni}" var="recensione">
     <tr id="listaRecensioni${recensione.idRecensione}">
       <th scope="row">${recensione.idRecensione}</th>
@@ -75,18 +81,18 @@
       <td><input type="text" class="form-control" id="input_recensione_scrittoDa${recensione.idRecensione}" name="Nome" value="${recensione.scrittoDa}" disabled ></td>
       <td><input type="number" class="form-control" id="input_recensione_voto${recensione.idRecensione}" name="Nome" value="${recensione.voto}" disabled ></td>
       <td>
-		<button type="button" onclick="eliminaRecensione(${recensione.idRecensione})" id="booking-review_button"> cancella</button>
+		<button  class="btn btn-danger" type="button" onclick="eliminaRecensione(${recensione.idRecensione})"> elimina</button>
       </td>
       
       <td>
-		<button type="button"  id="bottoneModificaRecensione${recensione.idRecensione}" onclick ="modificaRecensione(${recensione.idRecensione})"> modifica </button>      </td>
+		<button  class="btn btn-warning" type="button"  id="bottoneModificaRecensione${recensione.idRecensione}" onclick ="modificaRecensione(${recensione.idRecensione})"> modifica </button>      </td>
     </tr>
  </c:forEach>
   </tbody>
 </table>
+</div>
 
-
-
+<div class="tab-pane fade" id="prenotazioni" role="tabpanel">
 <h2> Lista Prenotazioni </h2>
 	<table class="table" >
   <thead class="thead-light">
@@ -97,12 +103,11 @@
       <th scope="col">Data</th>
       <th scope="col">Persone</th>
       <th scope="col">Trattamento</th>
-      <th scope="col">Cancella</th>
+      <th scope="col">elimina</th>
       <th scope="col">Modifica</th>
     </tr>
   </thead>
   <tbody>
-  
   <c:forEach items="${listaPrenotazioni}" var="prenotazione">
     <tr id="listaPrenotazione${prenotazione.id}">
       <th scope="row">${prenotazione.id}</th>
@@ -113,19 +118,19 @@
       <td><input type="number" class="form-control" id="input_prenotazione_trattamento${prenotazione.id}" name="Nome" value="${prenotazione.trattamento}" disabled ></td>
       
       <td>
-		<button type="button"  id="booking-review_button" onclick="eliminaPrenotazione(${prenotazione.id})"> cancella</button>
+		<button  class="btn btn-danger" type="button"  onclick="eliminaPrenotazione(${prenotazione.id})"> elimina</button>
       </td>
       
       <td>
-		<button type="button"  id="bottoneModificaPrenotazione${prenotazione.id}" onclick="modificaPrenotazione(${prenotazione.id})"> modifica</button>
+		<button  class="btn btn-warning" type="button"  id="bottoneModificaPrenotazione${prenotazione.id}" onclick="modificaPrenotazione(${prenotazione.id})"> modifica</button>
       </td>
     </tr>
  </c:forEach>
   </tbody>
 </table>
+</div>
 
-
-
+<div class="tab-pane fade" id="trattamenti" role="tabpanel">
 <h2> Lista Trattamenti </h2>
 	<table class="table" id="trattamentiContainer" >
   <thead class="thead-light">
@@ -141,20 +146,18 @@
     <tr id="listaTrattamenti${trattamento.id}">
       <th scope="row">${trattamento.id}</th>
       <td><input type="text" class="form-control" id="input_trattamento_nome${trattamento.id}" name="Nome" value="${trattamento.nome}" disabled ></td>
-      
-      <td><textarea id="input_trattamento_descrizione${trattamento.id}" name="Name" rows="5" cols="50" disabled>${trattamento.descrizione}</textarea></td>
-      
-      <!--  td><!--  input type="text" class="form-control" id="input_trattamento_descrizione${trattamento.id}" name="Nome" value="${trattamento.descrizione}" disabled ></td-->
+      <td><textarea id="input_trattamento_descrizione${trattamento.id}" name="Name" rows="4" cols="50" disabled>${trattamento.descrizione}</textarea></td>
       <td>
-		<button type="button"  id="bottoneModificaTrattamento${trattamento.id}" onclick ="modificaTrattamento(${trattamento.id})"> modifica </button>
+		<button  class="btn btn-warning btn-lg" type="button"  id="bottoneModificaTrattamento${trattamento.id}" onclick ="modificaTrattamento(${trattamento.id})"> modifica </button>
       </td>
     </tr>
  </c:forEach>
   </tbody>
 </table>
-
 <hr/>
-  
+</div>
+
+</div>
   
 <script type="text/javascript">
 function modificaTrattamento(id)
