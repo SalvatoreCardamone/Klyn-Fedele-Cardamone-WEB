@@ -8,7 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 
 import model.Prenotazione;
 import model.Recensione;
@@ -27,11 +26,9 @@ public class AdminController
 	{
 		if(nomeAdmin.equals(nome) && passwordAdmin.equals(password))
 		{
-			//Stampo tutti gli utenti
 			ArrayList<Utente>listaUtenti=DBManager.getInstance().UtenteDAO().findAll();
 			session.setAttribute("listaUtenti", listaUtenti);
 			
-			//Stampo tutte le recensioni
 			ArrayList<Recensione>listaRecensioni = DBManager.getInstance().RecensioneDAO().findAll();
 			session.setAttribute("listaRecensioni", listaRecensioni);
 			
@@ -42,23 +39,7 @@ public class AdminController
 			session.setAttribute("listaTrattamenti", listaTrattamenti);
 			return "PageAdmin";
 		}
-			
-		
 		session.setAttribute("messaggio", "ACCESSO NEGATO");
-			return "redirect:/";
+		return "redirect:/";
 	}
-	
-	
-	
-	/*
-	@PostMapping("/adminUpdateTrattamento")
-	public ArrayList<Trattamento> adminUpdateTrattamento(@RequestParam Integer idTrattamento,@RequestParam String nomeTrattamento ,@RequestParam String descrizioneTrattamento, HttpSession session, Model model)
-	{
-		Trattamento tr= new Trattamento(idTrattamento,nomeTrattamento,descrizioneTrattamento);
-		DBManager.getInstance().TrattamentoDAO().updateTrattamento(tr);
-		ArrayList<Trattamento> lista= DBManager.getInstance().TrattamentoDAO().listaTrattamenti();
-		session.setAttribute("adminListaTrattamenti", lista);
-		return lista;
-	}
-	*/
 }

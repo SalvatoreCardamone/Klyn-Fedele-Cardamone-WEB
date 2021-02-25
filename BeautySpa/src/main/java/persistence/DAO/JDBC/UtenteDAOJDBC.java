@@ -142,7 +142,6 @@ public class UtenteDAOJDBC implements UtenteDAO
 				st.setString(6,utente.getEmail());
 				
 				st.executeUpdate();
-				System.out.println("Cambiamenti aggiornati!");
 			}
 		}
 		catch(Exception e)

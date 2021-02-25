@@ -2,21 +2,15 @@ package web.controller;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.sql.Date;
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -207,8 +201,6 @@ public class PageController
             output.flush();
             output.close();
             input.close();
-      
-		
 	}
 	
 	 @GetMapping("/Treatments")
@@ -297,71 +289,6 @@ public class PageController
 			}
 		}
 	}
-	
-	
-	 @PostMapping("/modificaUtente")
-	 public String modificaUtente(@RequestParam String Email,
-			 @RequestParam String Password,
-			 @RequestParam String Nome,
-			 @RequestParam String Cognome,
-			 @RequestParam String Telefono,
-			 @RequestParam String oldPassword,
-			 HttpSession session, Model model)
-	 {
-		 
-		/* Utente daCambiare= DBManager.getInstance().UtenteDAO().login(Email);
-		 if(daCambiare.getEmail()!=null)
-		 {
-			 String pass=Criptazione.getInstance().encrypt(Password);
-		 }
-		 */
-		 Utente ut=(Utente) session.getAttribute("utente");
-		 System.out.println(ut);
-		 Utente verifica=DBManager.getInstance().UtenteDAO().trovaUtente(ut.getEmail());
-		 String pass;
-		 if(Password.equals("") || oldPassword.equals(""))
-		 {
-			 System.out.println("Password nulla");
-			 pass=verifica.getPassword();
-		 }
-		 else
-		 {
-			Utente daVerificare=DBManager.getInstance().UtenteDAO().login(Email, oldPassword);
-			if(daVerificare.getEmail().equals(""))
-			{
-				 pass=verifica.getPassword();
-			}
-			else
-			{
-				pass=Criptazione.getInstance().encrypt(Password);
-			}
-		 }
-		 
-		 if(Nome.equals(""))
-		 {
-			Nome=verifica.getNome();
-		 }
-		 if(Cognome.equals(""))
-		 {
-			Cognome=verifica.getCognome();
-		 }
-		 if(Telefono.equals(""))
-		 {
-			Telefono=verifica.getNumero();
-		 }
-		 
-		 //System.out.println(pass);
-		 Utente daCambiare = new Utente(Email,pass,Nome,Cognome,true,Telefono);
-		 //System.out.println("Utente da Cambiare \n"+daCambiare);
-		 //session.setAttribute("ut.nome", Nome);
-		 //session.setAttribute("ut.cognome", Cognome);
-		 session.setAttribute("utente", daCambiare);
-		 //session.setAttribute("utente.cognome", Cognome);
-		 DBManager.getInstance().UtenteDAO().update(daCambiare);
-		 //System.out.println("Utente cambiato");
-		 //Allert che non si e cambiato
-		 return "Profile";
-	 }
 	 
 	 @PostMapping("/modificaPassword")
 	 public String cambiaPassword(HttpSession session, Model model, @RequestParam String vecchiaPassword, @RequestParam String nuovaPassword) {

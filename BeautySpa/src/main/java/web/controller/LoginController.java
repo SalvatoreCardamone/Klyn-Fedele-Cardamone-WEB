@@ -14,8 +14,6 @@ import persistence.DBManager;
 @Controller
 public class LoginController 
 {
-
-	
 	@PostMapping("/login")
 	public String loginUtente(@RequestParam String email,@RequestParam String password, HttpSession session, Model model)
 	{
@@ -26,7 +24,6 @@ public class LoginController
 		else
 			session.setAttribute("messaggio", "Attenzione: E-mail e/o password inserite non corrette!");
 		
-		//model.addAttribute();// prenod con $
 		session.setAttribute("google", false);
 		return "redirect:/"; 
 		
@@ -38,7 +35,6 @@ public class LoginController
 		session.setAttribute("utente", null);
 		session.setAttribute("google", false);
 		return "redirect:/";
-		
 	}
 	
 	@PostMapping("/loginGoogle")
@@ -59,5 +55,4 @@ public class LoginController
 		session.setAttribute("google", true);
 		return "redirect:/";
 	}
-	
 }
