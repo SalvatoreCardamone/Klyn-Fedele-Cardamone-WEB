@@ -23,7 +23,7 @@
 			</div>
 	
 			<div  class="form-group">
-				<input type="password" class="form-control" type="text" id="Password" placeholder="Inserisci Password" name="password" pattern="^([a-zA-Z0-9@*#]{6,30})$"  oninvalid="this.setCustomValidity('Perfavore inserire corettamente la password (da 6 a 30 caratteri comprsi(@*#))')"
+				<input type="password" class="form-control" type="text" id="Password" placeholder="Inserisci Password" name="password" pattern="^([a-zA-Z0-9@*#]{6,30})$"  oninvalid="this.setCustomValidity('Perfavore inserire corettamente la password (da 6 a 30 caratteri compresi(@*#))')"
  					oninput="setCustomValidity('')" required/>
 			</div>
 	

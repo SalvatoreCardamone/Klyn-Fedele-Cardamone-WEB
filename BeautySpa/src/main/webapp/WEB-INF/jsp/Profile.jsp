@@ -106,60 +106,55 @@
                     </div>
                     </div>
                     <div class="tab-pane" id="tab-account">
+                    <div class="row">
+                    	<div class="input-group form-group">
+	                         <label for="input_email" class="col-lg-2 control-label">Email:</label>
+	                         <div class="col-5">
+								<input type="text" class="form-control" placeholder="${utente.email}" disabled>
+							 </div>
+						</div>
+                    </div>
                         <div class="row">
-                            <div class="col-xs-12 col-sm-10 col-md-10 col-lg-10">
-                                <div class="tab-content">
-                                    <div class="tab-pane active" id="basic">
-                                        <form class="container" method="POST" action="/modificaUtente" id="reviewFormContainer">
-                                            <div class="form-group">
-                                                <label for="input_email" class="col-lg-2 control-label">Email</label>
-                                                <div class="col-lg-10">
-                                                    <input type="email" class="form-control" id="input_email" name="Email" value="${utente.email}"  readonly>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                            <label for="input_password" class="col control-label">Password</label>
-                                            <div class="row">
-                                                <div class="col">
-                                                    <input type="password" class="form-control" placeholder="Inserisci vecchia password" id="input_password_vecchia" name="oldPassword"  pattern="^([a-zA-Z0-9@*#]{6,30})$"  oninvalid="this.setCustomValidity('Perfavore inserire corettamente la password (da 6 a 30 caratteri comprsi(@*#))')" oninput="setCustomValidity('')" disabled required/>
-                                                </div>
-                                                <div class="col">
-                                                 <input type="password" class="form-control" placeholder="Inserisci nuova password" id="input_password_nuova" name="Password"  pattern="^([a-zA-Z0-9@*#]{6,30})$"  oninvalid="this.setCustomValidity('Perfavore inserire corettamente la password (da 6 a 30 caratteri comprsi(@*#))')" oninput="setCustomValidity('')" disabled required/>       
-                                           		</div>
-                                           	</div>
-                                            </div>
-                                            <div class="form-group">
-                                                <div class="row">
-                                                    <div class="col">
-                                                        <label for="input_nome" class="col control-label">Nome</label>
-                                                        <input type="text" class="form-control" id="input_nome" name="Nome" value="${utente.nome}" disabled >
-                                                       </div>
-                                                       <div class="col">
-                                                        <label for="input_cognome" class="col control-label">Cognome</label>
-                                                        <input type="text" class="form-control" id="input_cognome" name="Cognome" value="${utente.cognome}"  disabled>
-                                                       </div>
-                                                   </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="input_numero" class="col-lg-2 control-label" >Numero di Telefono</label>
-                                                <div class="col-lg-10">
-                                                    <input type="tel" class="form-control" id="input_telefono" name="Telefono" value="${utente.numero}" pattern="^(\(?\+?[0-9]*\)?)?[0-9_\- \(\)]{10,20}$"  oninvalid="this.setCustomValidity('Perfavore inserire corettamente il numero di telefono(da 10a 20 cifre compreso(+_))')" oninput="setCustomValidity('')" disabled/>
-                                                </div>
-                                            </div>     
-                                        </form>
-                                         <button class="btn btn-success btn-block" onclick ="Modifica()" id="bottoneModifica">Modifica</button>
-                                    </div>
-                                </div>
-                            </div>
+                           <div class="input-group form-group">
+                             <label for="input_password" class="col-lg-2 control-label">Password:</label>
+                             <form method="POST" action="/modificaPassword">
+							 <div class="input-group-append">
+							 
+								  <input type="password" name="vecchiaPassword" class="form-control" placeholder="Vecchia Password" required>
+								  <input type="password" name="nuovaPassword" class="form-control" placeholder="Nuova Password" pattern="^([a-zA-Z0-9@*#]{6,30})$"  oninvalid="this.setCustomValidity('Perfavore inserire correttamente la password (da 6 a 30 caratteri compresi(@*#))')" oninput="setCustomValidity('')" required>
+								  <button type="submit" class="btn btn-outline-primary" type="button">Modifica</button>
+							
+							 </div>
+							 </form>
+							</div> 
+						</div>
+					<div class="row">
+                           <div class="input-group form-group">
+                             <label for="input_name" class="col-lg-2 control-label">Nome:</label>
+							 <div class="input-group-append">
+								  <input type="text" class="form-control" placeholder="${utente.nome}" required>
+								  <input type="text" class="form-control" placeholder="${utente.cognome}" required>
+								  <button class="btn btn-outline-primary" type="button">Modifica</button>
+							 </div>
+							</div>     
+                     </div>
+                     <div class="row">
+                           <div class="input-group form-group">
+                             <label for="input_telephone" class="col-lg-2 control-label">Telefono:</label>
+                             
+							 <div class="input-group-append">
+							 	<input type="tel" class="form-control" placeholder="${utente.numero}" required>
+								<button class="btn btn-outline-primary" type="button">Modifica</button>
+							 </div>
+							</div>     
+                     </div>
+                     
+                    </div>
+                  </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-</div>                   
-
- 
+            </div>      
 </c:if>
 
 <c:if test="${utente == null}">
@@ -182,34 +177,8 @@
 
 </body>
 
-<script>
-
-	function Modifica(){
 	
-			$("#bottoneModifica").text("Conferma modifiche");
-		
-			if( document.getElementById('input_password_nuova').disabled== false)
-				{
-				    document.getElementById("reviewFormContainer").submit();
-					$("#input_password_nuova" ).prop( "disabled", true );
-					$("#input_password_vecchia" ).prop( "disabled", true );
-					$("#input_nome").prop( "disabled", true );
-					$("#input_cognome").prop( "disabled", true );
-					$("#input_telefono").prop( "disabled", true );
-			}
-			else{
-				$("#input_password_nuova").prop( "disabled", false);
-				$("#input_password_nuova").prop( "pattern", "^([a-zA-Z0-9@*#]{6,30})$");
-				$("#input_password_vecchia").prop( "disabled", false);
-				$("#input_nome").prop( "disabled",false );
-				$("#input_cognome").prop( "disabled", false );
-				$("#input_telefono").prop( "disabled", false );
-				document.getElementById("bottoneModifica").value = "Invia";
-			}
-		
-		
-	}
-</script>
+			
 
 </html>
 

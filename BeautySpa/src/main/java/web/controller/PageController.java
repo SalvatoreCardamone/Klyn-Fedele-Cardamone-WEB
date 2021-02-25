@@ -363,5 +363,28 @@ public class PageController
 		 return "Profile";
 	 }
 	 
+	 @PostMapping("/modificaPassword")
+	 public String cambiaPassword(HttpSession session, Model model, @RequestParam String vecchiaPassword, @RequestParam String nuovaPassword) {
+		 Utente ut = (Utente) session.getAttribute("utente");
+		 String email = ut.getEmail();
+		 
+		 Utente daVerificare = DBManager.getInstance().UtenteDAO().login(email, vecchiaPassword);
+		 if(daVerificare.getEmail() == null)
+			{
+			 	session.setAttribute("messaggio", "Attenzione: la vecchia password è errata!");
+			 	return "redirect:/Profile";
+			}
+			else
+			{
+				nuovaPassword = Criptazione.getInstance().encrypt(nuovaPassword);
+				session.setAttribute("messaggio", "Password modificata con successo!");
+			}
+		 
+		 Utente daCambiare = new Utente(email,nuovaPassword,ut.getNome(),ut.getCognome(),ut.isConvalidato(),ut.getNumero());
+		 session.setAttribute("utente", daCambiare);
+		 DBManager.getInstance().UtenteDAO().update(daCambiare);
+		 
+		 return "redirect:/Profile";
+	 }
 	 
 }
